@@ -16,7 +16,6 @@ var (
 	ErrStructType        = errors.New("fields in Struct are not populated properly")
 )
 
-// Context TODO: Struct TBD
 type Context struct {
 	Value interface{}
 }
