@@ -1,14 +1,18 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"github.com/lightstep/integrations/internal/generate"
+	"os"
 
 	"github.com/spf13/cobra"
 )
+
+// Assuming that the spec is in a JSON file named "spec.json"
+var specFile = "spec.json"
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
@@ -21,7 +25,14 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("init called")
+		generator := &generate.SpecGenerator{}
+		err := generator.GenerateSpecDirectories(specFile)
+		if err != nil {
+			fmt.Printf("Error generating directories: %v\n", err)
+			os.Exit(1)
+		}
+
+		fmt.Println("Directories for components have been successfully created.")
 	},
 }
 
