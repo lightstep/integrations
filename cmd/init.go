@@ -4,15 +4,12 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"github.com/lightstep/integrations/internal/generate"
-	"os"
-
 	"github.com/spf13/cobra"
 )
 
 // Assuming that the spec is in a JSON file named "spec.json"
-var specFile = "spec.json"
+var specFile string
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
@@ -24,28 +21,18 @@ and usage of using your command. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		generator := &generate.SpecGenerator{}
-		err := generator.GenerateSpecDirectories(specFile)
-		if err != nil {
-			fmt.Printf("Error generating directories: %v\n", err)
-			os.Exit(1)
-		}
-
-		fmt.Println("Directories for components have been successfully created.")
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return generate.Run(specFile)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(initCmd)
 
-	// Here you will define your flags and configuration settings.
+	// Define the 'specFile' flag for the 'init' command.
+	initCmd.Flags().StringVarP(&specFile, "spec", "s", "", "Path to the spec file (required)")
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// initCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// Mark the 'specFile' flag as required.
+	cobra.CheckErr(initCmd.MarkFlagRequired("spec"))
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// initCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

@@ -1,32 +1,27 @@
 package generate
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/lightstep/integrations/spec"
+	"github.com/lightstep/integrations/internal/spec"
+	"gopkg.in/yaml.v3"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 )
 
-type Generator interface {
-	GenerateSpecDirectories(specFile string) error
-}
-
-type SpecGenerator struct{}
-
-func (sg *SpecGenerator) GenerateSpecDirectories(specFile string) error {
+func Run(specFile string) error {
 	// Check if the spec file is readable
 	info, err := os.Stat(specFile)
 	if err != nil {
 		return fmt.Errorf("spec file is not readable: %v", err)
 	}
 
-	// Check if specFile is not a directory and has .json extension
+	// Check if specFile is not a directory and has .yaml or .yml extension
 	if info.IsDir() {
-		return fmt.Errorf("spec file is a directory, not a JSON file")
-	} else if filepath.Ext(specFile) != ".json" {
-		return fmt.Errorf("spec file is not a JSON file")
+		return fmt.Errorf("spec file is a directory, not a YAML file")
+	} else if ext := filepath.Ext(specFile); ext != ".yaml" && ext != ".yml" {
+		return fmt.Errorf("spec file is not a YAML file")
 	}
 
 	// Check if the current directory is writable
@@ -44,18 +39,18 @@ func (sg *SpecGenerator) GenerateSpecDirectories(specFile string) error {
 
 	// Unmarshal spec
 	var s spec.Spec
-	err = json.Unmarshal(data, &s)
+	err = yaml.Unmarshal(data, &s)
 	if err != nil {
 		return fmt.Errorf("unable to unmarshal spec, ensure it is in the correct format: %v", err)
 	}
 
 	// Generate directories for each component
 	for _, component := range s.Components {
-		err := os.Mkdir(component.Name, 0755)
-		if err != nil {
-			return fmt.Errorf("unable to create directory for component '%s': %v", component.Name, err)
+		if err = component.Render(); err != nil {
+			return fmt.Errorf("unable to create directory for component '%s': %v", component.ServiceName, err)
 		}
 	}
 
+	log.Println("Directories for components have been successfully created.")
 	return nil
 }
