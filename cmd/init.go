@@ -4,7 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/lightstep/integrations/internal/generate"
+	"github.com/lightstep/integrations/internal/generator"
 	"github.com/spf13/cobra"
 )
 
@@ -19,10 +19,10 @@ var initCmd = &cobra.Command{
 and usage of using your command. For example:
 
 Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
+This application is a tool to generator the needed files
 to quickly create a Cobra application.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return generate.Run(specFile)
+		return generator.Run(specFile)
 	},
 }
 

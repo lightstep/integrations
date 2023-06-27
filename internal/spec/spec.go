@@ -67,7 +67,7 @@ func (f *FileSet) Add(file File) {
 }
 
 func (f *FileSet) Render() error {
-	// TODO: implement this to write generate and store each file
+	// TODO: implement this to write generator and store each file
 	return nil
 }
 
@@ -85,19 +85,18 @@ type Component interface {
 }
 
 type component struct {
-	ServiceName string
+	Name string
 }
 
 func (c component) Render() error {
 	// Generate directories for each component
-	// Generate directories for each component
-	err := os.Mkdir(fmt.Sprintf("./%s", c.ServiceName), 0755)
+	err := os.Mkdir(fmt.Sprintf("./%s", c.Name), 0755)
 	if err != nil {
-		return fmt.Errorf("unable to create directory for component '%s': %v", c.ServiceName, err)
+		return fmt.Errorf("unable to create directory for component '%s': %v", c.Name, err)
 	}
-	//if err := createComponentDirectories(c.ServiceName); err != nil {
-	//	return err
-	//}
+	if err := createComponentDirectories(c.Name); err != nil {
+		return err
+	}
 	return nil
 }
 
