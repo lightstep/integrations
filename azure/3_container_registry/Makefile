@@ -19,7 +19,7 @@ destroy-terraform:
 
 .PHONY: run-collector
 run-collector:
-	docker run -d --name=azure-collector-disk -v ./:/conf/ -e AZURE_CLIENT_ID=${AZURE_CLIENT_ID} -e AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET} -e AZURE_SUBSCRIPTION_ID=${AZURE_SUBSCRIPTION_ID} -e AZURE_TENANT_ID=${AZURE_TENANT_ID} -e LS_ACCESS_TOKEN=${LS_ACCESS_TOKEN} otel/opentelemetry-collector-contrib:0.79.0 --config=/conf/collector.yaml
+	docker run -d --name=azure-collector-registry -v ./:/conf/ -e AZURE_CLIENT_ID=${AZURE_CLIENT_ID} -e AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET} -e AZURE_SUBSCRIPTION_ID=${AZURE_SUBSCRIPTION_ID} -e AZURE_TENANT_ID=${AZURE_TENANT_ID} -e LS_ACCESS_TOKEN=${LS_ACCESS_TOKEN} otel/opentelemetry-collector-contrib:0.79.0 --config=/conf/collector.yaml
 
 .PHONY: stop-collector
 stop-collector:
