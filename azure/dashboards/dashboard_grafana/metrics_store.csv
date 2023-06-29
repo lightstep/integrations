@@ -1,0 +1,1 @@
+azure_httprequestcount_average;azure_httprequestcount_count;azure_httprequestcount_maximum;azure_httprequestcount_minimum;azure_httprequestcount_total,Gauge,Count,Number of HTTP requests to Azure Managed Grafana server,

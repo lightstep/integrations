@@ -1,0 +1,2 @@
+azure_latency_average;azure_latency_count;azure_latency_maximum;azure_latency_minimum;azure_latency_total,Gauge,Seconds,Latency data for all requests to Azure Resource Manager,
+azure_traffic_average;azure_traffic_count;azure_traffic_maximum;azure_traffic_minimum;azure_traffic_total,Gauge,Count,Traffic data for all requests to Azure Resource Manager,

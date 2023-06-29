@@ -1,0 +1,2 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_%_processor_time_average;azure_%_processor_time_count;azure_%_processor_time_maximum;azure_%_processor_time_minimum;azure_%_processor_time_total,Percent CPU utilization,Percent,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location,average

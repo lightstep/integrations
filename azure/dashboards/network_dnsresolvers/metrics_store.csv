@@ -1,0 +1,3 @@
+azure_inboundendpointcount_average;azure_inboundendpointcount_count;azure_inboundendpointcount_maximum;azure_inboundendpointcount_minimum;azure_inboundendpointcount_total,Gauge,Count,This metric indicates the number of inbound endpoints created for a DNS Resolver.,
+azure_outboundendpointcount_average;azure_outboundendpointcount_count;azure_outboundendpointcount_maximum;azure_outboundendpointcount_minimum;azure_outboundendpointcount_total,Gauge,Count,This metric indicates the number of outbound endpoints created for a DNS Resolver.,
+azure_qps_average;azure_qps_count;azure_qps_maximum;azure_qps_minimum;azure_qps_total,Gauge,Count,This metric indicates the queries per second for a DNS Resolver. (Can be aggregated per EndpointId),

@@ -1,0 +1,1 @@
+azure_playerloggedincount_average;azure_playerloggedincount_count;azure_playerloggedincount_maximum;azure_playerloggedincount_minimum;azure_playerloggedincount_total,Gauge,Count,Number of logins by any player in a given title,

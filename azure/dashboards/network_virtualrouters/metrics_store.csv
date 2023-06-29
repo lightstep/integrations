@@ -1,0 +1,1 @@
+azure_peeringavailability_average;azure_peeringavailability_count;azure_peeringavailability_maximum;azure_peeringavailability_minimum;azure_peeringavailability_total,Gauge,Percent,BGP Availability between VirtualRouter and remote peers,

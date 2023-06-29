@@ -1,0 +1,2 @@
+azure_backuphealthevent_average;azure_backuphealthevent_count;azure_backuphealthevent_maximum;azure_backuphealthevent_minimum;azure_backuphealthevent_total,Gauge,Count,The count of health events pertaining to backup job health,
+azure_restorehealthevent_average;azure_restorehealthevent_count;azure_restorehealthevent_maximum;azure_restorehealthevent_minimum;azure_restorehealthevent_total,Gauge,Count,The count of health events pertaining to restore job health,

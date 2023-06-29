@@ -1,0 +1,3 @@
+azure_p2sbandwidth_average;azure_p2sbandwidth_count;azure_p2sbandwidth_maximum;azure_p2sbandwidth_minimum;azure_p2sbandwidth_total,Gauge,BytesPerSecond,Point-to-site bandwidth of a gateway in bytes per second,
+azure_p2sconnectioncount_average;azure_p2sconnectioncount_count;azure_p2sconnectioncount_maximum;azure_p2sconnectioncount_minimum;azure_p2sconnectioncount_total,Gauge,Count,Point-to-site connection count of a gateway,
+azure_uservpnroutecount_average;azure_uservpnroutecount_count;azure_uservpnroutecount_maximum;azure_uservpnroutecount_minimum;azure_uservpnroutecount_total,Gauge,Count,Count of P2S User Vpn routes learned by gateway,

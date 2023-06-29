@@ -1,0 +1,2 @@
+azure_failedruns_average;azure_failedruns_count;azure_failedruns_maximum;azure_failedruns_minimum;azure_failedruns_total,Gauge,Count,Failed Runs,
+azure_successfulruns_average;azure_successfulruns_count;azure_successfulruns_maximum;azure_successfulruns_minimum;azure_successfulruns_total,Gauge,Count,Successful Runs,

@@ -1,0 +1,2 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_nginx_average;azure_nginx_count;azure_nginx_maximum;azure_nginx_minimum;azure_nginx_total,The NGINX metric.,Count,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location,total

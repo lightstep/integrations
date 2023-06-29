@@ -1,0 +1,3 @@
+azure_count_average;azure_count_count;azure_count_maximum;azure_count_minimum;azure_count_total,Gauge,Count,Flow Records Processed by ATC.,
+azure_usage_active_average;azure_usage_active_count;azure_usage_active_maximum;azure_usage_active_minimum;azure_usage_active_total,Gauge,Percent,CPU Usage Percentage.,
+azure_used_percent_average;azure_used_percent_count;azure_used_percent_maximum;azure_used_percent_minimum;azure_used_percent_total,Gauge,Percent,Memory Usage Percentage.,

@@ -1,0 +1,5 @@
+azure_pingmesh_average;azure_pingmesh_count;azure_pingmesh_maximum;azure_pingmesh_minimum;azure_pingmesh_total,Gauge,Count,Communication status shows 1 if all communication is good and 0 if its bad.,
+azure_sessions_average;azure_sessions_count;azure_sessions_maximum;azure_sessions_minimum;azure_sessions_total,Gauge,Count,Sessions Count for the Bastion. View in sum and per instance.,
+azure_total_average;azure_total_count;azure_total_maximum;azure_total_minimum;azure_total_total,Gauge,Count,Total memory stats.,
+azure_usage_user_average;azure_usage_user_count;azure_usage_user_maximum;azure_usage_user_minimum;azure_usage_user_total,Gauge,Count,CPU Usage stats.,
+azure_used_average;azure_used_count;azure_used_maximum;azure_used_minimum;azure_used_total,Gauge,Count,Memory Usage stats.,

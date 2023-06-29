@@ -1,0 +1,2 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_httprequestcount_average;azure_httprequestcount_count;azure_httprequestcount_maximum;azure_httprequestcount_minimum;azure_httprequestcount_total,Number of HTTP requests to Azure Managed Grafana server,Count,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location,count

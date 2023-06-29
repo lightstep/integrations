@@ -1,0 +1,2 @@
+azure_pebytesin_average;azure_pebytesin_count;azure_pebytesin_maximum;azure_pebytesin_minimum;azure_pebytesin_total,Gauge,Count,Total number of Bytes Out,
+azure_pebytesout_average;azure_pebytesout_count;azure_pebytesout_maximum;azure_pebytesout_minimum;azure_pebytesout_total,Gauge,Count,Total number of Bytes Out,

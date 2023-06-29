@@ -1,0 +1,2 @@
+azure_requestlatency_average;azure_requestlatency_count;azure_requestlatency_maximum;azure_requestlatency_minimum;azure_requestlatency_total,Gauge,Milliseconds,How long it takes to get request response,
+azure_requeststraffic_average;azure_requeststraffic_count;azure_requeststraffic_maximum;azure_requeststraffic_minimum;azure_requeststraffic_total,Gauge,Count,Number of requests within a given period of time,

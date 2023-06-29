@@ -1,0 +1,2 @@
+azure_forwardingrulecount_average;azure_forwardingrulecount_count;azure_forwardingrulecount_maximum;azure_forwardingrulecount_minimum;azure_forwardingrulecount_total,Gauge,Count,This metric indicates the number of forwarding rules present in each DNS forwarding ruleset.,
+azure_virtualnetworklinkcount_average;azure_virtualnetworklinkcount_count;azure_virtualnetworklinkcount_maximum;azure_virtualnetworklinkcount_minimum;azure_virtualnetworklinkcount_total,Gauge,Count,This metric indicates the number of associated virtual network links to a DNS forwarding ruleset.,

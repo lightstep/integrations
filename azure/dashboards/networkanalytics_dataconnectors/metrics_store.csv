@@ -1,0 +1,5 @@
+azure_dataingested_average;azure_dataingested_count;azure_dataingested_maximum;azure_dataingested_minimum;azure_dataingested_total,Gauge,Bytes,The volume of data ingested by the pipeline (bytes).,
+azure_malformeddata_average;azure_malformeddata_count;azure_malformeddata_maximum;azure_malformeddata_minimum;azure_malformeddata_total,Gauge,Count,The number of files unable to be processed by the pipeline.,
+azure_malformedrecords_average;azure_malformedrecords_count;azure_malformedrecords_maximum;azure_malformedrecords_minimum;azure_malformedrecords_total,Gauge,Count,The number of records unable to be processed by the pipeline.,
+azure_processedfilecount_average;azure_processedfilecount_count;azure_processedfilecount_maximum;azure_processedfilecount_minimum;azure_processedfilecount_total,Gauge,Count,The number of files processed by the data connector.,
+azure_running_average;azure_running_count;azure_running_maximum;azure_running_minimum;azure_running_total,Gauge,Unspecified,Values greater than 0 indicate that the pipeline is ready to process data.,

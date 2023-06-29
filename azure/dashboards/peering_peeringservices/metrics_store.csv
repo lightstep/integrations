@@ -1,0 +1,1 @@
+azure_roundtriptime_average;azure_roundtriptime_count;azure_roundtriptime_maximum;azure_roundtriptime_minimum;azure_roundtriptime_total,Gauge,Milliseconds,Average round trip time,

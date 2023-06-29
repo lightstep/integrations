@@ -1,0 +1,2 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_signcompleted_average;azure_signcompleted_count;azure_signcompleted_maximum;azure_signcompleted_minimum;azure_signcompleted_total,Completed Sign Request,Count,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location;metadata_certtype;metadata_region;metadata_tenantid,count

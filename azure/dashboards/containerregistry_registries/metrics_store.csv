@@ -1,0 +1,7 @@
+azure_agentpoolcputime_average;azure_agentpoolcputime_count;azure_agentpoolcputime_maximum;azure_agentpoolcputime_minimum;azure_agentpoolcputime_total,Gauge,Seconds,AgentPool CPU Time in seconds,
+azure_runduration_average;azure_runduration_count;azure_runduration_maximum;azure_runduration_minimum;azure_runduration_total,Gauge,MilliSeconds,Run Duration in milliseconds,
+azure_storageused_average;azure_storageused_count;azure_storageused_maximum;azure_storageused_minimum;azure_storageused_total,Gauge,Bytes,"The amount of storage used by the container registry. For a registry account, it's the sum of capacity used by all the repositories within a registry. It's sum of capacity used by shared layers, manifest files, and replica copies in each of its repositories.",
+azure_successfulpullcount_average;azure_successfulpullcount_count;azure_successfulpullcount_maximum;azure_successfulpullcount_minimum;azure_successfulpullcount_total,Gauge,Count,Number of successful image pulls,
+azure_successfulpushcount_average;azure_successfulpushcount_count;azure_successfulpushcount_maximum;azure_successfulpushcount_minimum;azure_successfulpushcount_total,Gauge,Count,Number of successful image pushes,
+azure_totalpullcount_average;azure_totalpullcount_count;azure_totalpullcount_maximum;azure_totalpullcount_minimum;azure_totalpullcount_total,Gauge,Count,Number of image pulls in total,
+azure_totalpushcount_average;azure_totalpushcount_count;azure_totalpushcount_maximum;azure_totalpushcount_minimum;azure_totalpushcount_total,Gauge,Count,Number of image pushes in total,

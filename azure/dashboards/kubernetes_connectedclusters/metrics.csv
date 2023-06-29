@@ -1,0 +1,2 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_capacity_cpu_cores_average;azure_capacity_cpu_cores_count;azure_capacity_cpu_cores_maximum;azure_capacity_cpu_cores_minimum;azure_capacity_cpu_cores_total,Total number of cpu cores in a connected cluster,Count,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location,total

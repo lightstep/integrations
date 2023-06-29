@@ -1,0 +1,2 @@
+azure_availability_average;azure_availability_count;azure_availability_maximum;azure_availability_minimum;azure_availability_total,Gauge,Percent,Availability of the APIs,
+azure_usage_average;azure_usage_count;azure_usage_maximum;azure_usage_minimum;azure_usage_total,Gauge,Count,Count of API calls,

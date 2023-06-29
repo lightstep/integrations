@@ -1,0 +1,467 @@
+---
+title: Azure Microsoft.CognitiveServices/accounts metrics
+date: 2023-06-29 00:00:00
+canonical_url:
+description: See the Azure Microsoft.CognitiveServices/accounts metrics ingested by Lightstep Observability
+image: /images/ui/post-placeholder.jpg
+tags:
+  - Monitoring
+  - Performance
+  - Metrics
+  - Azure
+azure_int: Microsoft.CognitiveServices/accounts
+authors:
+  - otel-team
+layout: table
+cards:
+  - topic_item: /docs/setup-azure-for-metrics
+  - topic_item: /docs/create-and-manage-dashboards
+  - topic_item: /docs/create-alerts
+---
+Once you've integrated with [Azure Monitor](/docs/setup-azure-for-metrics), you have access to all metrics for Microsoft.CognitiveServices/accounts, **PUT DESCRIPTION HERE**. 
+
+See [all available Azure integrations](/docs/azure-metrics).
+{: .tip}
+
+To verify metrics are reporting, search for the metrics on the [Metric details](/docs/manage-metric-details) page in **Project settings**.
+{: .tip}
+
+The following table shows the {{page.azure_int}} metrics ingested by Lightstep.
+<table class="table-aws">
+<colgroup><col span="1" style="width: 35%;" /><col span="1" style="width: 15%;" /><col span="1" style="width: 35%;" /></colgroup>
+  <thead>
+    <th>Metric Name</th>
+    <th>Unit</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td>azure_actionfeatureidoccurrences_average, azure_actionfeatureidoccurrences_count, azure_actionfeatureidoccurrences_maximum, azure_actionfeatureidoccurrences_minimum, azure_actionfeatureidoccurrences_total</td>
+    <td>Count</td>
+    <td>Number of times each action feature appears.</td>
+  </tr>
+  <tr>
+    <td>azure_actionfeaturesperevent_average, azure_actionfeaturesperevent_count, azure_actionfeaturesperevent_maximum, azure_actionfeaturesperevent_minimum, azure_actionfeaturesperevent_total</td>
+    <td>Count</td>
+    <td>Average number of action features per event.</td>
+  </tr>
+  <tr>
+    <td>azure_actionidoccurrences_average, azure_actionidoccurrences_count, azure_actionidoccurrences_maximum, azure_actionidoccurrences_minimum, azure_actionidoccurrences_total</td>
+    <td>Count</td>
+    <td>Number of times each action appears.</td>
+  </tr>
+  <tr>
+    <td>azure_actionnamespacesperevent_average, azure_actionnamespacesperevent_count, azure_actionnamespacesperevent_maximum, azure_actionnamespacesperevent_minimum, azure_actionnamespacesperevent_total</td>
+    <td>Count</td>
+    <td>Average number of action namespaces per event.</td>
+  </tr>
+  <tr>
+    <td>azure_actionsperevent_average, azure_actionsperevent_count, azure_actionsperevent_maximum, azure_actionsperevent_minimum, azure_actionsperevent_total</td>
+    <td>Count</td>
+    <td>Number of actions per event.</td>
+  </tr>
+  <tr>
+    <td>azure_audiosecondstranscribed_average, azure_audiosecondstranscribed_count, azure_audiosecondstranscribed_maximum, azure_audiosecondstranscribed_minimum, azure_audiosecondstranscribed_total</td>
+    <td>Count</td>
+    <td>Number of seconds transcribed</td>
+  </tr>
+  <tr>
+    <td>azure_audiosecondstranslated_average, azure_audiosecondstranslated_count, azure_audiosecondstranslated_maximum, azure_audiosecondstranslated_minimum, azure_audiosecondstranslated_total</td>
+    <td>Count</td>
+    <td>Number of seconds translated</td>
+  </tr>
+  <tr>
+    <td>azure_baselineestimatoroverallreward_average, azure_baselineestimatoroverallreward_count, azure_baselineestimatoroverallreward_maximum, azure_baselineestimatoroverallreward_minimum, azure_baselineestimatoroverallreward_total</td>
+    <td>Count</td>
+    <td>Baseline Estimator Overall Reward.</td>
+  </tr>
+  <tr>
+    <td>azure_baselineestimatorslotreward_average, azure_baselineestimatorslotreward_count, azure_baselineestimatorslotreward_maximum, azure_baselineestimatorslotreward_minimum, azure_baselineestimatorslotreward_total</td>
+    <td>Count</td>
+    <td>Baseline Estimator Reward by slot.</td>
+  </tr>
+  <tr>
+    <td>azure_baselinerandomestimatoroverallreward_average, azure_baselinerandomestimatoroverallreward_count, azure_baselinerandomestimatoroverallreward_maximum, azure_baselinerandomestimatoroverallreward_minimum, azure_baselinerandomestimatoroverallreward_total</td>
+    <td>Count</td>
+    <td>Baseline Random Estimator Overall Reward.</td>
+  </tr>
+  <tr>
+    <td>azure_baselinerandomestimatorslotreward_average, azure_baselinerandomestimatorslotreward_count, azure_baselinerandomestimatorslotreward_maximum, azure_baselinerandomestimatorslotreward_minimum, azure_baselinerandomestimatorslotreward_total</td>
+    <td>Count</td>
+    <td>Baseline Random Estimator Reward by slot.</td>
+  </tr>
+  <tr>
+    <td>azure_baselinerandomeventcount_average, azure_baselinerandomeventcount_count, azure_baselinerandomeventcount_maximum, azure_baselinerandomeventcount_minimum, azure_baselinerandomeventcount_total</td>
+    <td>Count</td>
+    <td>Estimation for baseline random event count.</td>
+  </tr>
+  <tr>
+    <td>azure_baselinerandomreward_average, azure_baselinerandomreward_count, azure_baselinerandomreward_maximum, azure_baselinerandomreward_minimum, azure_baselinerandomreward_total</td>
+    <td>Count</td>
+    <td>Estimation for baseline random reward.</td>
+  </tr>
+  <tr>
+    <td>azure_blockedcalls_average, azure_blockedcalls_count, azure_blockedcalls_maximum, azure_blockedcalls_minimum, azure_blockedcalls_total</td>
+    <td>Count</td>
+    <td>Number of calls that exceeded rate or quota limit.</td>
+  </tr>
+  <tr>
+    <td>azure_carnegieinferencecount_average, azure_carnegieinferencecount_count, azure_carnegieinferencecount_maximum, azure_carnegieinferencecount_minimum, azure_carnegieinferencecount_total</td>
+    <td>Count</td>
+    <td>Inference Count of Carnegie Frontdoor Service</td>
+  </tr>
+  <tr>
+    <td>azure_characterstrained_average, azure_characterstrained_count, azure_characterstrained_maximum, azure_characterstrained_minimum, azure_characterstrained_total</td>
+    <td>Count</td>
+    <td>Total number of characters trained.</td>
+  </tr>
+  <tr>
+    <td>azure_characterstranslated_average, azure_characterstranslated_count, azure_characterstranslated_maximum, azure_characterstranslated_minimum, azure_characterstranslated_total</td>
+    <td>Count</td>
+    <td>Total number of characters in incoming text request.</td>
+  </tr>
+  <tr>
+    <td>azure_clienterrors_average, azure_clienterrors_count, azure_clienterrors_maximum, azure_clienterrors_minimum, azure_clienterrors_total</td>
+    <td>Count</td>
+    <td>Number of calls with client side error (HTTP response code 4xx).</td>
+  </tr>
+  <tr>
+    <td>azure_computervisiontransactions_average, azure_computervisiontransactions_count, azure_computervisiontransactions_maximum, azure_computervisiontransactions_minimum, azure_computervisiontransactions_total</td>
+    <td>Count</td>
+    <td>Number of Computer Vision Transactions</td>
+  </tr>
+  <tr>
+    <td>azure_contentsafetyimageanalyzerequestcount_average, azure_contentsafetyimageanalyzerequestcount_count, azure_contentsafetyimageanalyzerequestcount_maximum, azure_contentsafetyimageanalyzerequestcount_minimum, azure_contentsafetyimageanalyzerequestcount_total</td>
+    <td>Count</td>
+    <td>Number of calls for image moderation.</td>
+  </tr>
+  <tr>
+    <td>azure_contentsafetytextanalyzerequestcount_average, azure_contentsafetytextanalyzerequestcount_count, azure_contentsafetytextanalyzerequestcount_maximum, azure_contentsafetytextanalyzerequestcount_minimum, azure_contentsafetytextanalyzerequestcount_total</td>
+    <td>Count</td>
+    <td>Number of calls for text moderation.</td>
+  </tr>
+  <tr>
+    <td>azure_contextfeatureidoccurrences_average, azure_contextfeatureidoccurrences_count, azure_contextfeatureidoccurrences_maximum, azure_contextfeatureidoccurrences_minimum, azure_contextfeatureidoccurrences_total</td>
+    <td>Count</td>
+    <td>Number of times each context feature appears.</td>
+  </tr>
+  <tr>
+    <td>azure_contextfeaturesperevent_average, azure_contextfeaturesperevent_count, azure_contextfeaturesperevent_maximum, azure_contextfeaturesperevent_minimum, azure_contextfeaturesperevent_total</td>
+    <td>Count</td>
+    <td>Number of context features per event.</td>
+  </tr>
+  <tr>
+    <td>azure_contextnamespacesperevent_average, azure_contextnamespacesperevent_count, azure_contextnamespacesperevent_maximum, azure_contextnamespacesperevent_minimum, azure_contextnamespacesperevent_total</td>
+    <td>Count</td>
+    <td>Number of context namespaces per event.</td>
+  </tr>
+  <tr>
+    <td>azure_customvisiontrainingtime_average, azure_customvisiontrainingtime_count, azure_customvisiontrainingtime_maximum, azure_customvisiontrainingtime_minimum, azure_customvisiontrainingtime_total</td>
+    <td>Seconds</td>
+    <td>Custom Vision training time</td>
+  </tr>
+  <tr>
+    <td>azure_customvisiontransactions_average, azure_customvisiontransactions_count, azure_customvisiontransactions_maximum, azure_customvisiontransactions_minimum, azure_customvisiontransactions_total</td>
+    <td>Count</td>
+    <td>Number of Custom Vision prediction transactions</td>
+  </tr>
+  <tr>
+    <td>azure_datain_average, azure_datain_count, azure_datain_maximum, azure_datain_minimum, azure_datain_total</td>
+    <td>Bytes</td>
+    <td>Size of incoming data in bytes.</td>
+  </tr>
+  <tr>
+    <td>azure_dataout_average, azure_dataout_count, azure_dataout_maximum, azure_dataout_minimum, azure_dataout_total</td>
+    <td>Bytes</td>
+    <td>Size of outgoing data in bytes.</td>
+  </tr>
+  <tr>
+    <td>azure_documentcharacterstranslated_average, azure_documentcharacterstranslated_count, azure_documentcharacterstranslated_maximum, azure_documentcharacterstranslated_minimum, azure_documentcharacterstranslated_total</td>
+    <td>Count</td>
+    <td>Number of characters in document translation request.</td>
+  </tr>
+  <tr>
+    <td>azure_documentcustomcharacterstranslated_average, azure_documentcustomcharacterstranslated_count, azure_documentcustomcharacterstranslated_maximum, azure_documentcustomcharacterstranslated_minimum, azure_documentcustomcharacterstranslated_total</td>
+    <td>Count</td>
+    <td>Number of characters in custom document translation request.</td>
+  </tr>
+  <tr>
+    <td>azure_faceimagestrained_average, azure_faceimagestrained_count, azure_faceimagestrained_maximum, azure_faceimagestrained_minimum, azure_faceimagestrained_total</td>
+    <td>Count</td>
+    <td>Number of images trained. 1,000 images trained per transaction.</td>
+  </tr>
+  <tr>
+    <td>azure_facesstored_average, azure_facesstored_count, azure_facesstored_maximum, azure_facesstored_minimum, azure_facesstored_total</td>
+    <td>Count</td>
+    <td>Number of faces stored, prorated daily. The number of faces stored is reported daily.</td>
+  </tr>
+  <tr>
+    <td>azure_facetransactions_average, azure_facetransactions_count, azure_facetransactions_maximum, azure_facetransactions_minimum, azure_facetransactions_total</td>
+    <td>Count</td>
+    <td>Number of API calls made to Face service</td>
+  </tr>
+  <tr>
+    <td>azure_featurecardinality_action_average, azure_featurecardinality_action_count, azure_featurecardinality_action_maximum, azure_featurecardinality_action_minimum, azure_featurecardinality_action_total</td>
+    <td>Count</td>
+    <td>Feature Cardinality based on Action.</td>
+  </tr>
+  <tr>
+    <td>azure_featurecardinality_context_average, azure_featurecardinality_context_count, azure_featurecardinality_context_maximum, azure_featurecardinality_context_minimum, azure_featurecardinality_context_total</td>
+    <td>Count</td>
+    <td>Feature Cardinality based on Context.</td>
+  </tr>
+  <tr>
+    <td>azure_featurecardinality_slot_average, azure_featurecardinality_slot_count, azure_featurecardinality_slot_maximum, azure_featurecardinality_slot_minimum, azure_featurecardinality_slot_total</td>
+    <td>Count</td>
+    <td>Feature Cardinality based on Slot.</td>
+  </tr>
+  <tr>
+    <td>azure_finetunedtraininghours_average, azure_finetunedtraininghours_count, azure_finetunedtraininghours_maximum, azure_finetunedtraininghours_minimum, azure_finetunedtraininghours_total</td>
+    <td>Count</td>
+    <td>Number of Training Hours Processed on an OpenAI FineTuned Model</td>
+  </tr>
+  <tr>
+    <td>azure_generatedtokens_average, azure_generatedtokens_count, azure_generatedtokens_maximum, azure_generatedtokens_minimum, azure_generatedtokens_total</td>
+    <td>Count</td>
+    <td>Number of Generated Tokens from an OpenAI Model</td>
+  </tr>
+  <tr>
+    <td>azure_imagesstored_average, azure_imagesstored_count, azure_imagesstored_maximum, azure_imagesstored_minimum, azure_imagesstored_total</td>
+    <td>Count</td>
+    <td>Number of Custom Vision images stored.</td>
+  </tr>
+  <tr>
+    <td>azure_latency_average, azure_latency_count, azure_latency_maximum, azure_latency_minimum, azure_latency_total</td>
+    <td>MilliSeconds</td>
+    <td>Latency in milliseconds.</td>
+  </tr>
+  <tr>
+    <td>azure_learnedevents_average, azure_learnedevents_count, azure_learnedevents_maximum, azure_learnedevents_minimum, azure_learnedevents_total</td>
+    <td>Count</td>
+    <td>Number of Learned Events.</td>
+  </tr>
+  <tr>
+    <td>azure_luisspeechrequests_average, azure_luisspeechrequests_count, azure_luisspeechrequests_maximum, azure_luisspeechrequests_minimum, azure_luisspeechrequests_total</td>
+    <td>Count</td>
+    <td>Number of LUIS speech to intent understanding requests</td>
+  </tr>
+  <tr>
+    <td>azure_luistextrequests_average, azure_luistextrequests_count, azure_luistextrequests_maximum, azure_luistextrequests_minimum, azure_luistextrequests_total</td>
+    <td>Count</td>
+    <td>Number of LUIS text requests</td>
+  </tr>
+  <tr>
+    <td>azure_matchedrewards_average, azure_matchedrewards_count, azure_matchedrewards_maximum, azure_matchedrewards_minimum, azure_matchedrewards_total</td>
+    <td>Count</td>
+    <td>Number of Matched Rewards.</td>
+  </tr>
+  <tr>
+    <td>azure_nonactivatedevents_average, azure_nonactivatedevents_count, azure_nonactivatedevents_maximum, azure_nonactivatedevents_minimum, azure_nonactivatedevents_total</td>
+    <td>Count</td>
+    <td>Number of skipped events.</td>
+  </tr>
+  <tr>
+    <td>azure_numberofslots_average, azure_numberofslots_count, azure_numberofslots_maximum, azure_numberofslots_minimum, azure_numberofslots_total</td>
+    <td>Count</td>
+    <td>Number of slots per event.</td>
+  </tr>
+  <tr>
+    <td>azure_numberofspeakerprofiles_average, azure_numberofspeakerprofiles_count, azure_numberofspeakerprofiles_maximum, azure_numberofspeakerprofiles_minimum, azure_numberofspeakerprofiles_total</td>
+    <td>Count</td>
+    <td>Number of speaker profiles enrolled. Prorated hourly.</td>
+  </tr>
+  <tr>
+    <td>azure_observedrewards_average, azure_observedrewards_count, azure_observedrewards_maximum, azure_observedrewards_minimum, azure_observedrewards_total</td>
+    <td>Count</td>
+    <td>Number of Observed Rewards.</td>
+  </tr>
+  <tr>
+    <td>azure_onlineestimatoroverallreward_average, azure_onlineestimatoroverallreward_count, azure_onlineestimatoroverallreward_maximum, azure_onlineestimatoroverallreward_minimum, azure_onlineestimatoroverallreward_total</td>
+    <td>Count</td>
+    <td>Online Estimator Overall Reward.</td>
+  </tr>
+  <tr>
+    <td>azure_onlineestimatorslotreward_average, azure_onlineestimatorslotreward_count, azure_onlineestimatorslotreward_maximum, azure_onlineestimatorslotreward_minimum, azure_onlineestimatorslotreward_total</td>
+    <td>Count</td>
+    <td>Online Estimator Reward by slot.</td>
+  </tr>
+  <tr>
+    <td>azure_onlineeventcount_average, azure_onlineeventcount_count, azure_onlineeventcount_maximum, azure_onlineeventcount_minimum, azure_onlineeventcount_total</td>
+    <td>Count</td>
+    <td>Estimation for online event count.</td>
+  </tr>
+  <tr>
+    <td>azure_onlinereward_average, azure_onlinereward_count, azure_onlinereward_maximum, azure_onlinereward_minimum, azure_onlinereward_total</td>
+    <td>Count</td>
+    <td>Estimation for online reward.</td>
+  </tr>
+  <tr>
+    <td>azure_processedcharacters_average, azure_processedcharacters_count, azure_processedcharacters_maximum, azure_processedcharacters_minimum, azure_processedcharacters_total</td>
+    <td>Count</td>
+    <td>Number of Characters processed by Immersive Reader.</td>
+  </tr>
+  <tr>
+    <td>azure_processedhealthtextrecords_average, azure_processedhealthtextrecords_count, azure_processedhealthtextrecords_maximum, azure_processedhealthtextrecords_minimum, azure_processedhealthtextrecords_total</td>
+    <td>Count</td>
+    <td>Number of health text records processed</td>
+  </tr>
+  <tr>
+    <td>azure_processedimages_average, azure_processedimages_count, azure_processedimages_maximum, azure_processedimages_minimum, azure_processedimages_total</td>
+    <td>Count</td>
+    <td>Number of images processed</td>
+  </tr>
+  <tr>
+    <td>azure_processedpages_average, azure_processedpages_count, azure_processedpages_maximum, azure_processedpages_minimum, azure_processedpages_total</td>
+    <td>Count</td>
+    <td>Number of pages processed</td>
+  </tr>
+  <tr>
+    <td>azure_processedprompttokens_average, azure_processedprompttokens_count, azure_processedprompttokens_maximum, azure_processedprompttokens_minimum, azure_processedprompttokens_total</td>
+    <td>Count</td>
+    <td>Number of Prompt Tokens Processed on an OpenAI Model</td>
+  </tr>
+  <tr>
+    <td>azure_processedtextrecords_average, azure_processedtextrecords_count, azure_processedtextrecords_maximum, azure_processedtextrecords_minimum, azure_processedtextrecords_total</td>
+    <td>Count</td>
+    <td>Count of Text Records.</td>
+  </tr>
+  <tr>
+    <td>azure_questionansweringtextrecords_average, azure_questionansweringtextrecords_count, azure_questionansweringtextrecords_maximum, azure_questionansweringtextrecords_minimum, azure_questionansweringtextrecords_total</td>
+    <td>Count</td>
+    <td>Number of text records processed</td>
+  </tr>
+  <tr>
+    <td>azure_ratelimit_average, azure_ratelimit_count, azure_ratelimit_maximum, azure_ratelimit_minimum, azure_ratelimit_total</td>
+    <td>Count</td>
+    <td>The current ratelimit of the ratelimit key.</td>
+  </tr>
+  <tr>
+    <td>azure_reward_average, azure_reward_count, azure_reward_maximum, azure_reward_minimum, azure_reward_total</td>
+    <td>Count</td>
+    <td>Average reward per event.</td>
+  </tr>
+  <tr>
+    <td>azure_servererrors_average, azure_servererrors_count, azure_servererrors_maximum, azure_servererrors_minimum, azure_servererrors_total</td>
+    <td>Count</td>
+    <td>Number of calls with service internal error (HTTP response code 5xx).</td>
+  </tr>
+  <tr>
+    <td>azure_slotfeatureidoccurrences_average, azure_slotfeatureidoccurrences_count, azure_slotfeatureidoccurrences_maximum, azure_slotfeatureidoccurrences_minimum, azure_slotfeatureidoccurrences_total</td>
+    <td>Count</td>
+    <td>Number of times each slot feature appears.</td>
+  </tr>
+  <tr>
+    <td>azure_slotfeaturesperevent_average, azure_slotfeaturesperevent_count, azure_slotfeaturesperevent_maximum, azure_slotfeaturesperevent_minimum, azure_slotfeaturesperevent_total</td>
+    <td>Count</td>
+    <td>Average number of slot features per event.</td>
+  </tr>
+  <tr>
+    <td>azure_slotidoccurrences_average, azure_slotidoccurrences_count, azure_slotidoccurrences_maximum, azure_slotidoccurrences_minimum, azure_slotidoccurrences_total</td>
+    <td>Count</td>
+    <td>Number of times each slot appears.</td>
+  </tr>
+  <tr>
+    <td>azure_slotnamespacesperevent_average, azure_slotnamespacesperevent_count, azure_slotnamespacesperevent_maximum, azure_slotnamespacesperevent_minimum, azure_slotnamespacesperevent_total</td>
+    <td>Count</td>
+    <td>Average number of slot namespaces per event.</td>
+  </tr>
+  <tr>
+    <td>azure_slotreward_average, azure_slotreward_count, azure_slotreward_maximum, azure_slotreward_minimum, azure_slotreward_total</td>
+    <td>Count</td>
+    <td>Reward per slot.</td>
+  </tr>
+  <tr>
+    <td>azure_speakerrecognitiontransactions_average, azure_speakerrecognitiontransactions_count, azure_speakerrecognitiontransactions_maximum, azure_speakerrecognitiontransactions_minimum, azure_speakerrecognitiontransactions_total</td>
+    <td>Count</td>
+    <td>Number of speaker recognition transactions</td>
+  </tr>
+  <tr>
+    <td>azure_speechmodelhostinghours_average, azure_speechmodelhostinghours_count, azure_speechmodelhostinghours_maximum, azure_speechmodelhostinghours_minimum, azure_speechmodelhostinghours_total</td>
+    <td>Count</td>
+    <td>Number of speech model hosting hours</td>
+  </tr>
+  <tr>
+    <td>azure_speechsessionduration_average, azure_speechsessionduration_count, azure_speechsessionduration_maximum, azure_speechsessionduration_minimum, azure_speechsessionduration_total</td>
+    <td>Seconds</td>
+    <td>Total duration of speech session in seconds.</td>
+  </tr>
+  <tr>
+    <td>azure_successfulcalls_average, azure_successfulcalls_count, azure_successfulcalls_maximum, azure_successfulcalls_minimum, azure_successfulcalls_total</td>
+    <td>Count</td>
+    <td>Number of successful calls.</td>
+  </tr>
+  <tr>
+    <td>azure_successrate_average, azure_successrate_count, azure_successrate_maximum, azure_successrate_minimum, azure_successrate_total</td>
+    <td>Percent</td>
+    <td>Availability percentage with the following calculation: (Total Calls - Server Errors)/Total Calls. Server Errors include any HTTP responses >=500.</td>
+  </tr>
+  <tr>
+    <td>azure_synthesizedcharacters_average, azure_synthesizedcharacters_count, azure_synthesizedcharacters_maximum, azure_synthesizedcharacters_minimum, azure_synthesizedcharacters_total</td>
+    <td>Count</td>
+    <td>Number of Characters.</td>
+  </tr>
+  <tr>
+    <td>azure_textcharacterstranslated_average, azure_textcharacterstranslated_count, azure_textcharacterstranslated_maximum, azure_textcharacterstranslated_minimum, azure_textcharacterstranslated_total</td>
+    <td>Count</td>
+    <td>Number of characters in incoming text translation request.</td>
+  </tr>
+  <tr>
+    <td>azure_textcustomcharacterstranslated_average, azure_textcustomcharacterstranslated_count, azure_textcustomcharacterstranslated_maximum, azure_textcustomcharacterstranslated_minimum, azure_textcustomcharacterstranslated_total</td>
+    <td>Count</td>
+    <td>Number of characters in incoming custom text translation request.</td>
+  </tr>
+  <tr>
+    <td>azure_texttrainedcharacters_average, azure_texttrainedcharacters_count, azure_texttrainedcharacters_maximum, azure_texttrainedcharacters_minimum, azure_texttrainedcharacters_total</td>
+    <td>Count</td>
+    <td>Number of characters trained using text translation.</td>
+  </tr>
+  <tr>
+    <td>azure_tokentransaction_average, azure_tokentransaction_count, azure_tokentransaction_maximum, azure_tokentransaction_minimum, azure_tokentransaction_total</td>
+    <td>Count</td>
+    <td>Number of Inference Tokens Processed on an OpenAI Model</td>
+  </tr>
+  <tr>
+    <td>azure_totalcalls_average, azure_totalcalls_count, azure_totalcalls_maximum, azure_totalcalls_minimum, azure_totalcalls_total</td>
+    <td>Count</td>
+    <td>Total number of calls.</td>
+  </tr>
+  <tr>
+    <td>azure_totalerrors_average, azure_totalerrors_count, azure_totalerrors_maximum, azure_totalerrors_minimum, azure_totalerrors_total</td>
+    <td>Count</td>
+    <td>Total number of calls with error response (HTTP response code 4xx or 5xx).</td>
+  </tr>
+  <tr>
+    <td>azure_totalevents_average, azure_totalevents_count, azure_totalevents_maximum, azure_totalevents_minimum, azure_totalevents_total</td>
+    <td>Count</td>
+    <td>Number of events.</td>
+  </tr>
+  <tr>
+    <td>azure_totaltokencalls_average, azure_totaltokencalls_count, azure_totaltokencalls_maximum, azure_totaltokencalls_minimum, azure_totaltokencalls_total</td>
+    <td>Count</td>
+    <td>Total number of token calls.</td>
+  </tr>
+  <tr>
+    <td>azure_totaltransactions_average, azure_totaltransactions_count, azure_totaltransactions_maximum, azure_totaltransactions_minimum, azure_totaltransactions_total</td>
+    <td>Count</td>
+    <td>Total number of transactions.</td>
+  </tr>
+  <tr>
+    <td>azure_userbaselineeventcount_average, azure_userbaselineeventcount_count, azure_userbaselineeventcount_maximum, azure_userbaselineeventcount_minimum, azure_userbaselineeventcount_total</td>
+    <td>Count</td>
+    <td>Estimation for user defined baseline event count.</td>
+  </tr>
+  <tr>
+    <td>azure_userbaselinereward_average, azure_userbaselinereward_count, azure_userbaselinereward_maximum, azure_userbaselinereward_minimum, azure_userbaselinereward_total</td>
+    <td>Count</td>
+    <td>Estimation for user defined baseline reward.</td>
+  </tr>
+  <tr>
+    <td>azure_voicemodelhostinghours_average, azure_voicemodelhostinghours_count, azure_voicemodelhostinghours_maximum, azure_voicemodelhostinghours_minimum, azure_voicemodelhostinghours_total</td>
+    <td>Count</td>
+    <td>Number of Hours.</td>
+  </tr>
+  <tr>
+    <td>azure_voicemodeltrainingminutes_average, azure_voicemodeltrainingminutes_count, azure_voicemodeltrainingminutes_maximum, azure_voicemodeltrainingminutes_minimum, azure_voicemodeltrainingminutes_total</td>
+    <td>Count</td>
+    <td>Number of Minutes.</td>
+  </tr>
+</table>

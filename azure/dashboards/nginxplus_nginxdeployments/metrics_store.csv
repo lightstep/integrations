@@ -1,0 +1,1 @@
+azure_nginx_average;azure_nginx_count;azure_nginx_maximum;azure_nginx_minimum;azure_nginx_total,Gauge,Count,The NGINX metric.,

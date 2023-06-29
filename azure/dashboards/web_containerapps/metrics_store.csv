@@ -1,0 +1,7 @@
+azure_replicas_average;azure_replicas_count;azure_replicas_maximum;azure_replicas_minimum;azure_replicas_total,Gauge,Count,Number of replicas count of container app,
+azure_requests_average;azure_requests_count;azure_requests_maximum;azure_requests_minimum;azure_requests_total,Gauge,Count,Requests processed,
+azure_restartcount_average;azure_restartcount_count;azure_restartcount_maximum;azure_restartcount_minimum;azure_restartcount_total,Gauge,Count,Restart count of container app replicas,
+azure_rxbytes_average;azure_rxbytes_count;azure_rxbytes_maximum;azure_rxbytes_minimum;azure_rxbytes_total,Gauge,Bytes,Network received bytes,
+azure_txbytes_average;azure_txbytes_count;azure_txbytes_maximum;azure_txbytes_minimum;azure_txbytes_total,Gauge,Bytes,Network transmitted bytes,
+azure_usagenanocores_average;azure_usagenanocores_count;azure_usagenanocores_maximum;azure_usagenanocores_minimum;azure_usagenanocores_total,Gauge,NanoCores,"CPU consumed by the container app, in nano cores. 1,000,000,000 nano cores = 1 core",
+azure_workingsetbytes_average;azure_workingsetbytes_count;azure_workingsetbytes_maximum;azure_workingsetbytes_minimum;azure_workingsetbytes_total,Gauge,Bytes,Container App working set memory used in bytes.,

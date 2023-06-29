@@ -1,0 +1,3 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_pebytesin_average;azure_pebytesin_count;azure_pebytesin_maximum;azure_pebytesin_minimum;azure_pebytesin_total,Total number of Bytes Out,Count,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location,total
+azure_pebytesout_average;azure_pebytesout_count;azure_pebytesout_maximum;azure_pebytesout_minimum;azure_pebytesout_total,Total number of Bytes Out,Count,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location,total

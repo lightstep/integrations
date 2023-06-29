@@ -1,0 +1,1 @@
+azure_%_processor_time_average;azure_%_processor_time_count;azure_%_processor_time_maximum;azure_%_processor_time_minimum;azure_%_processor_time_total,Gauge,Percent,Percent CPU utilization,

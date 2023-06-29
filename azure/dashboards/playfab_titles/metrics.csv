@@ -1,0 +1,2 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_playerloggedincount_average;azure_playerloggedincount_count;azure_playerloggedincount_maximum;azure_playerloggedincount_minimum;azure_playerloggedincount_total,Number of logins by any player in a given title,Count,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location;metadata_titleid,count

@@ -1,0 +1,2 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_roundtriptime_average;azure_roundtriptime_count;azure_roundtriptime_maximum;azure_roundtriptime_minimum;azure_roundtriptime_total,Average round trip time,Milliseconds,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location;metadata_connectionmonitortestname,average

@@ -1,0 +1,5 @@
+azure_cpu_average;azure_cpu_count;azure_cpu_maximum;azure_cpu_minimum;azure_cpu_total,Gauge,Percent,CPU usage for premium streaming endpoints. This data is not available for standard streaming endpoints.,
+azure_egress_average;azure_egress_count;azure_egress_maximum;azure_egress_minimum;azure_egress_total,Gauge,Bytes,"The amount of Egress data, in bytes.",
+azure_egressbandwidth_average;azure_egressbandwidth_count;azure_egressbandwidth_maximum;azure_egressbandwidth_minimum;azure_egressbandwidth_total,Gauge,BitsPerSecond,Egress bandwidth in bits per second.,
+azure_requests_average;azure_requests_count;azure_requests_maximum;azure_requests_minimum;azure_requests_total,Gauge,Count,Requests to a Streaming Endpoint.,
+azure_successe2elatency_average;azure_successe2elatency_count;azure_successe2elatency_maximum;azure_successe2elatency_minimum;azure_successe2elatency_total,Gauge,MilliSeconds,The average latency for successful requests in milliseconds.,

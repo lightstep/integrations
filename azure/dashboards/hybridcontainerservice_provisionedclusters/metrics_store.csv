@@ -1,0 +1,1 @@
+azure_capacity_cpu_cores_average;azure_capacity_cpu_cores_count;azure_capacity_cpu_cores_maximum;azure_capacity_cpu_cores_minimum;azure_capacity_cpu_cores_total,Gauge,Count,Total number of cpu cores in a provisioned cluster,

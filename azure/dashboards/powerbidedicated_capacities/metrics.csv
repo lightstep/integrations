@@ -1,0 +1,3 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_cpu_metric_average;azure_cpu_metric_count;azure_cpu_metric_maximum;azure_cpu_metric_minimum;azure_cpu_metric_total,CPU Utilization. Supported only for Power BI Embedded Generation 2 resources.,Percent,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location,average
+azure_overload_metric_average;azure_overload_metric_count;azure_overload_metric_maximum;azure_overload_metric_minimum;azure_overload_metric_total,"Resource Overload, 1 if resource is overloaded, otherwise 0. Supported only for Power BI Embedded Generation 2 resources.",Count,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location,average

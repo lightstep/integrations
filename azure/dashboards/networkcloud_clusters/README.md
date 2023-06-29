@@ -1,0 +1,562 @@
+---
+title: Azure Microsoft.NetworkCloud/clusters metrics
+date: 2023-06-29 00:00:00
+canonical_url:
+description: See the Azure Microsoft.NetworkCloud/clusters metrics ingested by Lightstep Observability
+image: /images/ui/post-placeholder.jpg
+tags:
+  - Monitoring
+  - Performance
+  - Metrics
+  - Azure
+azure_int: Microsoft.NetworkCloud/clusters
+authors:
+  - otel-team
+layout: table
+cards:
+  - topic_item: /docs/setup-azure-for-metrics
+  - topic_item: /docs/create-and-manage-dashboards
+  - topic_item: /docs/create-alerts
+---
+Once you've integrated with [Azure Monitor](/docs/setup-azure-for-metrics), you have access to all metrics for Microsoft.NetworkCloud/clusters, **PUT DESCRIPTION HERE**. 
+
+See [all available Azure integrations](/docs/azure-metrics).
+{: .tip}
+
+To verify metrics are reporting, search for the metrics on the [Metric details](/docs/manage-metric-details) page in **Project settings**.
+{: .tip}
+
+The following table shows the {{page.azure_int}} metrics ingested by Lightstep.
+<table class="table-aws">
+<colgroup><col span="1" style="width: 35%;" /><col span="1" style="width: 15%;" /><col span="1" style="width: 35%;" /></colgroup>
+  <thead>
+    <th>Metric Name</th>
+    <th>Unit</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td>azure_apiserverauditrequestsrejectedtotal_average, azure_apiserverauditrequestsrejectedtotal_count, azure_apiserverauditrequestsrejectedtotal_maximum, azure_apiserverauditrequestsrejectedtotal_minimum, azure_apiserverauditrequestsrejectedtotal_total</td>
+    <td>Count</td>
+    <td>Counter of API server requests rejected due to an error in the audit logging backend</td>
+  </tr>
+  <tr>
+    <td>azure_apiserverclientcertificateexpirationsecondssum_average, azure_apiserverclientcertificateexpirationsecondssum_count, azure_apiserverclientcertificateexpirationsecondssum_maximum, azure_apiserverclientcertificateexpirationsecondssum_minimum, azure_apiserverclientcertificateexpirationsecondssum_total</td>
+    <td>Seconds</td>
+    <td>Sum of API server client certificate expiration (seconds)</td>
+  </tr>
+  <tr>
+    <td>azure_apiserverstoragedatakeygenerationfailurestotal_average, azure_apiserverstoragedatakeygenerationfailurestotal_count, azure_apiserverstoragedatakeygenerationfailurestotal_maximum, azure_apiserverstoragedatakeygenerationfailurestotal_minimum, azure_apiserverstoragedatakeygenerationfailurestotal_total</td>
+    <td>Count</td>
+    <td>Total number of operations that failed Data Encryption Key (DEK) generation</td>
+  </tr>
+  <tr>
+    <td>azure_apiservertlshandshakeerrorstotal_average, azure_apiservertlshandshakeerrorstotal_count, azure_apiservertlshandshakeerrorstotal_maximum, azure_apiservertlshandshakeerrorstotal_minimum, azure_apiservertlshandshakeerrorstotal_total</td>
+    <td>Count</td>
+    <td>Number of requests dropped with 'TLS handshake' error</td>
+  </tr>
+  <tr>
+    <td>azure_containerfsiotimesecondstotal_average, azure_containerfsiotimesecondstotal_count, azure_containerfsiotimesecondstotal_maximum, azure_containerfsiotimesecondstotal_minimum, azure_containerfsiotimesecondstotal_total</td>
+    <td>Seconds</td>
+    <td>Time taken for container Input/Output (I/O) operations</td>
+  </tr>
+  <tr>
+    <td>azure_containermemoryfailcnt_average, azure_containermemoryfailcnt_count, azure_containermemoryfailcnt_maximum, azure_containermemoryfailcnt_minimum, azure_containermemoryfailcnt_total</td>
+    <td>Count</td>
+    <td>Number of times a container's memory usage limit is hit</td>
+  </tr>
+  <tr>
+    <td>azure_containermemoryusagebytes_average, azure_containermemoryusagebytes_count, azure_containermemoryusagebytes_maximum, azure_containermemoryusagebytes_minimum, azure_containermemoryusagebytes_total</td>
+    <td>Bytes</td>
+    <td>Current memory usage, including all memory regardless of when it was accessed</td>
+  </tr>
+  <tr>
+    <td>azure_containernetworkreceiveerrorstotal_average, azure_containernetworkreceiveerrorstotal_count, azure_containernetworkreceiveerrorstotal_maximum, azure_containernetworkreceiveerrorstotal_minimum, azure_containernetworkreceiveerrorstotal_total</td>
+    <td>Count</td>
+    <td>Number of errors encountered while receiving bytes over the network</td>
+  </tr>
+  <tr>
+    <td>azure_containernetworktransmiterrorstotal_average, azure_containernetworktransmiterrorstotal_count, azure_containernetworktransmiterrorstotal_maximum, azure_containernetworktransmiterrorstotal_minimum, azure_containernetworktransmiterrorstotal_total</td>
+    <td>Count</td>
+    <td>Count of errors that happened while transmitting</td>
+  </tr>
+  <tr>
+    <td>azure_containerscrapeerror_average, azure_containerscrapeerror_count, azure_containerscrapeerror_maximum, azure_containerscrapeerror_minimum, azure_containerscrapeerror_total</td>
+    <td>Unspecified</td>
+    <td>Indicates whether there was an error while getting container metrics</td>
+  </tr>
+  <tr>
+    <td>azure_containertasksstate_average, azure_containertasksstate_count, azure_containertasksstate_maximum, azure_containertasksstate_minimum, azure_containertasksstate_total</td>
+    <td>Count</td>
+    <td>Number of tasks or processes in a given state (sleeping, running, stopped, uninterruptible, or waiting) in a container</td>
+  </tr>
+  <tr>
+    <td>azure_controllerruntimereconcileerrorstotal_average, azure_controllerruntimereconcileerrorstotal_count, azure_controllerruntimereconcileerrorstotal_maximum, azure_controllerruntimereconcileerrorstotal_minimum, azure_controllerruntimereconcileerrorstotal_total</td>
+    <td>Count</td>
+    <td>Total number of reconciliation errors per controller</td>
+  </tr>
+  <tr>
+    <td>azure_controllerruntimereconciletotal_average, azure_controllerruntimereconciletotal_count, azure_controllerruntimereconciletotal_maximum, azure_controllerruntimereconciletotal_minimum, azure_controllerruntimereconciletotal_total</td>
+    <td>Count</td>
+    <td>Total number of reconciliations per controller</td>
+  </tr>
+  <tr>
+    <td>azure_corednsdnsrequeststotal_average, azure_corednsdnsrequeststotal_count, azure_corednsdnsrequeststotal_maximum, azure_corednsdnsrequeststotal_minimum, azure_corednsdnsrequeststotal_total</td>
+    <td>Count</td>
+    <td>Total number of DNS requests</td>
+  </tr>
+  <tr>
+    <td>azure_corednsdnsresponsestotal_average, azure_corednsdnsresponsestotal_count, azure_corednsdnsresponsestotal_maximum, azure_corednsdnsresponsestotal_minimum, azure_corednsdnsresponsestotal_total</td>
+    <td>Count</td>
+    <td>Total number of DNS responses</td>
+  </tr>
+  <tr>
+    <td>azure_corednsforwardhealthcheckbrokentotal_average, azure_corednsforwardhealthcheckbrokentotal_count, azure_corednsforwardhealthcheckbrokentotal_maximum, azure_corednsforwardhealthcheckbrokentotal_minimum, azure_corednsforwardhealthcheckbrokentotal_total</td>
+    <td>Count</td>
+    <td>Total number of times all upstreams are unhealthy</td>
+  </tr>
+  <tr>
+    <td>azure_corednsforwardmaxconcurrentrejectstotal_average, azure_corednsforwardmaxconcurrentrejectstotal_count, azure_corednsforwardmaxconcurrentrejectstotal_maximum, azure_corednsforwardmaxconcurrentrejectstotal_minimum, azure_corednsforwardmaxconcurrentrejectstotal_total</td>
+    <td>Count</td>
+    <td>Total number of rejected queries because concurrent queries were at the maximum limit</td>
+  </tr>
+  <tr>
+    <td>azure_corednshealthrequestfailurestotal_average, azure_corednshealthrequestfailurestotal_count, azure_corednshealthrequestfailurestotal_maximum, azure_corednshealthrequestfailurestotal_minimum, azure_corednshealthrequestfailurestotal_total</td>
+    <td>Count</td>
+    <td>The number of times the self health check failed</td>
+  </tr>
+  <tr>
+    <td>azure_corednspanicstotal_average, azure_corednspanicstotal_count, azure_corednspanicstotal_maximum, azure_corednspanicstotal_minimum, azure_corednspanicstotal_total</td>
+    <td>Count</td>
+    <td>Total number of panics</td>
+  </tr>
+  <tr>
+    <td>azure_corednsreloadfailedtotal_average, azure_corednsreloadfailedtotal_count, azure_corednsreloadfailedtotal_maximum, azure_corednsreloadfailedtotal_minimum, azure_corednsreloadfailedtotal_total</td>
+    <td>Count</td>
+    <td>Total number of failed reload attempts</td>
+  </tr>
+  <tr>
+    <td>azure_etcddiskbackendcommitdurationsecondssum_average, azure_etcddiskbackendcommitdurationsecondssum_count, azure_etcddiskbackendcommitdurationsecondssum_maximum, azure_etcddiskbackendcommitdurationsecondssum_minimum, azure_etcddiskbackendcommitdurationsecondssum_total</td>
+    <td>Seconds</td>
+    <td>The latency distribution of commits called by the backend</td>
+  </tr>
+  <tr>
+    <td>azure_etcddiskwalfsyncdurationsecondssum_average, azure_etcddiskwalfsyncdurationsecondssum_count, azure_etcddiskwalfsyncdurationsecondssum_maximum, azure_etcddiskwalfsyncdurationsecondssum_minimum, azure_etcddiskwalfsyncdurationsecondssum_total</td>
+    <td>Seconds</td>
+    <td>The sum of latency distributions of 'fsync' called by the write-ahead log (WAL)</td>
+  </tr>
+  <tr>
+    <td>azure_etcdserverhealthfailures_average, azure_etcdserverhealthfailures_count, azure_etcdserverhealthfailures_maximum, azure_etcdserverhealthfailures_minimum, azure_etcdserverhealthfailures_total</td>
+    <td>Count</td>
+    <td>Total server health failures</td>
+  </tr>
+  <tr>
+    <td>azure_etcdserverisleader_average, azure_etcdserverisleader_count, azure_etcdserverisleader_maximum, azure_etcdserverisleader_minimum, azure_etcdserverisleader_total</td>
+    <td>Unspecified</td>
+    <td>Whether or not this member is a leader; 1 if is, 0 otherwise</td>
+  </tr>
+  <tr>
+    <td>azure_etcdserverislearner_average, azure_etcdserverislearner_count, azure_etcdserverislearner_maximum, azure_etcdserverislearner_minimum, azure_etcdserverislearner_total</td>
+    <td>Unspecified</td>
+    <td>Whether or not this member is a learner; 1 if is, 0 otherwise</td>
+  </tr>
+  <tr>
+    <td>azure_etcdserverleaderchangesseentotal_average, azure_etcdserverleaderchangesseentotal_count, azure_etcdserverleaderchangesseentotal_maximum, azure_etcdserverleaderchangesseentotal_minimum, azure_etcdserverleaderchangesseentotal_total</td>
+    <td>Count</td>
+    <td>The number of leader changes seen</td>
+  </tr>
+  <tr>
+    <td>azure_etcdserverproposalsappliedtotal_average, azure_etcdserverproposalsappliedtotal_count, azure_etcdserverproposalsappliedtotal_maximum, azure_etcdserverproposalsappliedtotal_minimum, azure_etcdserverproposalsappliedtotal_total</td>
+    <td>Count</td>
+    <td>The total number of consensus proposals applied</td>
+  </tr>
+  <tr>
+    <td>azure_etcdserverproposalscommittedtotal_average, azure_etcdserverproposalscommittedtotal_count, azure_etcdserverproposalscommittedtotal_maximum, azure_etcdserverproposalscommittedtotal_minimum, azure_etcdserverproposalscommittedtotal_total</td>
+    <td>Count</td>
+    <td>The total number of consensus proposals committed</td>
+  </tr>
+  <tr>
+    <td>azure_etcdserverproposalsfailedtotal_average, azure_etcdserverproposalsfailedtotal_count, azure_etcdserverproposalsfailedtotal_maximum, azure_etcdserverproposalsfailedtotal_minimum, azure_etcdserverproposalsfailedtotal_total</td>
+    <td>Count</td>
+    <td>The total number of failed proposals</td>
+  </tr>
+  <tr>
+    <td>azure_etcdserverslowapplytotal_average, azure_etcdserverslowapplytotal_count, azure_etcdserverslowapplytotal_maximum, azure_etcdserverslowapplytotal_minimum, azure_etcdserverslowapplytotal_total</td>
+    <td>Count</td>
+    <td>The total number of slow apply requests</td>
+  </tr>
+  <tr>
+    <td>azure_felixactivelocalendpoints_average, azure_felixactivelocalendpoints_count, azure_felixactivelocalendpoints_maximum, azure_felixactivelocalendpoints_minimum, azure_felixactivelocalendpoints_total</td>
+    <td>Count</td>
+    <td>Number of active endpoints on this host</td>
+  </tr>
+  <tr>
+    <td>azure_felixclusternumhostendpoints_average, azure_felixclusternumhostendpoints_count, azure_felixclusternumhostendpoints_maximum, azure_felixclusternumhostendpoints_minimum, azure_felixclusternumhostendpoints_total</td>
+    <td>Count</td>
+    <td>Total number of host endpoints cluster-wide</td>
+  </tr>
+  <tr>
+    <td>azure_felixclusternumhosts_average, azure_felixclusternumhosts_count, azure_felixclusternumhosts_maximum, azure_felixclusternumhosts_minimum, azure_felixclusternumhosts_total</td>
+    <td>Count</td>
+    <td>Total number of Calico hosts in the cluster</td>
+  </tr>
+  <tr>
+    <td>azure_felixclusternumworkloadendpoints_average, azure_felixclusternumworkloadendpoints_count, azure_felixclusternumworkloadendpoints_maximum, azure_felixclusternumworkloadendpoints_minimum, azure_felixclusternumworkloadendpoints_total</td>
+    <td>Count</td>
+    <td>Total number of workload endpoints cluster-wide</td>
+  </tr>
+  <tr>
+    <td>azure_felixintdataplanefailures_average, azure_felixintdataplanefailures_count, azure_felixintdataplanefailures_maximum, azure_felixintdataplanefailures_minimum, azure_felixintdataplanefailures_total</td>
+    <td>Count</td>
+    <td>Number of times dataplane updates failed and will be retried</td>
+  </tr>
+  <tr>
+    <td>azure_felixipseterrors_average, azure_felixipseterrors_count, azure_felixipseterrors_maximum, azure_felixipseterrors_minimum, azure_felixipseterrors_total</td>
+    <td>Count</td>
+    <td>Number of 'ipset' command failures</td>
+  </tr>
+  <tr>
+    <td>azure_felixipsetscalico_average, azure_felixipsetscalico_count, azure_felixipsetscalico_maximum, azure_felixipsetscalico_minimum, azure_felixipsetscalico_total</td>
+    <td>Count</td>
+    <td>Number of active Calico IP sets</td>
+  </tr>
+  <tr>
+    <td>azure_felixiptablesrestoreerrors_average, azure_felixiptablesrestoreerrors_count, azure_felixiptablesrestoreerrors_maximum, azure_felixiptablesrestoreerrors_minimum, azure_felixiptablesrestoreerrors_total</td>
+    <td>Count</td>
+    <td>Number of 'iptables-restore' errors</td>
+  </tr>
+  <tr>
+    <td>azure_felixiptablessaveerrors_average, azure_felixiptablessaveerrors_count, azure_felixiptablessaveerrors_maximum, azure_felixiptablessaveerrors_minimum, azure_felixiptablessaveerrors_total</td>
+    <td>Count</td>
+    <td>Number of 'iptables-save' errors</td>
+  </tr>
+  <tr>
+    <td>azure_felixresyncsstarted_average, azure_felixresyncsstarted_count, azure_felixresyncsstarted_maximum, azure_felixresyncsstarted_minimum, azure_felixresyncsstarted_total</td>
+    <td>Count</td>
+    <td>Number of times Felix has started resyncing with the datastore</td>
+  </tr>
+  <tr>
+    <td>azure_felixresyncstate_average, azure_felixresyncstate_count, azure_felixresyncstate_maximum, azure_felixresyncstate_minimum, azure_felixresyncstate_total</td>
+    <td>Unspecified</td>
+    <td>Current datastore state</td>
+  </tr>
+  <tr>
+    <td>azure_kubedaemonsetstatuscurrentnumberscheduled_average, azure_kubedaemonsetstatuscurrentnumberscheduled_count, azure_kubedaemonsetstatuscurrentnumberscheduled_maximum, azure_kubedaemonsetstatuscurrentnumberscheduled_minimum, azure_kubedaemonsetstatuscurrentnumberscheduled_total</td>
+    <td>Count</td>
+    <td>Number of daemonsets currently scheduled</td>
+  </tr>
+  <tr>
+    <td>azure_kubedaemonsetstatusdesirednumberscheduled_average, azure_kubedaemonsetstatusdesirednumberscheduled_count, azure_kubedaemonsetstatusdesirednumberscheduled_maximum, azure_kubedaemonsetstatusdesirednumberscheduled_minimum, azure_kubedaemonsetstatusdesirednumberscheduled_total</td>
+    <td>Count</td>
+    <td>Number of daemonsets desired scheduled</td>
+  </tr>
+  <tr>
+    <td>azure_kubedeploymentstatusreplicasavailable_average, azure_kubedeploymentstatusreplicasavailable_count, azure_kubedeploymentstatusreplicasavailable_maximum, azure_kubedeploymentstatusreplicasavailable_minimum, azure_kubedeploymentstatusreplicasavailable_total</td>
+    <td>Count</td>
+    <td>Number of deployment replicas available</td>
+  </tr>
+  <tr>
+    <td>azure_kubedeploymentstatusreplicasready_average, azure_kubedeploymentstatusreplicasready_count, azure_kubedeploymentstatusreplicasready_maximum, azure_kubedeploymentstatusreplicasready_minimum, azure_kubedeploymentstatusreplicasready_total</td>
+    <td>Count</td>
+    <td>Number of deployment replicas ready</td>
+  </tr>
+  <tr>
+    <td>azure_kubejobstatusactive_average, azure_kubejobstatusactive_count, azure_kubejobstatusactive_maximum, azure_kubejobstatusactive_minimum, azure_kubejobstatusactive_total</td>
+    <td>Count</td>
+    <td>Number of jobs active</td>
+  </tr>
+  <tr>
+    <td>azure_kubejobstatusfailed_average, azure_kubejobstatusfailed_count, azure_kubejobstatusfailed_maximum, azure_kubejobstatusfailed_minimum, azure_kubejobstatusfailed_total</td>
+    <td>Count</td>
+    <td>Number and reason of jobs failed</td>
+  </tr>
+  <tr>
+    <td>azure_kubejobstatussucceeded_average, azure_kubejobstatussucceeded_count, azure_kubejobstatussucceeded_maximum, azure_kubejobstatussucceeded_minimum, azure_kubejobstatussucceeded_total</td>
+    <td>Count</td>
+    <td>Number of jobs succeeded</td>
+  </tr>
+  <tr>
+    <td>azure_kubeletrunningcontainers_average, azure_kubeletrunningcontainers_count, azure_kubeletrunningcontainers_maximum, azure_kubeletrunningcontainers_minimum, azure_kubeletrunningcontainers_total</td>
+    <td>Count</td>
+    <td>Number of containers currently running</td>
+  </tr>
+  <tr>
+    <td>azure_kubeletrunningpods_average, azure_kubeletrunningpods_count, azure_kubeletrunningpods_maximum, azure_kubeletrunningpods_minimum, azure_kubeletrunningpods_total</td>
+    <td>Count</td>
+    <td>Number of pods running on the node</td>
+  </tr>
+  <tr>
+    <td>azure_kubeletruntimeoperationserrorstotal_average, azure_kubeletruntimeoperationserrorstotal_count, azure_kubeletruntimeoperationserrorstotal_maximum, azure_kubeletruntimeoperationserrorstotal_minimum, azure_kubeletruntimeoperationserrorstotal_total</td>
+    <td>Count</td>
+    <td>Cumulative number of runtime operation errors by operation type</td>
+  </tr>
+  <tr>
+    <td>azure_kubeletstartedpodserrorstotal_average, azure_kubeletstartedpodserrorstotal_count, azure_kubeletstartedpodserrorstotal_maximum, azure_kubeletstartedpodserrorstotal_minimum, azure_kubeletstartedpodserrorstotal_total</td>
+    <td>Count</td>
+    <td>Cumulative number of errors when starting pods</td>
+  </tr>
+  <tr>
+    <td>azure_kubeletvolumestatsavailablebytes_average, azure_kubeletvolumestatsavailablebytes_count, azure_kubeletvolumestatsavailablebytes_maximum, azure_kubeletvolumestatsavailablebytes_minimum, azure_kubeletvolumestatsavailablebytes_total</td>
+    <td>Bytes</td>
+    <td>Number of available bytes in the volume</td>
+  </tr>
+  <tr>
+    <td>azure_kubeletvolumestatscapacitybytes_average, azure_kubeletvolumestatscapacitybytes_count, azure_kubeletvolumestatscapacitybytes_maximum, azure_kubeletvolumestatscapacitybytes_minimum, azure_kubeletvolumestatscapacitybytes_total</td>
+    <td>Bytes</td>
+    <td>Capacity (in bytes) of the volume</td>
+  </tr>
+  <tr>
+    <td>azure_kubeletvolumestatsusedbytes_average, azure_kubeletvolumestatsusedbytes_count, azure_kubeletvolumestatsusedbytes_maximum, azure_kubeletvolumestatsusedbytes_minimum, azure_kubeletvolumestatsusedbytes_total</td>
+    <td>Bytes</td>
+    <td>Number of used bytes in the volume</td>
+  </tr>
+  <tr>
+    <td>azure_kubenodestatusallocatable_average, azure_kubenodestatusallocatable_count, azure_kubenodestatusallocatable_maximum, azure_kubenodestatusallocatable_minimum, azure_kubenodestatusallocatable_total</td>
+    <td>Count</td>
+    <td>Node resources allocatable for pods</td>
+  </tr>
+  <tr>
+    <td>azure_kubenodestatuscapacity_average, azure_kubenodestatuscapacity_count, azure_kubenodestatuscapacity_maximum, azure_kubenodestatuscapacity_minimum, azure_kubenodestatuscapacity_total</td>
+    <td>Count</td>
+    <td>Total amount of node resources available</td>
+  </tr>
+  <tr>
+    <td>azure_kubenodestatuscondition_average, azure_kubenodestatuscondition_count, azure_kubenodestatuscondition_maximum, azure_kubenodestatuscondition_minimum, azure_kubenodestatuscondition_total</td>
+    <td>Count</td>
+    <td>The condition of a node</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerresourcelimits_average, azure_kubepodcontainerresourcelimits_count, azure_kubepodcontainerresourcelimits_maximum, azure_kubepodcontainerresourcelimits_minimum, azure_kubepodcontainerresourcelimits_total</td>
+    <td>Count</td>
+    <td>The container's resources limits</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerresourcerequests_average, azure_kubepodcontainerresourcerequests_count, azure_kubepodcontainerresourcerequests_maximum, azure_kubepodcontainerresourcerequests_minimum, azure_kubepodcontainerresourcerequests_total</td>
+    <td>Count</td>
+    <td>The container's resources requested</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatestarted_average, azure_kubepodcontainerstatestarted_count, azure_kubepodcontainerstatestarted_maximum, azure_kubepodcontainerstatestarted_minimum, azure_kubepodcontainerstatestarted_total</td>
+    <td>Count</td>
+    <td>Unix timestamp start time of a container</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatuslastterminatedreason_average, azure_kubepodcontainerstatuslastterminatedreason_count, azure_kubepodcontainerstatuslastterminatedreason_maximum, azure_kubepodcontainerstatuslastterminatedreason_minimum, azure_kubepodcontainerstatuslastterminatedreason_total</td>
+    <td>Count</td>
+    <td>The reason of a container's last terminated status</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatusready_average, azure_kubepodcontainerstatusready_count, azure_kubepodcontainerstatusready_maximum, azure_kubepodcontainerstatusready_minimum, azure_kubepodcontainerstatusready_total</td>
+    <td>Count</td>
+    <td>Describes whether the container's readiness check succeeded</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatusrestartstotal_average, azure_kubepodcontainerstatusrestartstotal_count, azure_kubepodcontainerstatusrestartstotal_maximum, azure_kubepodcontainerstatusrestartstotal_minimum, azure_kubepodcontainerstatusrestartstotal_total</td>
+    <td>Count</td>
+    <td>The number of container restarts</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatusrunning_average, azure_kubepodcontainerstatusrunning_count, azure_kubepodcontainerstatusrunning_maximum, azure_kubepodcontainerstatusrunning_minimum, azure_kubepodcontainerstatusrunning_total</td>
+    <td>Count</td>
+    <td>The number of containers with a status of 'running'</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatusterminated_average, azure_kubepodcontainerstatusterminated_count, azure_kubepodcontainerstatusterminated_maximum, azure_kubepodcontainerstatusterminated_minimum, azure_kubepodcontainerstatusterminated_total</td>
+    <td>Count</td>
+    <td>The number of containers with a status of 'terminated'</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatusterminatedreason_average, azure_kubepodcontainerstatusterminatedreason_count, azure_kubepodcontainerstatusterminatedreason_maximum, azure_kubepodcontainerstatusterminatedreason_minimum, azure_kubepodcontainerstatusterminatedreason_total</td>
+    <td>Count</td>
+    <td>The number and reason of containers with a status of 'terminated'</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatuswaiting_average, azure_kubepodcontainerstatuswaiting_count, azure_kubepodcontainerstatuswaiting_maximum, azure_kubepodcontainerstatuswaiting_minimum, azure_kubepodcontainerstatuswaiting_total</td>
+    <td>Count</td>
+    <td>The number of containers with a status of 'waiting'</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodcontainerstatuswaitingreason_average, azure_kubepodcontainerstatuswaitingreason_count, azure_kubepodcontainerstatuswaitingreason_maximum, azure_kubepodcontainerstatuswaitingreason_minimum, azure_kubepodcontainerstatuswaitingreason_total</td>
+    <td>Count</td>
+    <td>The number and reason of containers with a status of 'waiting'</td>
+  </tr>
+  <tr>
+    <td>azure_kubepoddeletiontimestamp_average, azure_kubepoddeletiontimestamp_count, azure_kubepoddeletiontimestamp_maximum, azure_kubepoddeletiontimestamp_minimum, azure_kubepoddeletiontimestamp_total</td>
+    <td>Count</td>
+    <td>The timestamp of the pod's deletion</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodinitcontainerstatusready_average, azure_kubepodinitcontainerstatusready_count, azure_kubepodinitcontainerstatusready_maximum, azure_kubepodinitcontainerstatusready_minimum, azure_kubepodinitcontainerstatusready_total</td>
+    <td>Count</td>
+    <td>The number of ready pod init containers</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodinitcontainerstatusrestartstotal_average, azure_kubepodinitcontainerstatusrestartstotal_count, azure_kubepodinitcontainerstatusrestartstotal_maximum, azure_kubepodinitcontainerstatusrestartstotal_minimum, azure_kubepodinitcontainerstatusrestartstotal_total</td>
+    <td>Count</td>
+    <td>The number of pod init containers restarts</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodinitcontainerstatusrunning_average, azure_kubepodinitcontainerstatusrunning_count, azure_kubepodinitcontainerstatusrunning_maximum, azure_kubepodinitcontainerstatusrunning_minimum, azure_kubepodinitcontainerstatusrunning_total</td>
+    <td>Count</td>
+    <td>The number of running pod init containers</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodinitcontainerstatusterminated_average, azure_kubepodinitcontainerstatusterminated_count, azure_kubepodinitcontainerstatusterminated_maximum, azure_kubepodinitcontainerstatusterminated_minimum, azure_kubepodinitcontainerstatusterminated_total</td>
+    <td>Count</td>
+    <td>The number of terminated pod init containers</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodinitcontainerstatusterminatedreason_average, azure_kubepodinitcontainerstatusterminatedreason_count, azure_kubepodinitcontainerstatusterminatedreason_maximum, azure_kubepodinitcontainerstatusterminatedreason_minimum, azure_kubepodinitcontainerstatusterminatedreason_total</td>
+    <td>Count</td>
+    <td>The number of pod init containers with terminated reason</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodinitcontainerstatuswaiting_average, azure_kubepodinitcontainerstatuswaiting_count, azure_kubepodinitcontainerstatuswaiting_maximum, azure_kubepodinitcontainerstatuswaiting_minimum, azure_kubepodinitcontainerstatuswaiting_total</td>
+    <td>Count</td>
+    <td>The number of pod init containers waiting</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodinitcontainerstatuswaitingreason_average, azure_kubepodinitcontainerstatuswaitingreason_count, azure_kubepodinitcontainerstatuswaitingreason_maximum, azure_kubepodinitcontainerstatuswaitingreason_minimum, azure_kubepodinitcontainerstatuswaitingreason_total</td>
+    <td>Count</td>
+    <td>The reason the pod init container is waiting</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodstatusphase_average, azure_kubepodstatusphase_count, azure_kubepodstatusphase_maximum, azure_kubepodstatusphase_minimum, azure_kubepodstatusphase_total</td>
+    <td>Count</td>
+    <td>The pod status phase</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodstatusready_average, azure_kubepodstatusready_count, azure_kubepodstatusready_maximum, azure_kubepodstatusready_minimum, azure_kubepodstatusready_total</td>
+    <td>Count</td>
+    <td>Signifies if the pod is in ready state</td>
+  </tr>
+  <tr>
+    <td>azure_kubepodstatusreason_average, azure_kubepodstatusreason_count, azure_kubepodstatusreason_maximum, azure_kubepodstatusreason_minimum, azure_kubepodstatusreason_total</td>
+    <td>Count</td>
+    <td>NodeAffinity</td>
+  </tr>
+  <tr>
+    <td>azure_kubestatefulsetreplicas_average, azure_kubestatefulsetreplicas_count, azure_kubestatefulsetreplicas_maximum, azure_kubestatefulsetreplicas_minimum, azure_kubestatefulsetreplicas_total</td>
+    <td>Count</td>
+    <td>The desired number of statefulset replicas</td>
+  </tr>
+  <tr>
+    <td>azure_kubestatefulsetstatusreplicas_average, azure_kubestatefulsetstatusreplicas_count, azure_kubestatefulsetstatusreplicas_maximum, azure_kubestatefulsetstatusreplicas_minimum, azure_kubestatefulsetstatusreplicas_total</td>
+    <td>Count</td>
+    <td>The number of replicas per statefulset</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtinfo_average, azure_kubevirtinfo_count, azure_kubevirtinfo_maximum, azure_kubevirtinfo_minimum, azure_kubevirtinfo_total</td>
+    <td>Unspecified</td>
+    <td>Kubevirt version information</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvirtcontrollerleading_average, azure_kubevirtvirtcontrollerleading_count, azure_kubevirtvirtcontrollerleading_maximum, azure_kubevirtvirtcontrollerleading_minimum, azure_kubevirtvirtcontrollerleading_total</td>
+    <td>Unspecified</td>
+    <td>Indication for an operating virt-controller</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvirtcontrollerready_average, azure_kubevirtvirtcontrollerready_count, azure_kubevirtvirtcontrollerready_maximum, azure_kubevirtvirtcontrollerready_minimum, azure_kubevirtvirtcontrollerready_total</td>
+    <td>Unspecified</td>
+    <td>Indication for a virt-controller that is ready to take the lead</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvirtoperatorready_average, azure_kubevirtvirtoperatorready_count, azure_kubevirtvirtoperatorready_maximum, azure_kubevirtvirtoperatorready_minimum, azure_kubevirtvirtoperatorready_total</td>
+    <td>Unspecified</td>
+    <td>Indication for a virt operator being ready</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmimemoryactualballoonbytes_average, azure_kubevirtvmimemoryactualballoonbytes_count, azure_kubevirtvmimemoryactualballoonbytes_maximum, azure_kubevirtvmimemoryactualballoonbytes_minimum, azure_kubevirtvmimemoryactualballoonbytes_total</td>
+    <td>Bytes</td>
+    <td>Current balloon size (in bytes)</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmimemoryavailablebytes_average, azure_kubevirtvmimemoryavailablebytes_count, azure_kubevirtvmimemoryavailablebytes_maximum, azure_kubevirtvmimemoryavailablebytes_minimum, azure_kubevirtvmimemoryavailablebytes_total</td>
+    <td>Bytes</td>
+    <td>Amount of usable memory as seen by the domain. This value may not be accurate if a balloon driver is in use or if the guest OS does not initialize all assigned pages</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmimemorydomainbytestotal_average, azure_kubevirtvmimemorydomainbytestotal_count, azure_kubevirtvmimemorydomainbytestotal_maximum, azure_kubevirtvmimemorydomainbytestotal_minimum, azure_kubevirtvmimemorydomainbytestotal_total</td>
+    <td>Bytes</td>
+    <td>The amount of memory (in bytes) allocated to the domain. The memory value in domain XML file</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmimemoryswapintrafficbytestotal_average, azure_kubevirtvmimemoryswapintrafficbytestotal_count, azure_kubevirtvmimemoryswapintrafficbytestotal_maximum, azure_kubevirtvmimemoryswapintrafficbytestotal_minimum, azure_kubevirtvmimemoryswapintrafficbytestotal_total</td>
+    <td>Bytes</td>
+    <td>The total amount of data read from swap space of the guest (in bytes)</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmimemoryswapouttrafficbytestotal_average, azure_kubevirtvmimemoryswapouttrafficbytestotal_count, azure_kubevirtvmimemoryswapouttrafficbytestotal_maximum, azure_kubevirtvmimemoryswapouttrafficbytestotal_minimum, azure_kubevirtvmimemoryswapouttrafficbytestotal_total</td>
+    <td>Bytes</td>
+    <td>The total amount of memory written out to swap space of the guest (in bytes)</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmimemoryunusedbytes_average, azure_kubevirtvmimemoryunusedbytes_count, azure_kubevirtvmimemoryunusedbytes_maximum, azure_kubevirtvmimemoryunusedbytes_minimum, azure_kubevirtvmimemoryunusedbytes_total</td>
+    <td>Bytes</td>
+    <td>The amount of memory left completely unused by the system. Memory that is available but used for reclaimable caches should NOT be reported as free</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvminetworkreceivepacketstotal_average, azure_kubevirtvminetworkreceivepacketstotal_count, azure_kubevirtvminetworkreceivepacketstotal_maximum, azure_kubevirtvminetworkreceivepacketstotal_minimum, azure_kubevirtvminetworkreceivepacketstotal_total</td>
+    <td>Bytes</td>
+    <td>Total network traffic received packets</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvminetworktransmitpacketsdroppedtotal_average, azure_kubevirtvminetworktransmitpacketsdroppedtotal_count, azure_kubevirtvminetworktransmitpacketsdroppedtotal_maximum, azure_kubevirtvminetworktransmitpacketsdroppedtotal_minimum, azure_kubevirtvminetworktransmitpacketsdroppedtotal_total</td>
+    <td>Bytes</td>
+    <td>The total number of transmit packets dropped on virtual NIC (vNIC) interfaces</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvminetworktransmitpacketstotal_average, azure_kubevirtvminetworktransmitpacketstotal_count, azure_kubevirtvminetworktransmitpacketstotal_maximum, azure_kubevirtvminetworktransmitpacketstotal_minimum, azure_kubevirtvminetworktransmitpacketstotal_total</td>
+    <td>Bytes</td>
+    <td>Total network traffic transmitted packets</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmioutdatedcount_average, azure_kubevirtvmioutdatedcount_count, azure_kubevirtvmioutdatedcount_maximum, azure_kubevirtvmioutdatedcount_minimum, azure_kubevirtvmioutdatedcount_total</td>
+    <td>Count</td>
+    <td>Indication for the total number of VirtualMachineInstance (VMI) workloads that are not running within the most up-to-date version of the virt-launcher environment</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmiphasecount_average, azure_kubevirtvmiphasecount_count, azure_kubevirtvmiphasecount_maximum, azure_kubevirtvmiphasecount_minimum, azure_kubevirtvmiphasecount_total</td>
+    <td>Count</td>
+    <td>Sum of VirtualMachineInstances (VMIs) per phase and node</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmistorageiopsreadtotal_average, azure_kubevirtvmistorageiopsreadtotal_count, azure_kubevirtvmistorageiopsreadtotal_maximum, azure_kubevirtvmistorageiopsreadtotal_minimum, azure_kubevirtvmistorageiopsreadtotal_total</td>
+    <td>Count</td>
+    <td>Total number of Input/Output (I/O) read operations</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmistorageiopswritetotal_average, azure_kubevirtvmistorageiopswritetotal_count, azure_kubevirtvmistorageiopswritetotal_maximum, azure_kubevirtvmistorageiopswritetotal_minimum, azure_kubevirtvmistorageiopswritetotal_total</td>
+    <td>Count</td>
+    <td>Total number of Input/Output (I/O) write operations</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmistoragereadtimesmstotal_average, azure_kubevirtvmistoragereadtimesmstotal_count, azure_kubevirtvmistoragereadtimesmstotal_maximum, azure_kubevirtvmistoragereadtimesmstotal_minimum, azure_kubevirtvmistoragereadtimesmstotal_total</td>
+    <td>Milliseconds</td>
+    <td>Total time in milliseconds (ms) spent on read operations</td>
+  </tr>
+  <tr>
+    <td>azure_kubevirtvmistoragewritetimesmstotal_average, azure_kubevirtvmistoragewritetimesmstotal_count, azure_kubevirtvmistoragewritetimesmstotal_maximum, azure_kubevirtvmistoragewritetimesmstotal_minimum, azure_kubevirtvmistoragewritetimesmstotal_total</td>
+    <td>Milliseconds</td>
+    <td>Total time in milliseconds (ms) spent on write operations</td>
+  </tr>
+  <tr>
+    <td>azure_ncvmicpuaffinity_average, azure_ncvmicpuaffinity_count, azure_ncvmicpuaffinity_maximum, azure_ncvmicpuaffinity_minimum, azure_ncvmicpuaffinity_total</td>
+    <td>Count</td>
+    <td>Pinning map of virtual CPUs (vCPUs) to CPUs</td>
+  </tr>
+  <tr>
+    <td>azure_typhaconnectionsaccepted_average, azure_typhaconnectionsaccepted_count, azure_typhaconnectionsaccepted_maximum, azure_typhaconnectionsaccepted_minimum, azure_typhaconnectionsaccepted_total</td>
+    <td>Count</td>
+    <td>Total number of connections accepted over time</td>
+  </tr>
+  <tr>
+    <td>azure_typhaconnectionsdropped_average, azure_typhaconnectionsdropped_count, azure_typhaconnectionsdropped_maximum, azure_typhaconnectionsdropped_minimum, azure_typhaconnectionsdropped_total</td>
+    <td>Count</td>
+    <td>Total number of connections dropped due to rebalancing</td>
+  </tr>
+  <tr>
+    <td>azure_typhapinglatencycount_average, azure_typhapinglatencycount_count, azure_typhapinglatencycount_maximum, azure_typhapinglatencycount_minimum, azure_typhapinglatencycount_total</td>
+    <td>Count</td>
+    <td>Round-trip ping/pong latency to client. Typha's protocol includes a regular ping/pong keepalive to verify that the connection is still up</td>
+  </tr>
+</table>

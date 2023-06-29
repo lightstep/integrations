@@ -1,0 +1,347 @@
+---
+title: Azure Microsoft.NotificationHubs/Namespaces/NotificationHubs metrics
+date: 2023-06-29 00:00:00
+canonical_url:
+description: See the Azure Microsoft.NotificationHubs/Namespaces/NotificationHubs metrics ingested by Lightstep Observability
+image: /images/ui/post-placeholder.jpg
+tags:
+  - Monitoring
+  - Performance
+  - Metrics
+  - Azure
+azure_int: Microsoft.NotificationHubs/Namespaces/NotificationHubs
+authors:
+  - otel-team
+layout: table
+cards:
+  - topic_item: /docs/setup-azure-for-metrics
+  - topic_item: /docs/create-and-manage-dashboards
+  - topic_item: /docs/create-alerts
+---
+Once you've integrated with [Azure Monitor](/docs/setup-azure-for-metrics), you have access to all metrics for Microsoft.NotificationHubs/Namespaces/NotificationHubs, **PUT DESCRIPTION HERE**. 
+
+See [all available Azure integrations](/docs/azure-metrics).
+{: .tip}
+
+To verify metrics are reporting, search for the metrics on the [Metric details](/docs/manage-metric-details) page in **Project settings**.
+{: .tip}
+
+The following table shows the {{page.azure_int}} metrics ingested by Lightstep.
+<table class="table-aws">
+<colgroup><col span="1" style="width: 35%;" /><col span="1" style="width: 15%;" /><col span="1" style="width: 35%;" /></colgroup>
+  <thead>
+    <th>Metric Name</th>
+    <th>Unit</th>
+    <th>Description</th>
+  </thead>
+  <tr>
+    <td>azure_incoming_average, azure_incoming_count, azure_incoming_maximum, azure_incoming_minimum, azure_incoming_total</td>
+    <td>Count</td>
+    <td>The count of all successful send API calls.</td>
+  </tr>
+  <tr>
+    <td>azure_incoming.all.failedrequests_average, azure_incoming.all.failedrequests_count, azure_incoming.all.failedrequests_maximum, azure_incoming.all.failedrequests_minimum, azure_incoming.all.failedrequests_total</td>
+    <td>Count</td>
+    <td>Total incoming failed requests for a notification hub</td>
+  </tr>
+  <tr>
+    <td>azure_incoming.all.requests_average, azure_incoming.all.requests_count, azure_incoming.all.requests_maximum, azure_incoming.all.requests_minimum, azure_incoming.all.requests_total</td>
+    <td>Count</td>
+    <td>Total incoming requests for a notification hub</td>
+  </tr>
+  <tr>
+    <td>azure_incoming.scheduled_average, azure_incoming.scheduled_count, azure_incoming.scheduled_maximum, azure_incoming.scheduled_minimum, azure_incoming.scheduled_total</td>
+    <td>Count</td>
+    <td>Scheduled Push Notifications Sent</td>
+  </tr>
+  <tr>
+    <td>azure_incoming.scheduled.cancel_average, azure_incoming.scheduled.cancel_count, azure_incoming.scheduled.cancel_maximum, azure_incoming.scheduled.cancel_minimum, azure_incoming.scheduled.cancel_total</td>
+    <td>Count</td>
+    <td>Scheduled Push Notifications Cancelled</td>
+  </tr>
+  <tr>
+    <td>azure_installation.all_average, azure_installation.all_count, azure_installation.all_maximum, azure_installation.all_minimum, azure_installation.all_total</td>
+    <td>Count</td>
+    <td>Installation Management Operations</td>
+  </tr>
+  <tr>
+    <td>azure_installation.delete_average, azure_installation.delete_count, azure_installation.delete_maximum, azure_installation.delete_minimum, azure_installation.delete_total</td>
+    <td>Count</td>
+    <td>Delete Installation Operations</td>
+  </tr>
+  <tr>
+    <td>azure_installation.get_average, azure_installation.get_count, azure_installation.get_maximum, azure_installation.get_minimum, azure_installation.get_total</td>
+    <td>Count</td>
+    <td>Get Installation Operations</td>
+  </tr>
+  <tr>
+    <td>azure_installation.patch_average, azure_installation.patch_count, azure_installation.patch_maximum, azure_installation.patch_minimum, azure_installation.patch_total</td>
+    <td>Count</td>
+    <td>Patch Installation Operations</td>
+  </tr>
+  <tr>
+    <td>azure_installation.upsert_average, azure_installation.upsert_count, azure_installation.upsert_maximum, azure_installation.upsert_minimum, azure_installation.upsert_total</td>
+    <td>Count</td>
+    <td>Create or Update Installation Operations</td>
+  </tr>
+  <tr>
+    <td>azure_notificationhub.pushes_average, azure_notificationhub.pushes_count, azure_notificationhub.pushes_maximum, azure_notificationhub.pushes_minimum, azure_notificationhub.pushes_total</td>
+    <td>Count</td>
+    <td>All outgoing notifications of the notification hub</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.allpns.badorexpiredchannel_average, azure_outgoing.allpns.badorexpiredchannel_count, azure_outgoing.allpns.badorexpiredchannel_maximum, azure_outgoing.allpns.badorexpiredchannel_minimum, azure_outgoing.allpns.badorexpiredchannel_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the channel/token/registrationId in the registration was expired or invalid.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.allpns.channelerror_average, azure_outgoing.allpns.channelerror_count, azure_outgoing.allpns.channelerror_maximum, azure_outgoing.allpns.channelerror_minimum, azure_outgoing.allpns.channelerror_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the channel was invalid not associated with the correct app throttled or expired.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.allpns.invalidpayload_average, azure_outgoing.allpns.invalidpayload_count, azure_outgoing.allpns.invalidpayload_maximum, azure_outgoing.allpns.invalidpayload_minimum, azure_outgoing.allpns.invalidpayload_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the PNS returned a bad payload error.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.allpns.pnserror_average, azure_outgoing.allpns.pnserror_count, azure_outgoing.allpns.pnserror_maximum, azure_outgoing.allpns.pnserror_minimum, azure_outgoing.allpns.pnserror_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because there was a problem communicating with the PNS (excludes authentication problems).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.allpns.success_average, azure_outgoing.allpns.success_count, azure_outgoing.allpns.success_maximum, azure_outgoing.allpns.success_minimum, azure_outgoing.allpns.success_total</td>
+    <td>Count</td>
+    <td>The count of all successful notifications.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.apns.badchannel_average, azure_outgoing.apns.badchannel_count, azure_outgoing.apns.badchannel_maximum, azure_outgoing.apns.badchannel_minimum, azure_outgoing.apns.badchannel_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the token is invalid (APNS status code: 8).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.apns.expiredchannel_average, azure_outgoing.apns.expiredchannel_count, azure_outgoing.apns.expiredchannel_maximum, azure_outgoing.apns.expiredchannel_minimum, azure_outgoing.apns.expiredchannel_total</td>
+    <td>Count</td>
+    <td>The count of token that were invalidated by the APNS feedback channel.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.apns.invalidcredentials_average, azure_outgoing.apns.invalidcredentials_count, azure_outgoing.apns.invalidcredentials_maximum, azure_outgoing.apns.invalidcredentials_minimum, azure_outgoing.apns.invalidcredentials_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the PNS did not accept the provided credentials or the credentials are blocked.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.apns.invalidnotificationsize_average, azure_outgoing.apns.invalidnotificationsize_count, azure_outgoing.apns.invalidnotificationsize_maximum, azure_outgoing.apns.invalidnotificationsize_minimum, azure_outgoing.apns.invalidnotificationsize_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the payload was too large (APNS status code: 7).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.apns.pnserror_average, azure_outgoing.apns.pnserror_count, azure_outgoing.apns.pnserror_maximum, azure_outgoing.apns.pnserror_minimum, azure_outgoing.apns.pnserror_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because of errors communicating with APNS.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.apns.success_average, azure_outgoing.apns.success_count, azure_outgoing.apns.success_maximum, azure_outgoing.apns.success_minimum, azure_outgoing.apns.success_total</td>
+    <td>Count</td>
+    <td>The count of all successful notifications.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.authenticationerror_average, azure_outgoing.gcm.authenticationerror_count, azure_outgoing.gcm.authenticationerror_maximum, azure_outgoing.gcm.authenticationerror_minimum, azure_outgoing.gcm.authenticationerror_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the PNS did not accept the provided credentials the credentials are blocked or the SenderId is not correctly configured in the app (GCM result: MismatchedSenderId).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.badchannel_average, azure_outgoing.gcm.badchannel_count, azure_outgoing.gcm.badchannel_maximum, azure_outgoing.gcm.badchannel_minimum, azure_outgoing.gcm.badchannel_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the registrationId in the registration was not recognized (GCM result: Invalid Registration).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.expiredchannel_average, azure_outgoing.gcm.expiredchannel_count, azure_outgoing.gcm.expiredchannel_maximum, azure_outgoing.gcm.expiredchannel_minimum, azure_outgoing.gcm.expiredchannel_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the registrationId in the registration was expired (GCM result: NotRegistered).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.invalidcredentials_average, azure_outgoing.gcm.invalidcredentials_count, azure_outgoing.gcm.invalidcredentials_maximum, azure_outgoing.gcm.invalidcredentials_minimum, azure_outgoing.gcm.invalidcredentials_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the PNS did not accept the provided credentials or the credentials are blocked.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.invalidnotificationformat_average, azure_outgoing.gcm.invalidnotificationformat_count, azure_outgoing.gcm.invalidnotificationformat_maximum, azure_outgoing.gcm.invalidnotificationformat_minimum, azure_outgoing.gcm.invalidnotificationformat_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the payload was not formatted correctly (GCM result: InvalidDataKey or InvalidTtl).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.invalidnotificationsize_average, azure_outgoing.gcm.invalidnotificationsize_count, azure_outgoing.gcm.invalidnotificationsize_maximum, azure_outgoing.gcm.invalidnotificationsize_minimum, azure_outgoing.gcm.invalidnotificationsize_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the payload was too large (GCM result: MessageTooBig).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.pnserror_average, azure_outgoing.gcm.pnserror_count, azure_outgoing.gcm.pnserror_maximum, azure_outgoing.gcm.pnserror_minimum, azure_outgoing.gcm.pnserror_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because of errors communicating with GCM.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.success_average, azure_outgoing.gcm.success_count, azure_outgoing.gcm.success_maximum, azure_outgoing.gcm.success_minimum, azure_outgoing.gcm.success_total</td>
+    <td>Count</td>
+    <td>The count of all successful notifications.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.throttled_average, azure_outgoing.gcm.throttled_count, azure_outgoing.gcm.throttled_maximum, azure_outgoing.gcm.throttled_minimum, azure_outgoing.gcm.throttled_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because GCM throttled this app (GCM status code: 501-599 or result:Unavailable).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.gcm.wrongchannel_average, azure_outgoing.gcm.wrongchannel_count, azure_outgoing.gcm.wrongchannel_maximum, azure_outgoing.gcm.wrongchannel_minimum, azure_outgoing.gcm.wrongchannel_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the registrationId in the registration is not associated to the current app (GCM result: InvalidPackageName).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.authenticationerror_average, azure_outgoing.mpns.authenticationerror_count, azure_outgoing.mpns.authenticationerror_maximum, azure_outgoing.mpns.authenticationerror_minimum, azure_outgoing.mpns.authenticationerror_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the PNS did not accept the provided credentials or the credentials are blocked.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.badchannel_average, azure_outgoing.mpns.badchannel_count, azure_outgoing.mpns.badchannel_maximum, azure_outgoing.mpns.badchannel_minimum, azure_outgoing.mpns.badchannel_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the ChannelURI in the registration was not recognized (MPNS status: 404 not found).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.channeldisconnected_average, azure_outgoing.mpns.channeldisconnected_count, azure_outgoing.mpns.channeldisconnected_maximum, azure_outgoing.mpns.channeldisconnected_minimum, azure_outgoing.mpns.channeldisconnected_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the ChannelURI in the registration was disconnected (MPNS status: 412 not found).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.dropped_average, azure_outgoing.mpns.dropped_count, azure_outgoing.mpns.dropped_maximum, azure_outgoing.mpns.dropped_minimum, azure_outgoing.mpns.dropped_total</td>
+    <td>Count</td>
+    <td>The count of pushes that were dropped by MPNS (MPNS response header: X-NotificationStatus: QueueFull or Suppressed).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.invalidcredentials_average, azure_outgoing.mpns.invalidcredentials_count, azure_outgoing.mpns.invalidcredentials_maximum, azure_outgoing.mpns.invalidcredentials_minimum, azure_outgoing.mpns.invalidcredentials_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the PNS did not accept the provided credentials or the credentials are blocked.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.invalidnotificationformat_average, azure_outgoing.mpns.invalidnotificationformat_count, azure_outgoing.mpns.invalidnotificationformat_maximum, azure_outgoing.mpns.invalidnotificationformat_minimum, azure_outgoing.mpns.invalidnotificationformat_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the payload of the notification was too large.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.pnserror_average, azure_outgoing.mpns.pnserror_count, azure_outgoing.mpns.pnserror_maximum, azure_outgoing.mpns.pnserror_minimum, azure_outgoing.mpns.pnserror_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because of errors communicating with MPNS.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.success_average, azure_outgoing.mpns.success_count, azure_outgoing.mpns.success_maximum, azure_outgoing.mpns.success_minimum, azure_outgoing.mpns.success_total</td>
+    <td>Count</td>
+    <td>The count of all successful notifications.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.mpns.throttled_average, azure_outgoing.mpns.throttled_count, azure_outgoing.mpns.throttled_maximum, azure_outgoing.mpns.throttled_minimum, azure_outgoing.mpns.throttled_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because MPNS is throttling this app (WNS MPNS: 406 Not Acceptable).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.authenticationerror_average, azure_outgoing.wns.authenticationerror_count, azure_outgoing.wns.authenticationerror_maximum, azure_outgoing.wns.authenticationerror_minimum, azure_outgoing.wns.authenticationerror_total</td>
+    <td>Count</td>
+    <td>Notification not delivered because of errors communicating with Windows Live invalid credentials or wrong token.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.badchannel_average, azure_outgoing.wns.badchannel_count, azure_outgoing.wns.badchannel_maximum, azure_outgoing.wns.badchannel_minimum, azure_outgoing.wns.badchannel_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the ChannelURI in the registration was not recognized (WNS status: 404 not found).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.channeldisconnected_average, azure_outgoing.wns.channeldisconnected_count, azure_outgoing.wns.channeldisconnected_maximum, azure_outgoing.wns.channeldisconnected_minimum, azure_outgoing.wns.channeldisconnected_total</td>
+    <td>Count</td>
+    <td>The notification was dropped because the ChannelURI in the registration is throttled (WNS response header: X-WNS-DeviceConnectionStatus: disconnected).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.channelthrottled_average, azure_outgoing.wns.channelthrottled_count, azure_outgoing.wns.channelthrottled_maximum, azure_outgoing.wns.channelthrottled_minimum, azure_outgoing.wns.channelthrottled_total</td>
+    <td>Count</td>
+    <td>The notification was dropped because the ChannelURI in the registration is throttled (WNS response header: X-WNS-NotificationStatus:channelThrottled).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.dropped_average, azure_outgoing.wns.dropped_count, azure_outgoing.wns.dropped_maximum, azure_outgoing.wns.dropped_minimum, azure_outgoing.wns.dropped_total</td>
+    <td>Count</td>
+    <td>The notification was dropped because the ChannelURI in the registration is throttled (X-WNS-NotificationStatus: dropped but not X-WNS-DeviceConnectionStatus: disconnected).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.expiredchannel_average, azure_outgoing.wns.expiredchannel_count, azure_outgoing.wns.expiredchannel_maximum, azure_outgoing.wns.expiredchannel_minimum, azure_outgoing.wns.expiredchannel_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the ChannelURI is expired (WNS status: 410 Gone).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.invalidcredentials_average, azure_outgoing.wns.invalidcredentials_count, azure_outgoing.wns.invalidcredentials_maximum, azure_outgoing.wns.invalidcredentials_minimum, azure_outgoing.wns.invalidcredentials_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because the PNS did not accept the provided credentials or the credentials are blocked. (Windows Live does not recognize the credentials).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.invalidnotificationformat_average, azure_outgoing.wns.invalidnotificationformat_count, azure_outgoing.wns.invalidnotificationformat_maximum, azure_outgoing.wns.invalidnotificationformat_minimum, azure_outgoing.wns.invalidnotificationformat_total</td>
+    <td>Count</td>
+    <td>The format of the notification is invalid (WNS status: 400). Note that WNS does not reject all invalid payloads.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.invalidnotificationsize_average, azure_outgoing.wns.invalidnotificationsize_count, azure_outgoing.wns.invalidnotificationsize_maximum, azure_outgoing.wns.invalidnotificationsize_minimum, azure_outgoing.wns.invalidnotificationsize_total</td>
+    <td>Count</td>
+    <td>The notification payload is too large (WNS status: 413).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.invalidtoken_average, azure_outgoing.wns.invalidtoken_count, azure_outgoing.wns.invalidtoken_maximum, azure_outgoing.wns.invalidtoken_minimum, azure_outgoing.wns.invalidtoken_total</td>
+    <td>Count</td>
+    <td>The token provided to WNS is not valid (WNS status: 401 Unauthorized).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.pnserror_average, azure_outgoing.wns.pnserror_count, azure_outgoing.wns.pnserror_maximum, azure_outgoing.wns.pnserror_minimum, azure_outgoing.wns.pnserror_total</td>
+    <td>Count</td>
+    <td>Notification not delivered because of errors communicating with WNS.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.success_average, azure_outgoing.wns.success_count, azure_outgoing.wns.success_maximum, azure_outgoing.wns.success_minimum, azure_outgoing.wns.success_total</td>
+    <td>Count</td>
+    <td>The count of all successful notifications.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.throttled_average, azure_outgoing.wns.throttled_count, azure_outgoing.wns.throttled_maximum, azure_outgoing.wns.throttled_minimum, azure_outgoing.wns.throttled_total</td>
+    <td>Count</td>
+    <td>The count of pushes that failed because WNS is throttling this app (WNS status: 406 Not Acceptable).</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.tokenproviderunreachable_average, azure_outgoing.wns.tokenproviderunreachable_count, azure_outgoing.wns.tokenproviderunreachable_maximum, azure_outgoing.wns.tokenproviderunreachable_minimum, azure_outgoing.wns.tokenproviderunreachable_total</td>
+    <td>Count</td>
+    <td>Windows Live is not reachable.</td>
+  </tr>
+  <tr>
+    <td>azure_outgoing.wns.wrongtoken_average, azure_outgoing.wns.wrongtoken_count, azure_outgoing.wns.wrongtoken_maximum, azure_outgoing.wns.wrongtoken_minimum, azure_outgoing.wns.wrongtoken_total</td>
+    <td>Count</td>
+    <td>The token provided to WNS is valid but for another application (WNS status: 403 Forbidden). This can happen if the ChannelURI in the registration is associated with another app. Check that the client app is associated with the same app whose credentials are in the notification hub.</td>
+  </tr>
+  <tr>
+    <td>azure_registration.all_average, azure_registration.all_count, azure_registration.all_maximum, azure_registration.all_minimum, azure_registration.all_total</td>
+    <td>Count</td>
+    <td>The count of all successful registration operations (creations updates queries and deletions).</td>
+  </tr>
+  <tr>
+    <td>azure_registration.create_average, azure_registration.create_count, azure_registration.create_maximum, azure_registration.create_minimum, azure_registration.create_total</td>
+    <td>Count</td>
+    <td>The count of all successful registration creations.</td>
+  </tr>
+  <tr>
+    <td>azure_registration.delete_average, azure_registration.delete_count, azure_registration.delete_maximum, azure_registration.delete_minimum, azure_registration.delete_total</td>
+    <td>Count</td>
+    <td>The count of all successful registration deletions.</td>
+  </tr>
+  <tr>
+    <td>azure_registration.get_average, azure_registration.get_count, azure_registration.get_maximum, azure_registration.get_minimum, azure_registration.get_total</td>
+    <td>Count</td>
+    <td>The count of all successful registration queries.</td>
+  </tr>
+  <tr>
+    <td>azure_registration.update_average, azure_registration.update_count, azure_registration.update_maximum, azure_registration.update_minimum, azure_registration.update_total</td>
+    <td>Count</td>
+    <td>The count of all successful registration updates.</td>
+  </tr>
+  <tr>
+    <td>azure_scheduled.pending_average, azure_scheduled.pending_count, azure_scheduled.pending_maximum, azure_scheduled.pending_minimum, azure_scheduled.pending_total</td>
+    <td>Count</td>
+    <td>Pending Scheduled Notifications</td>
+  </tr>
+</table>

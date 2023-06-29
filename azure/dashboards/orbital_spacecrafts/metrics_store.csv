@@ -1,0 +1,2 @@
+azure_contactfailure_average;azure_contactfailure_count;azure_contactfailure_maximum;azure_contactfailure_minimum;azure_contactfailure_total,Gauge,Count,Denotes the number of failed Contacts for a specific Spacecraft,
+azure_contactsuccess_average;azure_contactsuccess_count;azure_contactsuccess_maximum;azure_contactsuccess_minimum;azure_contactsuccess_total,Gauge,Count,Denotes the number of successful Contacts for a specific Spacecraft,

@@ -1,0 +1,2 @@
+Name,Description,Unit,DataType,Attributes,Default Aggregation
+azure_peeringavailability_average;azure_peeringavailability_count;azure_peeringavailability_maximum;azure_peeringavailability_minimum;azure_peeringavailability_total,BGP Availability between VirtualRouter and remote peers,Percent,Gauge,azuremonitor.subscription_id;azuremonitor.tenant_id;azuremonitor.resource_id;location;metadata_peer,average

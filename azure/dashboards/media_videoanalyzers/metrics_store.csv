@@ -1,0 +1,2 @@
+azure_ingressbytes_average;azure_ingressbytes_count;azure_ingressbytes_maximum;azure_ingressbytes_minimum;azure_ingressbytes_total,Gauge,Bytes,The number of bytes ingressed by the pipeline node.,
+azure_pipelines_average;azure_pipelines_count;azure_pipelines_maximum;azure_pipelines_minimum;azure_pipelines_total,Gauge,Count,The number of pipelines of each kind and state,

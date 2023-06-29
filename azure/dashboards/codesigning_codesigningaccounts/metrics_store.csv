@@ -1,0 +1,1 @@
+azure_signcompleted_average;azure_signcompleted_count;azure_signcompleted_maximum;azure_signcompleted_minimum;azure_signcompleted_total,Gauge,Count,Completed Sign Request,
