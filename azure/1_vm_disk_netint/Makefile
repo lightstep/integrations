@@ -9,7 +9,7 @@ stop: stop-collector destroy-terraform
 get-logs:
 	docker logs azure-collector-disk >& ../dashboards/compute_disks/logs.txt
 	docker logs azure-collector-netint >& ../dashboards/network_networkinterfaces/logs.txt
-	docker logs azure-collector-vm >& ../dashboards/microsoft.compute_virtualmachines/logs.txt
+	docker logs azure-collector-vm >& ../dashboards/compute_virtualmachines/logs.txt
 
 .PHONY: apply-terraform
 apply-terraform:

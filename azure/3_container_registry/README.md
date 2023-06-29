@@ -49,11 +49,7 @@ receivers:
     client_id: "${AZURE_CLIENT_ID}"
     client_secret: "${AZURE_CLIENT_SECRET}"
     resource_groups:
-      - "example-resources"
-    services:
-      - "microsoft.compute/disks"
-      - "Microsoft.Network/networkInterfaces"
-      - "Microsoft.Compute/virtualMachines"
+      - "example3-resources"
     collection_interval: 60s
 
 exporters:
@@ -73,6 +69,5 @@ service:
       receivers: [azuremonitor]
       processors: [batch]
       exporters: [logging, otlp/public]
-
 ```
 
