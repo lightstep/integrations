@@ -33,7 +33,7 @@ resource "lightstep_dashboard" "otel_collector_dashboard" {
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_percentage_cpu_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_percentage_cpu_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -48,7 +48,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_available_memory_bytes_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_available_memory_bytes_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -63,7 +63,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_network_in_total | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_network_in_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -78,7 +78,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_network_out_total | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_network_out_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -93,7 +93,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_os_disk_bandwidth_consumed_percentage_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location)   &&  (metadata_lun == $metadata_lun) )  | delta | group_by [], sum
+metric azure_os_disk_bandwidth_consumed_percentage_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_lun == $metadata_lun)) | delta | group_by [], sum
 EOT
     }
   }
@@ -108,7 +108,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cpu_credits_consumed_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_cpu_credits_consumed_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -123,7 +123,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cpu_credits_remaining_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_cpu_credits_remaining_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -153,7 +153,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_data_disk_read_operations/sec_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location)   &&  (metadata_lun == $metadata_lun) )  | delta | group_by [], sum
+metric azure_data_disk_read_operations/sec_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_lun == $metadata_lun)) | delta | group_by [], sum
 EOT
     }
   }
@@ -168,7 +168,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_data_disk_write_bytes/sec_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location)   &&  (metadata_lun == $metadata_lun) )  | delta | group_by [], sum
+metric azure_data_disk_write_bytes/sec_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)   &&  (metadata_lun == $metadata_lun)) | delta | group_by [], sum
 EOT
     }
   }
@@ -183,7 +183,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_data_disk_write_operations/sec_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location)   &&  (metadata_lun == $metadata_lun) )  | delta | group_by [], sum
+metric azure_data_disk_write_operations/sec_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)   &&  (metadata_lun == $metadata_lun)) | delta | group_by [], sum
 EOT
     }
   }
@@ -198,7 +198,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_data_disk_bandwidth_consumed_percentage_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location)   &&  (metadata_lun == $metadata_lun) )  | delta | group_by [], sum
+metric azure_data_disk_bandwidth_consumed_percentage_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_lun == $metadata_lun)) | delta | group_by [], sum
 EOT
     }
   }
@@ -213,7 +213,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_data_disk_iops_consumed_percentage_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location)   &&  (metadata_lun == $metadata_lun) )  | delta | group_by [], sum
+metric azure_data_disk_iops_consumed_percentage_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_lun == $metadata_lun)) | delta | group_by [], sum
 EOT
     }
   }
@@ -228,7 +228,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_data_disk_max_burst_bandwidth_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location)   &&  (metadata_lun == $metadata_lun) )  | delta | group_by [], sum
+metric azure_data_disk_max_burst_bandwidth_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_lun == $metadata_lun)) | delta | group_by [], sum
 EOT
     }
   }
@@ -262,6 +262,4 @@ EOT
     default_values           = []
     suggestion_attribute_key = "metadata_lun"
   }
-
-
 }

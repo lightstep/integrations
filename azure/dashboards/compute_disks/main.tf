@@ -33,7 +33,7 @@ resource "lightstep_dashboard" "otel_collector_dashboard" {
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_composite_disk_read_bytes/sec_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_composite_disk_read_bytes/sec_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -48,7 +48,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_composite_disk_read_operations/sec_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_composite_disk_read_operations/sec_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -63,7 +63,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_composite_disk_write_bytes/sec_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_composite_disk_write_bytes/sec_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -78,7 +78,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_composite_disk_write_operations/sec_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_composite_disk_write_operations/sec_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -93,12 +93,10 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_diskpaidburstiops_average | filter (  (azuremonitor.subscription_id == $azuremonitor_subscription_id)   &&  (azuremonitor.tenant_id == $azuremonitor_tenant_id)   &&  (azuremonitor.resource_id == $azuremonitor_resource_id)   &&  (location == $location) )  | delta | group_by [], sum
+metric azure_diskpaidburstiops_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
-
-
 
   template_variable {
     name                     = "azuremonitor_resource_id"
@@ -123,6 +121,4 @@ EOT
     default_values           = []
     suggestion_attribute_key = "location"
   }
-
-
 }
