@@ -21,15 +21,9 @@ import (
 
 const (
 	// Templates path
-	Base               = "integrations"
-	BasePath           = "integrations/internal/"
-	BaseTemplatePath   = BasePath + "templates/"
-	DashboardsFilePath = BaseTemplatePath + constants.DashboardubDir + "/main.tf.head.tmpl"
-	ComposeFilePath    = BaseTemplatePath + "compose/docker-compose.yaml.tmpl"
-	HelmFilePath       = BaseTemplatePath + constants.HelmSubDir + "/chart_values.yaml.tmpl"
-	AlertsFilePath     = BaseTemplatePath + constants.AlertsSubDir + "/alerts.tmpl"
-	ImagesFilePath     = BaseTemplatePath + constants.ImagesSubDir + "/images.tmpl"
-	K8sFilePath        = BaseTemplatePath + constants.K8sDir + "/deployment.yaml.tmpl"
+	Base             = "integrations"
+	BasePath         = "integrations/internal/"
+	BaseTemplatePath = BasePath + "templates/"
 )
 
 type Spec struct {
