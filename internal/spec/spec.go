@@ -2,8 +2,34 @@ package spec
 
 import (
 	"fmt"
-	"os"
+	alerts2 "github.com/lightstep/integrations/internal/alerts"
+	"github.com/lightstep/integrations/internal/constants"
+	"github.com/lightstep/integrations/internal/examples/compose"
+	helm2 "github.com/lightstep/integrations/internal/examples/helm"
+	k8s2 "github.com/lightstep/integrations/internal/examples/k8s"
+	images2 "github.com/lightstep/integrations/internal/images"
+	"github.com/lightstep/integrations/internal/utils"
+	"gopkg.in/yaml.v3"
+	"html/template"
+	"log"
 	"path/filepath"
+	"strings"
+
+	//"log"
+	"os"
+)
+
+const (
+	// Templates path
+	Base               = "integrations"
+	BasePath           = "integrations/internal/"
+	BaseTemplatePath   = BasePath + "templates/"
+	DashboardsFilePath = BaseTemplatePath + constants.DashboardubDir + "/main.tf.head.tmpl"
+	ComposeFilePath    = BaseTemplatePath + "compose/docker-compose.yaml.tmpl"
+	HelmFilePath       = BaseTemplatePath + constants.HelmSubDir + "/chart_values.yaml.tmpl"
+	AlertsFilePath     = BaseTemplatePath + constants.AlertsSubDir + "/alerts.tmpl"
+	ImagesFilePath     = BaseTemplatePath + constants.ImagesSubDir + "/images.tmpl"
+	K8sFilePath        = BaseTemplatePath + constants.K8sDir + "/deployment.yaml.tmpl"
 )
 
 type Spec struct {
@@ -18,7 +44,7 @@ type Spec struct {
 	Images    []ImageData  `json:"images,omitempty" yaml:"images,omitempty"`
 	Changelog Changelog    `json:"changelog,omitempty" yaml:"changelog,omitempty"`
 
-	Components []component `json:"components,omitempty" yaml:"components,omitempty"`
+	Components []ComponentSpec `json:"components,omitempty" yaml:"components,omitempty"`
 }
 
 type Author struct {
@@ -26,56 +52,173 @@ type Author struct {
 }
 
 type SignalData struct {
-	Name string `json:"name,omitempty" yaml:"name,omitempty"`
-	Type string `json:"type,omitempty" yaml:"type,omitempty"`
-	Path string `json:"path,omitempty" yaml:"path,omitempty"`
+	Name string `json:"name,omitempty"`
+	Type string `json:"type,omitempty"`
+	Path string `json:"path,omitempty"`
 }
 
 type ImageData struct {
-	Name        string `json:"name,omitempty" yaml:"name,omitempty"`
-	Description string `json:"description,omitempty" yaml:"description,omitempty"`
-	Path        string `json:"path,omitempty" yaml:"path,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	Path        string `json:"path,omitempty"`
 }
 
 type Change struct {
-	Description string `json:"description,omitempty" yaml:"description,omitempty"`
-	Date        string `json:"date,omitempty" yaml:"date,omitempty"`
+	Description string `json:"description,omitempty"`
+	Date        string `json:"date,omitempty"`
 }
 
 type Changelog struct {
-	Path    string   `json:"path,omitempty" yaml:"path,omitempty"`
-	Changes []Change `json:"changes,omitempty" yaml:"changes,omitempty"`
+	Path    string   `json:"path,omitempty"`
+	Changes []Change `json:"changes,omitempty"`
 }
 
 type Example struct {
-	Name     string `json:"name,omitempty" yaml:"name,omitempty"`
-	Platform string `json:"platform,omitempty" yaml:"platform,omitempty"`
-	Files    []File `json:"files,omitempty" yaml:"files,omitempty"`
+	Name     string `json:"name,omitempty"`
+	Platform string `json:"platform,omitempty"`
+	Files    []File `json:"files,omitempty"`
+}
+
+type Assets struct {
+	Files    []string
+	Template string
+}
+
+type DirectoryFiles struct {
+	DirAssets map[string]Assets `yaml:"dir_assets"`
 }
 
 type File struct {
-	Name        string `json:"name,omitempty" yaml:"name,omitempty"`
-	Description string `json:"description,omitempty" yaml:"description,omitempty"`
-	Path        string `json:"path,omitempty" yaml:"path,omitempty"`
-	content     []byte `json:"content,omitempty" yaml:"content,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	Path        string `json:"path,omitempty"`
+	Content     []byte `json:"content,omitempty"`
 }
 
-type FileSet map[string]File // `json:"file_set,omitempty"`
+type FileSet map[string]File
+
+func Run(specFile string) error {
+	// Read spec file
+	data, err := os.ReadFile(specFile)
+	if err != nil {
+		return fmt.Errorf("unable to read spec file: %v", err)
+	}
+
+	// Unmarshal spec
+	var s Spec
+	err = yaml.Unmarshal(data, &s)
+	if err != nil {
+		return fmt.Errorf("unable to unmarshal spec, ensure it is in the correct format: %v", err)
+	}
+
+	// Generate components
+	for _, component := range s.Components {
+		if err = component.Render(); err != nil {
+			return fmt.Errorf("unable to create directory for component '%s': %v", component.Name, err)
+		}
+	}
+
+	log.Println("Directories for components have been successfully created.")
+	return nil
+}
 
 func (f *FileSet) Add(file File) {
 	(*f)[file.Path+file.Name] = file
 }
 
-func (f *FileSet) Render() error {
-	// TODO: implement this to write generator and store each file
+func (f *FileSet) Render(componentName string, subDir string) error {
+	// write generator and store each file
+	data := ReadmeData{
+		Title:           "Agent Check: Docker Compose",
+		Overview:        "This check monitors Docker Compose, etc.",
+		IntegrationName: "docker_compose",
+		InitConfig:      "blank or `{}`",
+		InstanceConfig:  `{"server": "%%host%%", "port":"443"}`,
+	}
+
+	for _, file := range *f {
+		switch subDir {
+		case constants.DashboardubDir:
+			//TODO: To be integrated
+		case constants.ComposeSubDir:
+			newCompose := compose.NewCompose(componentName)
+			if err := newCompose.Generate(file.Path, file.Content); err != nil {
+				return err
+			}
+		case constants.HelmSubDir:
+			newHelm := helm2.NewHelm(componentName)
+			if err := newHelm.Generate(file.Path, file.Content); err != nil {
+				return err
+			}
+		case constants.AlertsSubDir:
+			newAlerts := alerts2.NewAlerts(componentName)
+			if err := newAlerts.Generate(file.Path, file.Content); err != nil {
+				return err
+			}
+		case constants.K8sDir:
+			newK8s := k8s2.NewK8s(componentName)
+			if err := newK8s.Generate(file.Path, file.Content); err != nil {
+				return err
+			}
+		default:
+			newImages := images2.NewIMages()
+			if err := newImages.Generate(file.Path, file.Content); err != nil {
+				return err
+			}
+		}
+		if _, err := GenerateRepoReadme(file.Path, data); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
-func GenerateRepoReadme() ([]byte, error) {
+type ReadmeData struct {
+	Title           string
+	Overview        string
+	IntegrationName string
+	InitConfig      string
+	InstanceConfig  string
+}
+
+func GenerateRepoReadme(path string, data ReadmeData) ([]byte, error) {
 	// 1. get the template?
+	readmeTemplate, err := GetTemplate(constants.ReadMeTemplate)
+	if err != nil {
+		return nil, err
+	}
+
+	t := template.Must(template.New(constants.ReadMeName).Parse(string(readmeTemplate)))
+
+	f, err := os.Create(fmt.Sprintf("%s/%s", path, constants.ReadMeFile))
+	if err != nil {
+		return nil, fmt.Errorf("error creating file: %v", err)
+	}
+	defer f.Close()
+
 	// 2. execute the template
+	err = t.Execute(f, data)
+	if err != nil {
+		return nil, fmt.Errorf("error executing template: %v", err)
+	}
 	// 3. data is what's in repo
 	return nil, nil
+}
+
+func GetComponentFiles() (DirectoryFiles, error) {
+	data, err := os.ReadFile(constants.ConfigFile)
+	if err != nil {
+		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
+	}
+
+	var df DirectoryFiles
+	err = yaml.Unmarshal(data, &df)
+	if err != nil {
+		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
+	}
+
+	return df, nil
 }
 
 type Component interface {
@@ -84,40 +227,71 @@ type Component interface {
 	Render() error
 }
 
-type component struct {
+type ComponentSpec struct {
 	Name string
 }
 
-func (c component) Render() error {
-	// Generate directories for each component
-	err := os.Mkdir(fmt.Sprintf("./%s", c.Name), 0755)
-	if err != nil {
+func (c ComponentSpec) Render() error {
+	if err := os.Mkdir(fmt.Sprintf("./%s", c.Name), 0755); err != nil {
 		return fmt.Errorf("unable to create directory for component '%s': %v", c.Name, err)
 	}
-	if err := createComponentDirectories(c.Name); err != nil {
-		return err
-	}
-	return nil
-}
 
-func createComponentDirectories(serviceName string) error {
-	// Define the subdirectories to be created for each component
-	subDirs := []string{
-		"examples/compose",
-		"examples/helm/templates",
-		"examples/k8s/templates",
-		"dashboards/overview",
-		"alerts/mem",
-		"images",
+	fs := make(FileSet)
+
+	// Render each subdirectory
+	directoryFiles, err := GetComponentFiles()
+	if err != nil {
+		return fmt.Errorf("error creating directory: %v", err)
 	}
 
-	// Create each subdirectory
-	for _, dir := range subDirs {
-		path := filepath.Join(serviceName, dir)
-		if err := os.MkdirAll(path, 0755); err != nil {
-			return fmt.Errorf("unable to create directory '%s': %v", path, err)
+	for dir, assets := range directoryFiles.DirAssets {
+		d := strings.Split(dir, "/")
+		subDir := d[1]
+		if subDir == "" {
+			subDir = d[0]
+		}
+
+		path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, filepath.Join(c.Name, dir)))
+		if err = os.MkdirAll(path, 0755); err != nil {
+			return fmt.Errorf("error creating directory: %v", err)
+		}
+		if err = addFile(assets, fs, path); err != nil {
+			return fmt.Errorf("error adding file files: %v", err)
+		}
+		if err = fs.Render(c.Name, subDir); err != nil {
+			return fmt.Errorf("error renreding files: %v", err)
 		}
 	}
 
 	return nil
+}
+
+func addFile(assets Assets, fs FileSet, path string) error {
+	// Setting files info
+	for _, filename := range assets.Files {
+		// Put the content
+		template, err := GetTemplate(assets.Template)
+		if err != nil {
+			return err
+		}
+		fs.Add(File{Name: filename, Path: path, Content: template})
+	}
+	return nil
+}
+
+func GetTemplate(templatePath string) (template []byte, err error) {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BaseTemplatePath, templatePath))
+	template, err = ReadTemplate(path)
+	if err != nil {
+		return nil, err
+	}
+	return template, nil
+}
+
+func ReadTemplate(path string) ([]byte, error) {
+	tmplBytes, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("error: %v", err)
+	}
+	return tmplBytes, nil
 }

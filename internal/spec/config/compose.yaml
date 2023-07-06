@@ -1,0 +1,15 @@
+service:
+  ports:
+    - "8080"
+  networks: ["integrations"]
+
+otelCollector:
+  name: "otel-collector"
+  container: "otel-collector"
+  version: "0.51.0"
+  env_var: "${LS_ACCESS_TOKEN}"
+  configs:
+    - source: "collector_conf"
+      target: "/conf/collector.yml"
+  command: ["--config=/conf/collector.yml"]
+  networks: ["integrations"]

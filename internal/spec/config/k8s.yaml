@@ -1,0 +1,6 @@
+DeploymentName: my-deployment
+AppName: my-app
+Replicas: 3
+ContainerName: my-container
+Image: nginx:1.14.2
+ContainerPort: 80
