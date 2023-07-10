@@ -108,7 +108,7 @@ func Run(specFile string) error {
 	// Generate components
 	for _, component := range s.Components {
 		if err = component.Render(); err != nil {
-			return fmt.Errorf("unable to create directory for component '%s': %v", component.Name, err)
+			return fmt.Errorf("unable to render component '%s': %v", component.Name, err)
 		}
 	}
 
@@ -200,7 +200,8 @@ func GenerateRepoReadme(componentName string, data ReadmeData) ([]byte, error) {
 }
 
 func GetComponentFiles() (DirectoryFiles, error) {
-	data, err := os.ReadFile(constants.ConfigFile)
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigFile))
+	data, err := os.ReadFile(path)
 	if err != nil {
 		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
 	}
@@ -225,7 +226,8 @@ type ComponentSpec struct {
 }
 
 func (c ComponentSpec) Render() error {
-	if err := os.Mkdir(fmt.Sprintf("./%s", c.Name), 0755); err != nil {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, c.Name))
+	if err := os.Mkdir(path, 0755); err != nil {
 		return fmt.Errorf("unable to create directory for component '%s': %v", c.Name, err)
 	}
 
@@ -234,7 +236,7 @@ func (c ComponentSpec) Render() error {
 	// Render each subdirectory
 	directoryFiles, err := GetComponentFiles()
 	if err != nil {
-		return fmt.Errorf("error creating directory: %v", err)
+		return fmt.Errorf("error getting component files: %v", err)
 	}
 
 	for dir, assets := range directoryFiles.DirAssets {
@@ -244,7 +246,7 @@ func (c ComponentSpec) Render() error {
 			subDir = d[0]
 		}
 
-		path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, filepath.Join(c.Name, dir)))
+		path, _ = utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, filepath.Join(c.Name, dir)))
 		if err = os.MkdirAll(path, 0755); err != nil {
 			return fmt.Errorf("error creating directory: %v", err)
 		}

@@ -1,7 +1,7 @@
 dir_assets:
-  'examples/compose/':
-    files: ['docker-compose.yml']
-    template: 'compose/docker-compose.yaml.tmpl'
+#  'examples/compose/':
+#    files: ['docker-compose.yml']
+#    template: 'compose/docker-compose.yaml.tmpl'
 #  'examples/helm/':
 #    files: ['Values.yaml', 'Chart.yaml']
 #    template: 'helm/chart_values.yaml.tmpl'
