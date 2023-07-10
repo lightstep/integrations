@@ -1,0 +1,26 @@
+deployment:
+  apiVersion: "apps/v1"
+  kind: "Deployment"
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app:
+    template:
+      metadata:
+        labels:
+          app:
+      spec:
+        containers:
+          - name: ""
+            image:
+            ports:
+              - containerPort:
+            volumeMounts:
+              - name:
+                mountPath:
+            volumes:
+              - name:
+                persistentVolumeClaim:
+                  claimName:
+

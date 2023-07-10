@@ -2,44 +2,22 @@ package compose
 
 import (
 	"fmt"
+	"github.com/lightstep/integrations/internal/utils"
 	"gopkg.in/yaml.v3"
 	"html/template"
 	"os"
+	"path/filepath"
 )
 
 const (
-	CompTemplateName = "docker-compose"
-	CompFile         = "docker-compose.yml"
-	configFile       = "./config/compose.yaml"
+	compTemplateName = "docker-compose"
+	compFile         = "docker-compose.yml"
+	configFile       = "config/compose_config.yaml"
+	composePath      = "integrations/internal/examples/compose"
 )
 
 type Compose interface {
 	Generate(string, []byte) error
-}
-
-type Service struct {
-	Name      string   `json:"name" yaml:"name"`
-	Container string   `json:"container" yaml:"container"`
-	Image     string   `json:"image" yaml:"image"`
-	EnvVar    string   `json:"env_var" yaml:"env_var"`
-	Ports     []string `json:"ports" yaml:"ports"`
-	Command   []string `json:"command" yaml:"command"`
-	Networks  []string `json:"networks" yaml:"networks"`
-}
-
-type OtelCollector struct {
-	Name      string   `json:"name" yaml:"name"`
-	Container string   `json:"container" yaml:"container"`
-	EnvVar    string   `json:"env_var" yaml:"env_var"`
-	Configs   []Config `json:"configs" yaml:"configs"`
-	Command   []string `json:"command" yaml:"command"`
-	Networks  []string `json:"networks" yaml:"networks"`
-	Version   string   `json:"version" yaml:"version"`
-}
-
-type Config struct {
-	Source string `json:"source" yaml:"source"`
-	Target string `json:"target" yaml:"target"`
 }
 
 type compose struct {
@@ -56,14 +34,17 @@ func NewCompose(componentName string) Compose {
 }
 
 func (c *compose) Generate(path string, content []byte) error {
-	t := template.Must(template.New(CompTemplateName).Parse(string(content)))
-
-	f, err := os.Create(fmt.Sprintf("%s/%s", path, CompFile))
+	f, err := os.Create(fmt.Sprintf("%s/%s", path, compFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)
 	}
 	defer f.Close()
 
+	tmpl, err := template.New(compTemplateName).Parse(string(content))
+	if err != nil {
+		return fmt.Errorf("error creating template: %v", err)
+	}
+	t := template.Must(tmpl, nil)
 	err = t.Execute(f, c)
 	if err != nil {
 		return fmt.Errorf("error executing template: %v", err)
@@ -73,7 +54,8 @@ func (c *compose) Generate(path string, content []byte) error {
 }
 
 func GetConfig(componentName string) (*compose, error) {
-	data, err := os.ReadFile(configFile)
+	path, _ := utils.GetRelativePath(composePath)
+	data, err := os.ReadFile(filepath.Join(path, configFile))
 	if err != nil {
 		return nil, fmt.Errorf("error renreding files: %v", err)
 	}

@@ -8,9 +8,9 @@ dir_assets:
 #  'examples/helm/templates/':
 #    files:
 #    template:
-#  'examples/k8s/templates/':
-#    files: ['deployment.yaml']
-#    template: 'k8s/deployment.yaml.tmpl'
+  'examples/k8s/templates/':
+    files: ['deployment.yaml']
+    template: 'k8s/deployment.yaml.tmpl'
 #  'dashboards/overview/':
 #    files: ['main.tf']
 #    template: 'dashboards/main.tf.head.tmpl'

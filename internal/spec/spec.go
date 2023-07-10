@@ -117,7 +117,7 @@ func Run(specFile string) error {
 }
 
 func (f *FileSet) Add(file File) {
-	(*f)[file.Path+file.Name] = file
+	(*f)[file.Path+"/"+file.Name] = file
 }
 
 func (f *FileSet) Render(componentName string, subDir string) error {
@@ -160,7 +160,7 @@ func (f *FileSet) Render(componentName string, subDir string) error {
 				return err
 			}
 		}
-		if _, err := GenerateRepoReadme(file.Path, data); err != nil {
+		if _, err := GenerateRepoReadme(componentName, data); err != nil {
 			return err
 		}
 	}
@@ -176,21 +176,20 @@ type ReadmeData struct {
 	InstanceConfig  string
 }
 
-func GenerateRepoReadme(path string, data ReadmeData) ([]byte, error) {
-	// 1. get the template?
-	readmeTemplate, err := GetTemplate(constants.ReadMeTemplate)
-	if err != nil {
-		return nil, err
-	}
-
-	t := template.Must(template.New(constants.ReadMeName).Parse(string(readmeTemplate)))
-
+func GenerateRepoReadme(componentName string, data ReadmeData) ([]byte, error) {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, componentName))
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, constants.ReadMeFile))
 	if err != nil {
 		return nil, fmt.Errorf("error creating file: %v", err)
 	}
 	defer f.Close()
 
+	// 1. get the template?
+	readmeTemplate, err := GetTemplate(constants.ReadMeTemplate)
+	if err != nil {
+		return nil, err
+	}
+	t := template.Must(template.New(constants.ReadMeName).Parse(string(readmeTemplate)))
 	// 2. execute the template
 	err = t.Execute(f, data)
 	if err != nil {

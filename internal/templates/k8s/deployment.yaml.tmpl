@@ -1,21 +1,44 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: "apps/v1"
+kind: "Deployment"
 metadata:
-  name: {{.DeploymentName}}
+  name: {{.Deployment.Metadata.Name}}-deployment
   labels:
-    app: {{.AppName}}
+    app: {{.Deployment.Metadata.Name}}
 spec:
-  replicas: {{.Replicas}}
+  replicas: {{ .Deployment.Spec.Replicas }}
   selector:
     matchLabels:
-      app: {{.AppName}}
+      app: {{ .Deployment.Metadata.Name }}
   template:
     metadata:
       labels:
-        app: {{.AppName}}
+        app: {{ .Deployment.Metadata.Name }}
     spec:
+      {{- if .Deployment.Spec.Template.Spec.Containers }}
       containers:
-      - name: {{.ContainerName}}
-        image: {{.Image}}
-        ports:
-        - containerPort: {{.ContainerPort}}
+        {{- range .Deployment.Spec.Template.Spec.Containers }}
+        - name: {{ .Name }}
+          image: {{ .Image }}
+          {{- if .Ports }}
+          ports:
+            {{- range .Ports }}
+            - containerPort: {{ . }}
+            {{- end }}
+          {{- end }}
+          {{- if .VolumeMounts }}
+          volumeMounts:
+            {{- range .VolumeMounts }}
+            - name: {{ .Name }}
+              mountPath: {{ .MountPath }}
+            {{- end }}
+          {{- end }}
+          {{- if .Volumes }}
+          volumes:
+            {{- range .Volumes }}
+            - name: {{ .Name }}
+              persistentVolumeClaim:
+                claimName: {{ .PersistentVolumeClaim.ClaimName }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+      {{- end }}

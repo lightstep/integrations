@@ -2,6 +2,7 @@ package helm
 
 import (
 	"fmt"
+	"github.com/lightstep/integrations/internal/examples/k8s"
 	"gopkg.in/yaml.v3"
 	"html/template"
 	"log"
@@ -14,7 +15,7 @@ const (
 	ValuesTemplateName = "values"
 	ChartFile          = "Chart.yaml"
 	ValuesFile         = "values.yaml"
-	configFile         = "./config/helm.yaml"
+	configFile         = "./config/helm_config.yaml"
 )
 
 type Helm interface {
@@ -22,7 +23,7 @@ type Helm interface {
 }
 
 type Chart struct {
-	Metadata ChartMetadata `json:"metadata" yaml:"metadata"`
+	Metadata k8s.ChartMetadata `json:"metadata" yaml:"metadata"`
 }
 
 func NewHelm(componentName string) Helm {

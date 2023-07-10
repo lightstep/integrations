@@ -2,17 +2,19 @@ package k8s
 
 import (
 	"fmt"
-	"github.com/lightstep/integrations/internal/examples/helm"
+	"github.com/lightstep/integrations/internal/utils"
 	"gopkg.in/yaml.v3"
 	"html/template"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 const (
-	K8sTemplateName = "deployment"
-	DeploymentFile  = "deployment.yaml"
-	configFile      = "./config/k8s.yaml"
+	k8sTemplateName = "deployment"
+	deploymentFile  = "deployment.yaml"
+	configFile      = "config/k8s_config.yaml"
+	k8sPath         = "integrations/internal/examples/k8s"
 )
 
 type K8s interface {
@@ -20,12 +22,12 @@ type K8s interface {
 }
 
 type k8s struct {
-	Deployment helm.Deployment `yaml:"deployment"`
+	Deployment Deployment `yaml:"deployment"`
 }
 
 func NewK8s(componentName string) K8s {
 	return &k8s{
-		Deployment: helm.Deployment{
+		Deployment: Deployment{
 			APIVersion: getConfig(componentName).Deployment.APIVersion,
 			Kind:       getConfig(componentName).Deployment.Kind,
 			Metadata:   getConfig(componentName).Deployment.Metadata,
@@ -35,75 +37,68 @@ func NewK8s(componentName string) K8s {
 }
 
 func (k k8s) Generate(path string, content []byte) error {
-	file, err := os.Create(fmt.Sprintf("%s%s", path, DeploymentFile))
+	file, err := os.Create(fmt.Sprintf("%s/%s", path, deploymentFile))
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("error creating file: %v", err)
 	}
 
-	tmpl, err := template.New(K8sTemplateName).Parse(string(content))
+	t, err := template.New(k8sTemplateName).Parse(string(content))
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("error creating template: %v", err)
 	}
 
-	err = tmpl.Execute(file, k)
+	err = t.Execute(file, k)
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("error executing template: %v", err)
 	}
 
 	return nil
 }
 
-func getConfig(componentName string) k8s {
-	data, err := os.ReadFile(configFile)
+func getConfig(componentName string) *k8s {
+	path, _ := utils.GetRelativePath(k8sPath)
+	data, err := os.ReadFile(filepath.Join(path, configFile))
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
 
-	var k k8s
+	var k *k8s
 	err = yaml.Unmarshal(data, &k)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
-
-	switch {
-	case k.Deployment.APIVersion == "":
-		k.Deployment.APIVersion = "apps/v1"
-	case k.Deployment.Kind == "":
-		k.Deployment.Kind = "Deployment"
-	case k.Deployment.Metadata == nil:
-		k.Deployment.Metadata = &helm.DeploymentMetadata{
-			Name: "myapp-deployment",
-		}
-	case k.Deployment.Spec == nil:
-		//TODO: Clean up
-		k.Deployment.Spec = &helm.DeploymentSpec{
-			Replicas: 2,
-			Selector: &helm.DeploymentSelector{
-				MatchLabels: &helm.DeploymentLabels{
-					App: "myapp",
+	k.Deployment.APIVersion = "apps/v1"
+	k.Deployment.Kind = "Deployment"
+	k.Deployment.Metadata = &Metadata{
+		Name: componentName,
+	}
+	k.Deployment.Spec = &Spec{
+		Replicas: 2,
+		Selector: &Selector{
+			MatchLabels: &Labels{
+				App: componentName,
+			},
+		},
+		Template: &Template{
+			Metadata: &TemplateMetadata{
+				Labels: &Labels{
+					App: componentName,
 				},
 			},
-			Template: &helm.DeploymentTemplate{
-				Metadata: &helm.DeploymentTemplateMetadata{
-					Labels: &helm.DeploymentLabels{
-						App: "myapp",
-					},
-				},
-				Spec: &helm.DeploymentTemplateSpec{
-					Containers: []*helm.DeploymentContainer{
-						{
-							Name:  "myapp-container",
-							Image: "myapp:1.0.0",
-							Ports: []*helm.DeploymentContainerPort{
-								{
-									ContainerPort: 8080,
-								},
+			Spec: &TemplateSpec{
+				Containers: []*Container{
+					{
+						Name:  componentName,
+						Image: fmt.Sprintf("%s:latest", componentName),
+						Ports: []*ContainerPort{
+							{
+								ContainerPort: 8080,
 							},
 						},
 					},
 				},
 			},
-		}
+		},
 	}
 
 	return k
