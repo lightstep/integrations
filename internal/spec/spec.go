@@ -8,6 +8,7 @@ import (
 	helm2 "github.com/lightstep/integrations/internal/examples/helm"
 	k8s2 "github.com/lightstep/integrations/internal/examples/k8s"
 	images2 "github.com/lightstep/integrations/internal/images"
+	"github.com/lightstep/integrations/internal/userprompt"
 	"github.com/lightstep/integrations/internal/utils"
 	"gopkg.in/yaml.v3"
 	"html/template"
@@ -24,72 +25,10 @@ const (
 	Base             = "integrations"
 	BasePath         = "integrations/internal/"
 	BaseTemplatePath = BasePath + "templates/"
+
+	optionsPrompt   = "Please select an integration option:"
+	componentPrompt = "Do you want to generate component '%s'? (yes/no): "
 )
-
-type Spec struct {
-	Version string   `json:"version,omitempty" yaml:"version,omitempty"`
-	ID      string   `json:"id" yaml:"id"`
-	Name    string   `json:"name" yaml:"name"`
-	Author  Author   `json:"author,omitempty" yaml:"author,omitempty"`
-	Tags    []string `json:"tags,omitempty" yaml:"tags,omitempty"`
-	Status  string   `json:"status,omitempty" yaml:"status,omitempty"`
-
-	Signals   []SignalData `json:"signals,omitempty" yaml:"signals,omitempty"`
-	Images    []ImageData  `json:"images,omitempty" yaml:"images,omitempty"`
-	Changelog Changelog    `json:"changelog,omitempty" yaml:"changelog,omitempty"`
-
-	Components []ComponentSpec `json:"components,omitempty" yaml:"components,omitempty"`
-}
-
-type Author struct {
-	Name string `json:"name" yaml:"name"`
-}
-
-type SignalData struct {
-	Name string `json:"name,omitempty"`
-	Type string `json:"type,omitempty"`
-	Path string `json:"path,omitempty"`
-}
-
-type ImageData struct {
-	Name        string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
-	Path        string `json:"path,omitempty"`
-}
-
-type Change struct {
-	Description string `json:"description,omitempty"`
-	Date        string `json:"date,omitempty"`
-}
-
-type Changelog struct {
-	Path    string   `json:"path,omitempty"`
-	Changes []Change `json:"changes,omitempty"`
-}
-
-type Example struct {
-	Name     string `json:"name,omitempty"`
-	Platform string `json:"platform,omitempty"`
-	Files    []File `json:"files,omitempty"`
-}
-
-type Assets struct {
-	Files    []string
-	Template string
-}
-
-type DirectoryFiles struct {
-	DirAssets map[string]Assets `yaml:"dir_assets"`
-}
-
-type File struct {
-	Name        string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
-	Path        string `json:"path,omitempty"`
-	Content     []byte `json:"content,omitempty"`
-}
-
-type FileSet map[string]File
 
 func Run(specFile string) error {
 	// Read spec file
@@ -105,14 +44,40 @@ func Run(specFile string) error {
 		return fmt.Errorf("unable to unmarshal spec, ensure it is in the correct format: %v", err)
 	}
 
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigOptions))
+	data, err = os.ReadFile(path)
+	if err != nil {
+		return fmt.Errorf("unable to read spec file: %v", err)
+	}
+
+	var config IntegrationsConfig
+	err = yaml.Unmarshal(data, &config)
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+
+	selectedOption, err := userprompt.GetOption(optionsPrompt, config.Options)
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+	fmt.Println("You selected:", selectedOption)
+
 	// Generate components
 	for _, component := range s.Components {
-		if err = component.Render(); err != nil {
-			return fmt.Errorf("unable to render component '%s': %v", component.Name, err)
+		userPrompt := userprompt.NewUserPrompt(component.Name, config.Options[selectedOption])
+
+		generate, err := userPrompt.GetString(fmt.Sprintf(componentPrompt, component.Name))
+		if err != nil {
+			return fmt.Errorf("error reading input: %v", err)
+		}
+		if generate == "yes" {
+			if err = component.Render(userPrompt); err != nil {
+				return fmt.Errorf("unable to render component '%s': %v", component.Name, err)
+			}
 		}
 	}
 
-	log.Println("Directories for components have been successfully created.")
+	log.Println("Components have been successfully created!")
 	return nil
 }
 
@@ -120,7 +85,7 @@ func (f *FileSet) Add(file File) {
 	(*f)[file.Path+"/"+file.Name] = file
 }
 
-func (f *FileSet) Render(componentName string, subDir string) error {
+func (f *FileSet) Render(componentName string, subDir string, prompt userprompt.UserPrompt) error {
 	// write generator and store each file
 	data := ReadmeData{
 		Title:           "Agent Check: Docker Compose",
@@ -160,7 +125,7 @@ func (f *FileSet) Render(componentName string, subDir string) error {
 				return err
 			}
 		}
-		if _, err := GenerateRepoReadme(componentName, data); err != nil {
+		if _, err := GenerateRepoReadme(componentName, data, prompt); err != nil {
 			return err
 		}
 	}
@@ -176,8 +141,8 @@ type ReadmeData struct {
 	InstanceConfig  string
 }
 
-func GenerateRepoReadme(componentName string, data ReadmeData) ([]byte, error) {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, componentName))
+func GenerateRepoReadme(componentName string, data ReadmeData, prompt userprompt.UserPrompt) ([]byte, error) {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s/%s", Base, prompt.GetOption(), componentName))
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, constants.ReadMeFile))
 	if err != nil {
 		return nil, fmt.Errorf("error creating file: %v", err)
@@ -218,15 +183,16 @@ func GetComponentFiles() (DirectoryFiles, error) {
 type Component interface {
 	// paths within each component are relative to the integration package root
 	// so this argument can set the path to the component root
-	Render() error
+	Render(userprompt.UserPrompt) error
 }
 
 type ComponentSpec struct {
 	Name string
 }
 
-func (c ComponentSpec) Render() error {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, c.Name))
+// Render
+func (c ComponentSpec) Render(userPrompt userprompt.UserPrompt) error {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s/%s", Base, userPrompt.GetOption(), c.Name))
 	if err := os.Mkdir(path, 0755); err != nil {
 		return fmt.Errorf("unable to create directory for component '%s': %v", c.Name, err)
 	}
@@ -234,34 +200,34 @@ func (c ComponentSpec) Render() error {
 	fs := make(FileSet)
 
 	// Render each subdirectory
-	directoryFiles, err := GetComponentFiles()
+	componentFiles, err := GetComponentFiles()
 	if err != nil {
 		return fmt.Errorf("error getting component files: %v", err)
 	}
 
-	for dir, assets := range directoryFiles.DirAssets {
+	for dir, assets := range componentFiles.DirectoryTree {
 		d := strings.Split(dir, "/")
 		subDir := d[1]
 		if subDir == "" {
 			subDir = d[0]
 		}
 
-		path, _ = utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, filepath.Join(c.Name, dir)))
+		path, _ = utils.GetRelativePath(fmt.Sprintf("%s/%s/%s", Base, userPrompt.GetOption(), filepath.Join(c.Name, dir)))
 		if err = os.MkdirAll(path, 0755); err != nil {
 			return fmt.Errorf("error creating directory: %v", err)
 		}
 		if err = addFile(assets, fs, path); err != nil {
 			return fmt.Errorf("error adding file files: %v", err)
 		}
-		if err = fs.Render(c.Name, subDir); err != nil {
-			return fmt.Errorf("error renreding files: %v", err)
+		if err = fs.Render(c.Name, subDir, userPrompt); err != nil {
+			return fmt.Errorf("error rendering files: %v", err)
 		}
 	}
 
 	return nil
 }
 
-func addFile(assets Assets, fs FileSet, path string) error {
+func addFile(assets Directories, fs FileSet, path string) error {
 	// Setting files info
 	for _, filename := range assets.Files {
 		// Put the content

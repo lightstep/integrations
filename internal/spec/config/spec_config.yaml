@@ -1,4 +1,4 @@
-dir_assets:
+directories:
 #  'examples/compose/':
 #    files: ['docker-compose.yml']
 #    template: 'compose/docker-compose.yaml.tmpl'

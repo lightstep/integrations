@@ -8,7 +8,8 @@ const (
 	ImagesSubDir   = "images"
 	K8sDir         = "k8s"
 
-	SpecConfigFile = "spec/config/directories_config.yaml"
+	SpecConfigFile    = "spec/config/spec_config.yaml"
+	SpecConfigOptions = "spec/config/options_config.yaml"
 
 	ReadMeTemplate = "readme/README.md.tmpl"
 	ReadMeFile     = "README.md"

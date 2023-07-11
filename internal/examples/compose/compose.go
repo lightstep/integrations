@@ -57,13 +57,13 @@ func GetConfig(componentName string) (*compose, error) {
 	path, _ := utils.GetRelativePath(composePath)
 	data, err := os.ReadFile(filepath.Join(path, configFile))
 	if err != nil {
-		return nil, fmt.Errorf("error renreding files: %v", err)
+		return nil, fmt.Errorf("error reading compose config files: %v", err)
 	}
 
 	var c *compose
 
 	if err = yaml.Unmarshal(data, &c); err != nil {
-		return nil, fmt.Errorf("error renreding files: %v", err)
+		return nil, fmt.Errorf("error unmarshalling files: %v", err)
 	}
 
 	c.Service.Name = fmt.Sprintf("%sService", componentName)
