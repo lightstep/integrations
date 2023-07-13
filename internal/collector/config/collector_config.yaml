@@ -1,0 +1,25 @@
+integrations:
+  aws:
+    rds:
+  azure:
+  collector:
+    mysql: "db"
+    mongodb: "db"
+    couchdb: "db"
+    postgres: "db"
+  collector-prometheus:
+    clickhouse: "prometheus"
+    collectd: "prometheus"
+    couchbase: "prometheus"
+    docker : "prometheus"
+    zookeeper: "prometheus"
+  collector-jmx:
+    cassandra: "jmx"
+    activemq: "jmx"
+    hbase: "jmx"
+    hadoop: "jmx"
+    solr: "jmx"
+    tomcat: "jmx"
+  collector-statsd:
+    airflow: "statsd"
+    statsd: "statsd"

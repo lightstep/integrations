@@ -25,4 +25,4 @@ changelog:
       date: "2023-06-01"
 components:
   - name: "cassandra"
-  - name: "mysql"
+  - name: "hadoop"

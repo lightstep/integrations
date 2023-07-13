@@ -16,6 +16,7 @@ go build .
 |- examples/
    |- compose/
       |- docker-compose.yml
+      |- collector.yml
    |- helm/
       |- Values.yaml
       |- Chart.yaml

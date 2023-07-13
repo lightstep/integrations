@@ -67,4 +67,15 @@ type IntegrationsConfig struct {
 	Options map[string]string `yaml:"options"`
 }
 
+//	type Collector struct {
+//		Services map[string]string `yaml:"services"`
+//	}
+//
+//	type CollectorConfig struct {
+//		Integrations map[string]Collector `yaml:"integrations"`
+//	}
+type CollectorConfig struct {
+	Integrations map[string]interface{} `yaml:"integrations"`
+}
+
 type FileSet map[string]File

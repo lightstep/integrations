@@ -4,3 +4,4 @@ options:
   Collector: "collector"
   Collector Prometheus: "collector-prometheus"
   Collector JMX: "collector-jmx"
+  Collector Statsd: "collector-statsd"

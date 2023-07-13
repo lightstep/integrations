@@ -44,27 +44,39 @@ func Run(specFile string) error {
 		return fmt.Errorf("unable to unmarshal spec, ensure it is in the correct format: %v", err)
 	}
 
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigOptions))
+	intConfig, selectedOption, err := getIntegrationOptions(data, err)
+	if err != nil {
+		return fmt.Errorf("unable to get integration options: %v", err)
+	}
+
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.CollectorConfig))
 	data, err = os.ReadFile(path)
 	if err != nil {
 		return fmt.Errorf("unable to read spec file: %v", err)
 	}
 
-	var config IntegrationsConfig
-	err = yaml.Unmarshal(data, &config)
+	var collectorConfig CollectorConfig
+	err = yaml.Unmarshal(data, &collectorConfig)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		return fmt.Errorf("unable to unmarshal file: %v", err)
 	}
 
-	selectedOption, err := userprompt.GetOption(optionsPrompt, config.Options)
-	if err != nil {
-		fmt.Println("Error: ", err)
+	// Type assertion for "collector"
+	collector, ok := collectorConfig.Integrations[intConfig.Options[selectedOption]]
+	if !ok {
+		return fmt.Errorf("unable to get collector for: %v", intConfig.Options[selectedOption])
 	}
-	fmt.Println("You selected:", selectedOption)
+	fmt.Printf("Your collectors: %v \n", collector)
 
 	// Generate components
 	for _, component := range s.Components {
-		userPrompt := userprompt.NewUserPrompt(component.Name, config.Options[selectedOption])
+		category, ok := collector.(map[string]interface{})[component.Name].(string)
+		if !ok {
+			return fmt.Errorf("unable to find category for %s", component.Name)
+		}
+		fmt.Printf("Your category: %v \n", category)
+
+		userPrompt := userprompt.NewUserPrompt(component.Name, intConfig.Options[selectedOption], category)
 
 		generate, err := userPrompt.GetString(fmt.Sprintf(componentPrompt, component.Name))
 		if err != nil {
@@ -79,6 +91,27 @@ func Run(specFile string) error {
 
 	log.Println("Components have been successfully created!")
 	return nil
+}
+
+func getIntegrationOptions(data []byte, err error) (IntegrationsConfig, string, error) {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigOptions))
+	data, err = os.ReadFile(path)
+	if err != nil {
+		return IntegrationsConfig{}, "", fmt.Errorf("unable to read spec file: %v", err)
+	}
+
+	var intConfig IntegrationsConfig
+	err = yaml.Unmarshal(data, &intConfig)
+	if err != nil {
+		return IntegrationsConfig{}, "", fmt.Errorf("unable to unmarshal file: %v", err)
+	}
+
+	selectedOption, err := userprompt.GetOption(optionsPrompt, intConfig.Options)
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+	fmt.Println("You selected:", selectedOption)
+	return intConfig, selectedOption, nil
 }
 
 func (f *FileSet) Add(file File) {
@@ -104,6 +137,10 @@ func (f *FileSet) Render(componentName string, subDir string, prompt userprompt.
 			if err := newCompose.Generate(file.Path, file.Content); err != nil {
 				return err
 			}
+			// TODO: generate collector.yaml file
+			//receiver := collector.NewReceiver(prompt.GetCategory())
+			//receiver.Generate("", []byte{})
+
 		case constants.HelmSubDir:
 			newHelm := helm2.NewHelm(componentName)
 			if err := newHelm.Generate(file.Path, file.Content); err != nil {

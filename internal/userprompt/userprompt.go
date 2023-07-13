@@ -13,19 +13,22 @@ type UserPrompt interface {
 	GetInt(prompt string) (int, error)
 	SetInput(prompt string, input string)
 	GetOption() string
+	GetCategory() string
 }
 
 type userPrompt struct {
-	Option string
-	Entity string
-	Inputs map[string]string
+	Option   string
+	Entity   string
+	Category string
+	Inputs   map[string]string
 }
 
-func NewUserPrompt(entity string, option string) UserPrompt {
+func NewUserPrompt(entity string, option string, category string) UserPrompt {
 	return &userPrompt{
-		Option: option,
-		Entity: entity,
-		Inputs: make(map[string]string),
+		Option:   option,
+		Entity:   entity,
+		Category: category,
+		Inputs:   make(map[string]string),
 	}
 }
 
@@ -83,4 +86,8 @@ func (up *userPrompt) SetInput(prompt string, input string) {
 
 func (up *userPrompt) GetOption() string {
 	return up.Option
+}
+
+func (up *userPrompt) GetCategory() string {
+	return up.Category
 }
