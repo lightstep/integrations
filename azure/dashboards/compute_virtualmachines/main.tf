@@ -20,8 +20,8 @@ output "dashboard_url" {
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "Compute_virtualmachines Metrics"
-  dashboard_description = "Monitor Compute_virtualmachines with this metrics overview dashboard."
+  dashboard_name = "Compute Virtual Machines Metrics"
+  dashboard_description = "Monitor Compute Virtual Machines with this metrics overview dashboard."
 
   chart {
     name = "CPU %"

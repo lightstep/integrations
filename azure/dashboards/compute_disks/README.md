@@ -18,12 +18,12 @@ cards:
   - topic_item: /docs/create-and-manage-dashboards
   - topic_item: /docs/create-alerts
 ---
-Once you've integrated with [Azure Monitor](/docs/setup-azure-for-metrics), you have access to all metrics for microsoft.compute/disks, **PUT DESCRIPTION HERE**. 
+Once you've integrated with [Azure Monitor](/docs/setup-azure-for-metrics), you have access to all metrics for microsoft.compute/disks.
 
 See [all available Azure integrations](/docs/azure-metrics).
 {: .tip}
 
-To verify metrics are reporting, search for the metrics on the [Metric details](/docs/manage-metric-details) page in **Project settings**.
+To verify metrics are reporting, search for the metrics on the [Metric details](/docs/manage-metric-details) page.
 {: .tip}
 
 The following table shows the {{page.azure_int}} metrics ingested by Lightstep.

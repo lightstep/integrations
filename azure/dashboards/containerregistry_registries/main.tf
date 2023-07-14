@@ -20,8 +20,8 @@ output "dashboard_url" {
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "Containerregistry_registries Metrics"
-  dashboard_description = "Monitor Containerregistry_registries with this metrics overview dashboard."
+  dashboard_name = "Container Registry Metrics"
+  dashboard_description = "Monitor Container Registry with this metrics overview dashboard."
 
   chart {
     name = "Agent Pool CPU Time"

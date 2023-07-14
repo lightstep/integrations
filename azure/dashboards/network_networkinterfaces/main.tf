@@ -20,8 +20,8 @@ output "dashboard_url" {
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "Network_networkinterfaces Metrics"
-  dashboard_description = "Monitor Network_networkinterfaces with this metrics overview dashboard."
+  dashboard_name = "Network Interfaces Metrics"
+  dashboard_description = "Monitor Network Interfaces with this metrics overview dashboard."
 
   chart {
     name = "Bytes Received Rate"

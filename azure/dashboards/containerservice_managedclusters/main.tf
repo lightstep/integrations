@@ -20,8 +20,8 @@ output "dashboard_url" {
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "Containerservice_managedclusters Metrics"
-  dashboard_description = "Monitor Containerservice_managedclusters with this metrics overview dashboard."
+  dashboard_name = "Container Service Managed Clusters Metrics"
+  dashboard_description = "Monitor Container Service Managed Clusters with this metrics overview dashboard."
 
   chart {
     name = "Apiserver Current Inflight Requests"
