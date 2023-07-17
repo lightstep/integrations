@@ -65,3 +65,7 @@ func (r Receiver) Generate(path string, content []byte) error {
 
 	return nil
 }
+
+func (r Receiver) GetConfig() {
+
+}

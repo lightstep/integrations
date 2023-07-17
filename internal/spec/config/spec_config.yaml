@@ -9,7 +9,6 @@ directories:
 #    files:
 #    template:
   'examples/k8s/templates/':
-    files: ['deployment.yaml']
     template: 'k8s/deployment.yaml.tmpl'
 #  'dashboards/overview/':
 #    files: ['main.tf']

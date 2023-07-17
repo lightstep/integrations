@@ -8,14 +8,12 @@ import (
 	helm2 "github.com/lightstep/integrations/internal/examples/helm"
 	k8s2 "github.com/lightstep/integrations/internal/examples/k8s"
 	images2 "github.com/lightstep/integrations/internal/images"
-	"github.com/lightstep/integrations/internal/userprompt"
 	"github.com/lightstep/integrations/internal/utils"
 	"gopkg.in/yaml.v3"
 	"html/template"
 	"log"
 	"path/filepath"
 	"strings"
-
 	//"log"
 	"os"
 )
@@ -25,9 +23,6 @@ const (
 	Base             = "integrations"
 	BasePath         = "integrations/internal/"
 	BaseTemplatePath = BasePath + "templates/"
-
-	optionsPrompt   = "Please select an integration option:"
-	componentPrompt = "Do you want to generate component '%s'? (yes/no): "
 )
 
 func Run(specFile string) error {
@@ -38,87 +33,41 @@ func Run(specFile string) error {
 	}
 
 	// Unmarshal spec
-	var s Spec
-	err = yaml.Unmarshal(data, &s)
+	var spec Spec
+	err = yaml.Unmarshal(data, &spec)
 	if err != nil {
 		return fmt.Errorf("unable to unmarshal spec, ensure it is in the correct format: %v", err)
 	}
 
-	intConfig, selectedOption, err := getIntegrationOptions(data, err)
-	if err != nil {
-		return fmt.Errorf("unable to get integration options: %v", err)
-	}
-
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.CollectorConfig))
-	data, err = os.ReadFile(path)
-	if err != nil {
-		return fmt.Errorf("unable to read spec file: %v", err)
-	}
-
-	var collectorConfig CollectorConfig
-	err = yaml.Unmarshal(data, &collectorConfig)
-	if err != nil {
-		return fmt.Errorf("unable to unmarshal file: %v", err)
-	}
-
-	// Type assertion for "collector"
-	collector, ok := collectorConfig.Integrations[intConfig.Options[selectedOption]]
-	if !ok {
-		return fmt.Errorf("unable to get collector for: %v", intConfig.Options[selectedOption])
-	}
-	fmt.Printf("Your collectors: %v \n", collector)
-
 	// Generate components
-	for _, component := range s.Components {
-		category, ok := collector.(map[string]interface{})[component.Name].(string)
-		if !ok {
-			return fmt.Errorf("unable to find category for %s", component.Name)
-		}
-		fmt.Printf("Your category: %v \n", category)
-
-		userPrompt := userprompt.NewUserPrompt(component.Name, intConfig.Options[selectedOption], category)
-
-		generate, err := userPrompt.GetString(fmt.Sprintf(componentPrompt, component.Name))
-		if err != nil {
-			return fmt.Errorf("error reading input: %v", err)
-		}
-		if generate == "yes" {
-			if err = component.Render(userPrompt); err != nil {
-				return fmt.Errorf("unable to render component '%s': %v", component.Name, err)
-			}
-		}
+	if err = spec.Render(); err != nil {
+		return fmt.Errorf("error rendering service: %v", err)
 	}
 
-	log.Println("Components have been successfully created!")
+	log.Println("Service Components have been successfully created!")
 	return nil
 }
 
-func getIntegrationOptions(data []byte, err error) (IntegrationsConfig, string, error) {
+func getIntegrationOptions(data []byte, err error) (IntegrationsConfig, error) {
 	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigOptions))
 	data, err = os.ReadFile(path)
 	if err != nil {
-		return IntegrationsConfig{}, "", fmt.Errorf("unable to read spec file: %v", err)
+		return IntegrationsConfig{}, fmt.Errorf("unable to read spec file: %v", err)
 	}
 
 	var intConfig IntegrationsConfig
 	err = yaml.Unmarshal(data, &intConfig)
 	if err != nil {
-		return IntegrationsConfig{}, "", fmt.Errorf("unable to unmarshal file: %v", err)
+		return IntegrationsConfig{}, fmt.Errorf("unable to unmarshal file: %v", err)
 	}
-
-	selectedOption, err := userprompt.GetOption(optionsPrompt, intConfig.Options)
-	if err != nil {
-		fmt.Println("Error: ", err)
-	}
-	fmt.Println("You selected:", selectedOption)
-	return intConfig, selectedOption, nil
+	return intConfig, nil
 }
 
 func (f *FileSet) Add(file File) {
 	(*f)[file.Path+"/"+file.Name] = file
 }
 
-func (f *FileSet) Render(componentName string, subDir string, prompt userprompt.UserPrompt) error {
+func (f *FileSet) Render(componentName string, subDir string) error {
 	// write generator and store each file
 	data := ReadmeData{
 		Title:           "Agent Check: Docker Compose",
@@ -162,7 +111,7 @@ func (f *FileSet) Render(componentName string, subDir string, prompt userprompt.
 				return err
 			}
 		}
-		if _, err := GenerateRepoReadme(componentName, data, prompt); err != nil {
+		if _, err := GenerateRepoReadme(componentName, data); err != nil {
 			return err
 		}
 	}
@@ -178,8 +127,8 @@ type ReadmeData struct {
 	InstanceConfig  string
 }
 
-func GenerateRepoReadme(componentName string, data ReadmeData, prompt userprompt.UserPrompt) ([]byte, error) {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s/%s", Base, prompt.GetOption(), componentName))
+func GenerateRepoReadme(componentName string, data ReadmeData) ([]byte, error) {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, componentName))
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, constants.ReadMeFile))
 	if err != nil {
 		return nil, fmt.Errorf("error creating file: %v", err)
@@ -201,74 +150,85 @@ func GenerateRepoReadme(componentName string, data ReadmeData, prompt userprompt
 	return nil, nil
 }
 
-func GetComponentFiles() (DirectoryFiles, error) {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigFile))
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
-	}
-
-	var df DirectoryFiles
-	err = yaml.Unmarshal(data, &df)
-	if err != nil {
-		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
-	}
-
-	return df, nil
-}
+//TODO: Remove
+//func GetComponentFiles() (DirectoryFiles, error) {
+//	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigFile))
+//	data, err := os.ReadFile(path)
+//	if err != nil {
+//		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
+//	}
+//
+//	var df DirectoryFiles
+//	err = yaml.Unmarshal(data, &df)
+//	if err != nil {
+//		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
+//	}
+//
+//	return df, nil
+//}
 
 type Component interface {
 	// paths within each component are relative to the integration package root
 	// so this argument can set the path to the component root
-	Render(userprompt.UserPrompt) error
+	Render() error
+}
+
+type Artifacts struct {
+	Files    []string
+	Template string
 }
 
 type ComponentSpec struct {
+	Name  string
+	Files []string
+	Path  string
+}
+
+type Template struct {
 	Name string
 }
 
 // Render
-func (c ComponentSpec) Render(userPrompt userprompt.UserPrompt) error {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s/%s", Base, userPrompt.GetOption(), c.Name))
+func (s Spec) Render() error {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, s.Name))
 	if err := os.Mkdir(path, 0755); err != nil {
-		return fmt.Errorf("unable to create directory for component '%s': %v", c.Name, err)
+		return fmt.Errorf("unable to create directory for service '%s': %v", s.Name, err)
 	}
 
-	fs := make(FileSet)
-
-	// Render each subdirectory
-	componentFiles, err := GetComponentFiles()
-	if err != nil {
-		return fmt.Errorf("error getting component files: %v", err)
-	}
-
-	for dir, assets := range componentFiles.DirectoryTree {
-		d := strings.Split(dir, "/")
-		subDir := d[1]
-		if subDir == "" {
-			subDir = d[0]
-		}
-
-		path, _ = utils.GetRelativePath(fmt.Sprintf("%s/%s/%s", Base, userPrompt.GetOption(), filepath.Join(c.Name, dir)))
-		if err = os.MkdirAll(path, 0755); err != nil {
-			return fmt.Errorf("error creating directory: %v", err)
-		}
-		if err = addFile(assets, fs, path); err != nil {
-			return fmt.Errorf("error adding file files: %v", err)
-		}
-		if err = fs.Render(c.Name, subDir, userPrompt); err != nil {
-			return fmt.Errorf("error rendering files: %v", err)
-		}
+	for _, component := range s.Components {
+		component.Render()
 	}
 
 	return nil
 }
 
-func addFile(assets Directories, fs FileSet, path string) error {
+func (c *ComponentSpec) Render() error {
+	fs := make(FileSet)
+
+	d := strings.Split(c.Path, "/")
+	subDir := d[1]
+	if subDir == "" {
+		subDir = d[0]
+	}
+
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, filepath.Join(c.Name, c.Path)))
+	if err := os.MkdirAll(path, 0755); err != nil {
+		return fmt.Errorf("error creating directory: %v", err)
+	}
+	if err := c.addFile(subDir, fs, path); err != nil {
+		return fmt.Errorf("error adding file files: %v", err)
+	}
+	if err := fs.Render(c.Name, subDir); err != nil {
+		return fmt.Errorf("error rendering files: %v", err)
+	}
+	return nil
+}
+
+func (c *ComponentSpec) addFile(dir string, fs FileSet, path string) error {
 	// Setting files info
-	for _, filename := range assets.Files {
+	for _, filename := range c.Files {
 		// Put the content
-		template, err := GetTemplate(assets.Template)
+		template, err := GetTemplate(dir)
 		if err != nil {
 			return err
 		}

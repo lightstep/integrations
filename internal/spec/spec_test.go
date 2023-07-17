@@ -9,8 +9,8 @@ import (
 
 var mockSpec = `
 version: "1.0.0"
-id: "example_service"
-name: "Example Service"
+id: "cassandra_service"
+name: "Cassandra Service"
 author:
   name: "Heber Silva"
 tags:
@@ -34,8 +34,13 @@ changelog:
     - description: "Initial release"
       date: "2023-06-01"
 components:
-  - name: "cassandra"
-  - name: "aws_rds"
+  - name: "docker-compose"
+    artifacts:
+      files: [ 'deployment.yaml' ]
+      template: 'k8s/deployment.yaml.tmpl'
+    path: "examples/k8s/templates/"
+templates:
+  - name: "jmx"
 `
 
 func Test_Run(t *testing.T) {

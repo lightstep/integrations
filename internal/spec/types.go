@@ -13,6 +13,8 @@ type Spec struct {
 	Changelog Changelog    `json:"changelog,omitempty" yaml:"changelog,omitempty"`
 
 	Components []ComponentSpec `json:"components,omitempty" yaml:"components,omitempty"`
+
+	Templates []Template `json:"templates,omitempty" yaml:"templates,omitempty"`
 }
 
 type Author struct {
