@@ -2,54 +2,31 @@ terraform {
   required_providers {
     lightstep = {
       source  = "lightstep/lightstep"
-      version = "~> 1.70.9"
+      version = "~> 1.70.10"
     }
   }
   required_version = ">= v1.0.11"
 }
 
-resource "lightstep_metric_dashboard" "translated_grafana_dashboard" {
-  project_name = var.project
-  dashboard_name = "{{.Attributes.Name}}"
-{{range .Attributes.Charts}}
+resource "lightstep_dashboard" "otel_collector_activemq_dashboard" {
+  project_name          = "{{.Resource.LightstepDashboard.OtelCollectorDashboard.ProjectName}}"
+  dashboard_name        = "{{.Resource.LightstepDashboard.OtelCollectorDashboard.DashboardName}}"
+  dashboard_description = "{{.Resource.LightstepDashboard.OtelCollectorDashboard.DashboardDescription}}"
+
+  {{range .Resource.LightstepDashboard.OtelCollectorDashboard.Chart}}
   chart {
-    name = "{{.Title}}"
+    name = "{{.Name}}"
     rank = "{{.Rank}}"
-    type = "{{.ChartType}}"
-{{range .MetricQueries}}
+    type = "{{.Type}}"
+
+    {{range .Query}}
     query {
-      query_name          = "{{.Name}}"
-      display             = "{{.Display}}"
-      hidden              = {{.Hidden}}
-{{if (and .SpansQuery .SpansQuery.Query) }}
-      spans {
-         query         = "{{escapeSpanQuery .SpansQuery.Query}}"
-         operator      = "{{.SpansQuery.Operator}}"
-         group_by_keys = [{{range .SpansQuery.GroupByKeys}}"{{.}}",{{end}}]{{if eq .SpansQuery.Operator "latency"}}
-         latency_percentiles = [{{range .SpansQuery.LatencyPercentiles}}{{.}},{{end}}]{{end}}
-      }
-{{end}}{{if .TQLQuery}}
-      tql                 = "{{.TQLQuery}}"
-{{end}}{{if .Query.Metric}}
-      metric              = "{{.Query.Metric}}"
-      timeseries_operator = "{{.Query.TimeseriesOperator}}"
-{{if .Query.Filters}}
-      include_filters = [{{range .Query.Filters}}
-        {
-          key   = "{{.Key}}"
-          value = "{{.Value}}"
-        },{{end}}
-      ]
-{{end}}
-{{if .Query.GroupBy}}
-      group_by {
-        aggregation_method = "{{.Query.GroupBy.Aggregation}}"
-        keys = [{{range .Query.GroupBy.LabelKeys}}"{{.}}",{{end}}]
-      }{{end}}
-{{end}}
+      query_name   = "{{.QueryName}}"
+      display      = "{{.Display}}"
+      hidden       = {{.Hidden}}
+      query_string = "{{.QueryString}}"
     }
-{{end}}
+    {{end}}
   }
-{{end}}
+  {{end}}
 }
-`

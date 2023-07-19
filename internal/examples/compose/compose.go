@@ -33,14 +33,14 @@ func NewCompose(componentName string) Compose {
 	}
 }
 
-func (c *compose) Generate(path string, content []byte) error {
+func (c *compose) Generate(path string, templateBytes []byte) error {
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, compFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)
 	}
 	defer f.Close()
 
-	tmpl, err := template.New(compTemplateName).Parse(string(content))
+	tmpl, err := template.New(compTemplateName).Parse(string(templateBytes))
 	if err != nil {
 		return fmt.Errorf("error creating template: %v", err)
 	}

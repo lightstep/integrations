@@ -1,21 +1,25 @@
 directories:
-#  'examples/compose/':
-#    files: ['docker-compose.yml']
-#    template: 'compose/docker-compose.yaml.tmpl'
-#  'examples/helm/':
-#    files: ['Values.yaml', 'Chart.yaml']
-#    template: 'helm/chart_values.yaml.tmpl'
-#  'examples/helm/templates/':
-#    files:
-#    template:
-  'examples/k8s/templates/':
+  compose:
+    files: ['docker-compose.yml']
+    template: 'compose/docker-compose.yaml.tmpl'
+    path: 'examples/compose/'
+  helm:
+    files: ['Values.yaml', 'Chart.yaml']
+    template: 'helm/chart_values.yaml.tmpl'
+    path: 'examples/helm/templates/'
+  k8s:
+    files: ['deployment.yaml']
     template: 'k8s/deployment.yaml.tmpl'
-#  'dashboards/overview/':
-#    files: ['main.tf']
-#    template: 'dashboards/main.tf.head.tmpl'
-#  'alerts/mem/':
-#    files:
-#    template: 'alerts/alerts.tmpl'
-#  'images/':
-#    files: ['dashboards-overview.png']
-#    template: 'images/images.tmpl'
+    path: 'examples/k8s/templates/'
+  dashboards:
+    files: ['example-dashboard.tf']
+    template: 'dashboards/main.tf.head.tmpl'
+    path: 'dashboards/'
+  alerts:
+    files: ['example-alerts.tf']
+    template: 'alerts/alerts.tf.tmpl'
+    path: 'alerts/'
+  images:
+    files: ['dashboards-overview.png']
+    template: 'images/images.tmpl'
+    path: 'images/'

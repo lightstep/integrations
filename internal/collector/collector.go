@@ -46,14 +46,14 @@ func NewReceiver(receiverType string) IReceiver {
 	return Receiver{}
 }
 
-func (r Receiver) Generate(path string, content []byte) error {
+func (r Receiver) Generate(path string, templateBytes []byte) error {
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, collectorFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)
 	}
 	defer f.Close()
 
-	tmpl, err := template.New(receiverTemplateName).Parse(string(content))
+	tmpl, err := template.New(receiverTemplateName).Parse(string(templateBytes))
 	if err != nil {
 		return fmt.Errorf("error creating template: %v", err)
 	}

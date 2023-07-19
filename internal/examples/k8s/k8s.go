@@ -36,13 +36,13 @@ func NewK8s(componentName string) K8s {
 	}
 }
 
-func (k k8s) Generate(path string, content []byte) error {
+func (k k8s) Generate(path string, templateBytes []byte) error {
 	file, err := os.Create(fmt.Sprintf("%s/%s", path, deploymentFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)
 	}
 
-	t, err := template.New(k8sTemplateName).Parse(string(content))
+	t, err := template.New(k8sTemplateName).Parse(string(templateBytes))
 	if err != nil {
 		return fmt.Errorf("error creating template: %v", err)
 	}

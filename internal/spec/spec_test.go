@@ -9,8 +9,8 @@ import (
 
 var mockSpec = `
 version: "1.0.0"
-id: "cassandra_service"
-name: "Cassandra Service"
+app_id: "activemq"
+name: "ActiveMQ"
 author:
   name: "Heber Silva"
 tags:
@@ -34,11 +34,12 @@ changelog:
     - description: "Initial release"
       date: "2023-06-01"
 components:
-  - name: "docker-compose"
-    artifacts:
-      files: [ 'deployment.yaml' ]
-      template: 'k8s/deployment.yaml.tmpl'
-    path: "examples/k8s/templates/"
+  - name: "compose"
+  - name: "helm"
+  - name: "k8s"
+  - name: "dashboards"
+  - name: "alerts"
+  - name: "images"
 templates:
   - name: "jmx"
 `

@@ -1,30 +1,44 @@
 package spec
 
 import (
+	"encoding/csv"
 	"fmt"
 	alerts2 "github.com/lightstep/integrations/internal/alerts"
 	"github.com/lightstep/integrations/internal/constants"
+	"github.com/lightstep/integrations/internal/dashboards"
 	"github.com/lightstep/integrations/internal/examples/compose"
 	helm2 "github.com/lightstep/integrations/internal/examples/helm"
 	k8s2 "github.com/lightstep/integrations/internal/examples/k8s"
 	images2 "github.com/lightstep/integrations/internal/images"
+	"github.com/lightstep/integrations/internal/spec/mock"
+	"github.com/lightstep/integrations/internal/templates"
 	"github.com/lightstep/integrations/internal/utils"
 	"gopkg.in/yaml.v3"
 	"html/template"
+	"io"
 	"log"
-	"path/filepath"
 	"strings"
+
 	//"log"
 	"os"
 )
 
 const (
 	// Templates path
-	Base             = "integrations"
-	BasePath         = "integrations/internal/"
-	BaseTemplatePath = BasePath + "templates/"
+	Base     = "integrations"
+	BasePath = "integrations/internal/"
 )
 
+var mockData = ReadmeData{
+	Title:           "Agent Check: Docker Compose",
+	Overview:        "This check monitors Docker Compose, etc.",
+	IntegrationName: "docker_compose",
+	InitConfig:      "blank or `{}`",
+	InstanceConfig:  `{"server": "%%host%%", "port":"443"}`,
+}
+
+// Run is the main function that starts the application. It reads a spec file, unmarshals it into a Spec object,
+// and renders the spec's components.
 func Run(specFile string) error {
 	// Read spec file
 	data, err := os.ReadFile(specFile)
@@ -44,43 +58,25 @@ func Run(specFile string) error {
 		return fmt.Errorf("error rendering service: %v", err)
 	}
 
-	log.Println("Service Components have been successfully created!")
+	log.Printf("%s Service Components have been successfully created! \n", spec.Name)
 	return nil
 }
 
-func getIntegrationOptions(data []byte, err error) (IntegrationsConfig, error) {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigOptions))
-	data, err = os.ReadFile(path)
-	if err != nil {
-		return IntegrationsConfig{}, fmt.Errorf("unable to read spec file: %v", err)
-	}
-
-	var intConfig IntegrationsConfig
-	err = yaml.Unmarshal(data, &intConfig)
-	if err != nil {
-		return IntegrationsConfig{}, fmt.Errorf("unable to unmarshal file: %v", err)
-	}
-	return intConfig, nil
-}
-
+// Add adds a file to the FileSet. The file is added at the path specified by file.Path.
 func (f *FileSet) Add(file File) {
 	(*f)[file.Path+"/"+file.Name] = file
 }
 
-func (f *FileSet) Render(componentName string, subDir string) error {
-	// write generator and store each file
-	data := ReadmeData{
-		Title:           "Agent Check: Docker Compose",
-		Overview:        "This check monitors Docker Compose, etc.",
-		IntegrationName: "docker_compose",
-		InitConfig:      "blank or `{}`",
-		InstanceConfig:  `{"server": "%%host%%", "port":"443"}`,
-	}
-
+// Render generates components for each file in the FileSet, based on the specified sub-directory.
+// It also generates a README file for the repository.
+func (f *FileSet) Render(componentName string) error {
 	for _, file := range *f {
-		switch subDir {
+		switch componentName {
 		case constants.DashboardubDir:
-			//TODO: To be integrated
+			newDashboard := dashboards.NewDashboard(componentName)
+			if err := newDashboard.Generate(file.Path, file.Content); err != nil {
+				return err
+			}
 		case constants.ComposeSubDir:
 			newCompose := compose.NewCompose(componentName)
 			if err := newCompose.Generate(file.Path, file.Content); err != nil {
@@ -111,145 +107,185 @@ func (f *FileSet) Render(componentName string, subDir string) error {
 				return err
 			}
 		}
-		if _, err := GenerateRepoReadme(componentName, data); err != nil {
-			return err
+	}
+
+	return nil
+}
+
+// GenerateRepoReadme creates a README file for the component by applying the supplied data to a template.
+func GenerateRepoReadme(componentName string) error {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, componentName))
+	f, err := os.Create(fmt.Sprintf("%s/%s", path, constants.ReadMeFile))
+	if err != nil {
+		return fmt.Errorf("error creating file: %v", err)
+	}
+	defer f.Close()
+
+	readmeTemplate, err := GetTemplate(constants.ReadMeTemplate)
+	if err != nil {
+		return err
+	}
+	t := template.Must(template.New(constants.ReadMeName).Parse(string(readmeTemplate)))
+	err = t.Execute(f, mockData)
+	if err != nil {
+		return fmt.Errorf("error executing template: %v", err)
+	}
+
+	return nil
+}
+
+func GetDirStructure() (DirStructure, error) {
+	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigFile))
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return DirStructure{}, fmt.Errorf("error: %v", err)
+	}
+
+	var df DirStructure
+	err = yaml.Unmarshal(data, &df)
+	if err != nil {
+		return DirStructure{}, fmt.Errorf("error: %v", err)
+	}
+
+	return df, nil
+}
+
+type Component struct {
+	Name     string
+	Files    []string
+	Path     string
+	Template string
+}
+
+// Render creates a directory for the spec and renders all of its components.
+func (s Spec) Render() error {
+	basePath, _ := utils.GetRelativePath(Base)
+	servicePath := fmt.Sprintf("%s/%s", basePath, s.AppID)
+
+	if err := os.Mkdir(servicePath, 0755); err != nil {
+		return fmt.Errorf("unable to create directory for service '%s': %v", s.Name, err)
+	}
+
+	for _, component := range s.Components {
+		dirStructure, err := GetDirStructure()
+		if err != nil {
+			return fmt.Errorf("error getting component files: %v", err)
+		}
+
+		comp, ok := dirStructure.DirTree[component.Name]
+		if !ok {
+			return fmt.Errorf("error getting component dir: %v", component.Name)
+		}
+
+		component.Path = fmt.Sprintf("%s/%s", servicePath, comp.Path)
+		component.Files = comp.Files
+		component.Template = comp.Template
+
+		if err := component.Render(s.AppID); err != nil {
+			return fmt.Errorf("error rendering component: %s %v", component.Name, err)
+		}
+	}
+
+	if err := CopySpec(basePath, servicePath); err != nil {
+		return fmt.Errorf("error copy spec file: %v", err)
+	}
+	if err := GenerateMetricsData(servicePath); err != nil {
+		return fmt.Errorf("error generating metircs file: %v", err)
+	}
+
+	return nil
+}
+
+// Render creates directories for the component and renders all of its files.
+func (c *Component) Render(appId string) error {
+	fs := make(FileSet)
+
+	if err := os.MkdirAll(c.Path, 0755); err != nil {
+		return fmt.Errorf("error creating directory: %v", err)
+	}
+	if err := c.addFile(c.Template, fs, c.Path); err != nil {
+		return fmt.Errorf("error adding file files: %v", err)
+	}
+	if err := fs.Render(c.Name); err != nil {
+		return fmt.Errorf("error rendering files: %v", err)
+	}
+	if err := GenerateRepoReadme(appId); err != nil {
+		return fmt.Errorf("error generating readme file: %v", err)
+	}
+
+	return nil
+}
+
+func GenerateMetricsData(servicePath string) error {
+	filePath := fmt.Sprintf("%s/%s", servicePath, "metrics.csv")
+	file, err := os.Create(filePath)
+	if err != nil {
+		return fmt.Errorf("error creating csv file: %v", err)
+	}
+	defer file.Close()
+
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+
+	for _, line := range strings.Split(mock.MockMetrics, "\n") {
+		if err := writer.Write(strings.Split(line, ",")); err != nil {
+			return fmt.Errorf("error : %v", err)
 		}
 	}
 
 	return nil
 }
 
-type ReadmeData struct {
-	Title           string
-	Overview        string
-	IntegrationName string
-	InitConfig      string
-	InstanceConfig  string
-}
-
-func GenerateRepoReadme(componentName string, data ReadmeData) ([]byte, error) {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, componentName))
-	f, err := os.Create(fmt.Sprintf("%s/%s", path, constants.ReadMeFile))
+func CopySpec(src, dst string) error {
+	srcFile, err := os.Open(fmt.Sprintf("%s/spec.yaml", src))
 	if err != nil {
-		return nil, fmt.Errorf("error creating file: %v", err)
+		return err
 	}
-	defer f.Close()
+	defer srcFile.Close()
 
-	// 1. get the template?
-	readmeTemplate, err := GetTemplate(constants.ReadMeTemplate)
+	dstFile, err := os.Create(fmt.Sprintf("%s/spec.yaml", dst))
 	if err != nil {
-		return nil, err
+		return err
 	}
-	t := template.Must(template.New(constants.ReadMeName).Parse(string(readmeTemplate)))
-	// 2. execute the template
-	err = t.Execute(f, data)
+	defer dstFile.Close()
+
+	_, err = io.Copy(dstFile, srcFile)
 	if err != nil {
-		return nil, fmt.Errorf("error executing template: %v", err)
-	}
-	// 3. data is what's in repo
-	return nil, nil
-}
-
-//TODO: Remove
-//func GetComponentFiles() (DirectoryFiles, error) {
-//	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BasePath, constants.SpecConfigFile))
-//	data, err := os.ReadFile(path)
-//	if err != nil {
-//		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
-//	}
-//
-//	var df DirectoryFiles
-//	err = yaml.Unmarshal(data, &df)
-//	if err != nil {
-//		return DirectoryFiles{}, fmt.Errorf("error: %v", err)
-//	}
-//
-//	return df, nil
-//}
-
-type Component interface {
-	// paths within each component are relative to the integration package root
-	// so this argument can set the path to the component root
-	Render() error
-}
-
-type Artifacts struct {
-	Files    []string
-	Template string
-}
-
-type ComponentSpec struct {
-	Name  string
-	Files []string
-	Path  string
-}
-
-type Template struct {
-	Name string
-}
-
-// Render
-func (s Spec) Render() error {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, s.Name))
-	if err := os.Mkdir(path, 0755); err != nil {
-		return fmt.Errorf("unable to create directory for service '%s': %v", s.Name, err)
+		return err
 	}
 
-	for _, component := range s.Components {
-		component.Render()
-	}
-
-	return nil
+	return dstFile.Sync()
 }
 
-func (c *ComponentSpec) Render() error {
-	fs := make(FileSet)
-
-	d := strings.Split(c.Path, "/")
-	subDir := d[1]
-	if subDir == "" {
-		subDir = d[0]
-	}
-
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", Base, filepath.Join(c.Name, c.Path)))
-	if err := os.MkdirAll(path, 0755); err != nil {
-		return fmt.Errorf("error creating directory: %v", err)
-	}
-	if err := c.addFile(subDir, fs, path); err != nil {
-		return fmt.Errorf("error adding file files: %v", err)
-	}
-	if err := fs.Render(c.Name, subDir); err != nil {
-		return fmt.Errorf("error rendering files: %v", err)
-	}
-	return nil
-}
-
-func (c *ComponentSpec) addFile(dir string, fs FileSet, path string) error {
-	// Setting files info
+// addFile sets the content for each file in the component's file list.
+func (c *Component) addFile(tmplPath string, fs FileSet, path string) error {
 	for _, filename := range c.Files {
-		// Put the content
-		template, err := GetTemplate(dir)
+		template, err := GetTemplate(tmplPath)
 		if err != nil {
 			return err
 		}
 		fs.Add(File{Name: filename, Path: path, Content: template})
 	}
+
 	return nil
 }
 
-func GetTemplate(templatePath string) (template []byte, err error) {
-	path, _ := utils.GetRelativePath(fmt.Sprintf("%s/%s", BaseTemplatePath, templatePath))
-	template, err = ReadTemplate(path)
+// GetTemplate retrieves the content of the specified template file.
+func GetTemplate(tmplPath string) (templateBytes []byte, err error) {
+	templateBytes, err = ReadTemplate(tmplPath)
 	if err != nil {
 		return nil, err
 	}
-	return template, nil
+
+	return templateBytes, nil
 }
 
+// ReadTemplate reads the content of the specified template file from the embedded file system.
 func ReadTemplate(path string) ([]byte, error) {
-	tmplBytes, err := os.ReadFile(path)
+	templateBytes, err := templates.TemplateContent.ReadFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("error: %v", err)
+		return nil, fmt.Errorf("error reading template file: %v", err)
 	}
-	return tmplBytes, nil
+
+	return templateBytes, nil
 }

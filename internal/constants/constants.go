@@ -13,7 +13,7 @@ const (
 
 	CollectorConfig = "collector/config/collector_config.yaml"
 
-	ReadMeTemplate = "readme/README.md.tmpl"
+	ReadMeTemplate = "readme/base.md.tmpl"
 	ReadMeFile     = "README.md"
 	ReadMeName     = "readme"
 )
