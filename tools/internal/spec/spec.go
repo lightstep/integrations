@@ -1,32 +1,76 @@
 package spec
 
+/*
+With the intended behavior of Template you can scaffold an integration package with
+just a few entries. Here's a speculative example of YAML you'll find to build something
+like we created for couchdb in the examples repo...
+
+```yaml
+version: 0.0.1
+name: CouchDB
+id: couchdb
+author: Nathan Slaughter
+status: development
+vars:
+
+	receiver:
+	  endpoint: http://couchdb:5984
+	  username: otelu
+	  password: otelp
+	  collection_interval: 10s
+	environment:
+	  COUCHDB_USER: otelu
+	  COUCHDB_PASSWORD: otelp
+	ports:
+	  metrics: 5984
+	  app: 5986
+
+templates:
+  - names: ["compose/appreceiver/solo"]
+    location: examples/compose/docker-compose.yml
+  - names: ["compose/appreceiver/cluster"]
+    vars:
+    nodes: 3
+    environment:
+    NODENAME:
+    location: examples/compose/docker-compose.cluster.yml
+  - names: ["compose/", ""]
+
+```
+
+This would seem valuable as it's 27 lines replacing 164 lines. But what's just as important is that every aspect of
+our integration packages that we can manage through templates can now be changed in mass. This gives us flexibility
+to apply the data for multiple purposes. Using concise data for each integration that captures only what's different in each case will provide us considerably
+
+The primary use cases that I'm contemplating are for testing. But this
+becomes a valuable
+gathering data
+*/
+type Template struct {
+	Name     string // used to lookup the template in project
+	Location string // relative path where template is rendered
+	Vars     map[string]string
+}
+
 type Spec struct {
-	Version string   `json:"version,omitempty"` // spec version - we can use this to determine how to parse the spec
-	ID      string   `json:"id"`      // unique id for the service
-	Name    string   `json:"name"`    // name of the service - e.g. Cassandra, MongoDB
-	Author  Author   `json:"author,omitempty"`
-	Tags    []string `json:"tags,omitempty"`   // like categories
-	Status  string   `json:"status,omitempty"` // e.g. stable, beta, deprecated
-
-	// Testing/Certification: [app versions] x collector version x [auxiliary app versions]
-
-	Signals   []SignalData `json:"signals,omitempty"`
-	Images    []ImageData  `json:"images,omitempty"`
-	Changelog Changelog    `json:"changelog,omitempty"`
-
-	Components []Component `json:"components,omitempty"`
-}
-
-type SignalData struct {
-	Name string `json:"name,omitempty"`
-	Type string `json:"type,omitempty"`
-	Path string `json:"path,omitempty"`
-}
-
-type ImageData struct {
-	Name        string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
-	Path        string `json:"path,omitempty"`
+	Version    string   `json:"version,omitempty"` // spec version - we can use this to determine how to parse the spec
+	ID         string   `json:"id"`                // unique id for the service
+	Name       string   `json:"name"`              // name of the service - e.g. Cassandra, MongoDB
+	Author     Author   `json:"author,omitempty"`
+	Categories []string `categories:"tags,omitempty"` // provides context on particular things relevant to the integration
+	Status     string   `json:"status,omitempty"`     // e.g. (development|experimental|supported)
+	/* TODO:
+	Make an IntegrationStatus type with statuses like
+	- deprecated - we will fix bugs, but the legacy package may remain temporarily as a resource while customers migrate
+	- development - this integration doesn't yet include a dashboard
+	- experimental - uses an unsupported approach though it is what we would recommend to a customer
+	- supported - we intend to maintain
+	*/
+	Matrix    Matrix `json:"matrix,omitempty"`
+	Vars      map[string]string
+	Templates []Template `json:"templates,omitempty"`
+	Assets    []Asset    `json:"assets,omitempty"`
+	Changelog Changelog  `json:"changelog,omitempty"`
 }
 
 type Change struct {
@@ -37,41 +81,4 @@ type Change struct {
 type Changelog struct {
 	Path    string   `json:"path,omitempty"`
 	Changes []Change `json:"changes,omitempty"`
-}
-
-type Example struct {
-	Name     string `json:"name,omitempty"`
-	Platform string `json:"platform,omitempty"`
-	Files    []File `json:"files,omitempty"`
-}
-
-type File struct {
-	Name    string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
-	Path    string `json:"path,omitempty"`
-	content []byte `json:"content,omitempty"`
-}
-
-type FileSet map[string]File `json:"file_set,omitempty"`
-
-func (f *FileSet) Add(file File) {
-	(*f)[file.Path + file.Name] = file
-}
-
-func (f *FileSet) Render() error {
-	// TODO: implement this to write generate and store each file
-	return nil
-}
-
-func GenerateRepoReadme() ([]byte, error) {
-	// 1. get the template?
-	// 2. execute the template
-	// 3. data is what's in repo
-	return nil, nil
-}
-
-type Component interface {
-    // paths within each component are relative to the integration package root
-    // so this argument can set the path to the component root
-    Render() error
 }
