@@ -12,12 +12,12 @@ id: couchdb
 author: Nathan Slaughter
 status: development
 vars:
-
 	receiver:
 	  endpoint: http://couchdb:5984
 	  username: otelu
 	  password: otelp
 	  collection_interval: 10s
+	image: couchdb
 	environment:
 	  COUCHDB_USER: otelu
 	  COUCHDB_PASSWORD: otelp
@@ -25,18 +25,49 @@ vars:
 	  metrics: 5984
 	  app: 5986
 
+# remove plural of name
+
+----------
+templates:
+  - dynamically rendered with vars
+assets:
+  - any file that is static
+----------
+
+examples:
+  vars: <the top-level vars>
+
+  # is it static - this example .. or template
+
+  - templates:
+    - name:
+      location:
+
+dashboards:
+  - 
+alerts:
+  -
+images:
+  - 
+----------
+
 templates:
   - names: ["compose/appreceiver/solo"]
     location: examples/compose/docker-compose.yml
   - names: ["compose/appreceiver/cluster"]
     vars:
-    nodes: 3
-    environment:
-    NODENAME:
+    	nodes: 3
+    	environment:
+    		NODENAME: ``
     location: examples/compose/docker-compose.cluster.yml
-  - names: ["compose/", ""]
-
+assets:
+  - 
 ```
+
+Top-level values can be used throughout all of the templates.
+
+- How to configure for compose
+- How to configure template for app config file
 
 This would seem valuable as it's 27 lines replacing 164 lines. But what's just as important is that every aspect of
 our integration packages that we can manage through templates can now be changed in mass. This gives us flexibility
