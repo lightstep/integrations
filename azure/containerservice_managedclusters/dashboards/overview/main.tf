@@ -1,0 +1,244 @@
+terraform {
+  required_providers {
+    lightstep = {
+      source  = "lightstep/lightstep"
+      version = "~> 1.76.0"
+    }
+  }
+  required_version = ">= v1.0.11"
+}
+
+variable "lightstep_project" {
+  description = "Lightstep Project Name"
+  type        = string
+}
+
+output "dashboard_url" {
+  value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
+  description = "OpenTelemetry Collector Containerservice_managedclusters Dashboard URL"
+}
+
+resource "lightstep_dashboard" "otel_collector_dashboard" {
+  project_name   = var.lightstep_project
+  dashboard_name = "Container Service Managed Clusters Metrics"
+  dashboard_description = "Monitor Container Service Managed Clusters with this metrics overview dashboard."
+
+  chart {
+    name = "Apiserver Current Inflight Requests"
+    rank = "0"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_apiserver_current_inflight_requests_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_requestkind == $metadata_requestkind)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Node CPU Usage %"
+    rank = "1"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_node_cpu_usage_percentage_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_node == $metadata_node) && (metadata_nodepool == $metadata_nodepool)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Kube Node Status Allocatable CPU Cores"
+    rank = "2"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_kube_node_status_allocatable_cpu_cores_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) &&  (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Kube Node Status Allocatable Memory Bytes"
+    rank = "3"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_kube_node_status_allocatable_memory_bytes_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Node Network In Bytes"
+    rank = "4"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_node_network_in_bytes_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_node == $metadata_node) && (metadata_nodepool == $metadata_nodepool)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Node Network Out Bytes"
+    rank = "5"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_node_network_out_bytes_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_node == $metadata_node) && (metadata_nodepool == $metadata_nodepool)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Kube Node Status Condition"
+    rank = "6"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_kube_node_status_condition_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_condition == $metadata_condition) && (metadata_status == $metadata_status) && (metadata_status2 == $metadata_status2) && (metadata_node == $metadata_node)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Kube Pod Status Phase"
+    rank = "7"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_kube_pod_status_phase_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_phase == $metadata_phase) && (metadata_namespace == $metadata_namespace) && (metadata_pod == $metadata_pod)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Kube Pod Status Ready"
+    rank = "8"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_kube_pod_status_ready_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_namespace == $metadata_namespace) && (metadata_pod == $metadata_pod) && (metadata_condition == $metadata_condition)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  template_variable {
+    name                     = "azuremonitor_resource_id"
+    default_values           = []
+    suggestion_attribute_key = "azuremonitor.resource_id"
+  }
+
+  template_variable {
+    name                     = "azuremonitor_subscription_id"
+    default_values           = []
+    suggestion_attribute_key = "azuremonitor.subscription_id"
+  }
+
+  template_variable {
+    name                     = "azuremonitor_tenant_id"
+    default_values           = []
+    suggestion_attribute_key = "azuremonitor.tenant_id"
+  }
+
+  template_variable {
+    name                     = "location"
+    default_values           = []
+    suggestion_attribute_key = "location"
+  }
+
+  template_variable {
+    name                     = "metadata_condition"
+    default_values           = []
+    suggestion_attribute_key = "metadata_condition"
+  }
+
+  template_variable {
+    name                     = "metadata_device"
+    default_values           = []
+    suggestion_attribute_key = "metadata_device"
+  }
+
+  template_variable {
+    name                     = "metadata_namespace"
+    default_values           = []
+    suggestion_attribute_key = "metadata_namespace"
+  }
+
+  template_variable {
+    name                     = "metadata_node"
+    default_values           = []
+    suggestion_attribute_key = "metadata_node"
+  }
+
+  template_variable {
+    name                     = "metadata_nodepool"
+    default_values           = []
+    suggestion_attribute_key = "metadata_nodepool"
+  }
+
+  template_variable {
+    name                     = "metadata_phase"
+    default_values           = []
+    suggestion_attribute_key = "metadata_phase"
+  }
+
+  template_variable {
+    name                     = "metadata_pod"
+    default_values           = []
+    suggestion_attribute_key = "metadata_pod"
+  }
+
+  template_variable {
+    name                     = "metadata_requestkind"
+    default_values           = []
+    suggestion_attribute_key = "metadata_requestkind"
+  }
+
+  template_variable {
+    name                     = "metadata_status"
+    default_values           = []
+    suggestion_attribute_key = "metadata_status"
+  }
+
+  template_variable {
+    name                     = "metadata_status2"
+    default_values           = []
+    suggestion_attribute_key = "metadata_status2"
+  }
+}
