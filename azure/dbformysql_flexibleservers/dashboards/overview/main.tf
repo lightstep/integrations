@@ -15,13 +15,13 @@ variable "lightstep_project" {
 
 output "dashboard_url" {
   value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
-  description = "OpenTelemetry Collector Dbformysql_flexibleservers Dashboard URL"
+  description = "OpenTelemetry Collector Mysql Flexible Servers Dashboard URL"
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "DB Mysql Flexible Servers Metrics"
-  dashboard_description = "Monitor DB Mysql Flexible Servers with this metrics overview dashboard."
+  dashboard_name = "Mysql Flexible Servers Metrics"
+  dashboard_description = "Monitor Mysql Flexible Servers with this metrics overview dashboard."
 
   chart {
     name = "CPU %"

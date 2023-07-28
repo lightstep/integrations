@@ -15,13 +15,13 @@ variable "lightstep_project" {
 
 output "dashboard_url" {
   value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
-  description = "OpenTelemetry Collector Dbforpostgresql_servers Dashboard URL"
+  description = "OpenTelemetry Collector PostgreSql Servers Dashboard URL"
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "DB PostgreSQL Servers Metrics"
-  dashboard_description = "Monitor Dbforpostgresql_servers with this metrics overview dashboard."
+  dashboard_name = "PostgreSQL Servers Metrics"
+  dashboard_description = "Monitor PostgreSql Servers with this metrics overview dashboard."
 
   chart {
     name = "Active Connections"

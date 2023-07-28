@@ -15,13 +15,13 @@ variable "lightstep_project" {
 
 output "dashboard_url" {
   value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
-  description = "OpenTelemetry Collector Storage Storage Tasks Dashboard URL"
+  description = "OpenTelemetry Collector Storage Tasks Dashboard URL"
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "Storage Storage Tasks Metrics"
-  dashboard_description = "Monitor Storage Storage Tasks with this metrics overview dashboard."
+  dashboard_name = "Storage Tasks Metrics"
+  dashboard_description = "Monitor Storage Tasks with this metrics overview dashboard."
 
   chart {
     name = "Objects Operated Count"
