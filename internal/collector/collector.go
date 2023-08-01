@@ -18,7 +18,7 @@ const (
 )
 
 type IReceiver interface {
-	Generate(string, []byte) error
+	TemplateRender(string, []byte) error
 }
 
 type Receiver struct {
@@ -46,7 +46,7 @@ func NewReceiver(receiverType string) IReceiver {
 	return Receiver{}
 }
 
-func (r Receiver) Generate(path string, templateBytes []byte) error {
+func (r Receiver) TemplateRender(path string, templateBytes []byte) error {
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, collectorFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)

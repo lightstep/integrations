@@ -74,7 +74,7 @@ func Test_Run(t *testing.T) {
 			err := os.WriteFile(tc.SpecFileName, []byte(mockSpec), 0644)
 			require.NoError(t, err)
 
-			err = spec.Run(tc.SpecFileName)
+			err = spec.Run(tc.SpecFileName, "", "")
 
 			if tc.ExpectedErr == "" {
 				require.NoError(t, err)

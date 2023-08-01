@@ -19,7 +19,7 @@ const (
 )
 
 type Alerts interface {
-	Generate(string, []byte) error
+	TemplateRender(string, []byte) error
 }
 
 type alerts struct {
@@ -37,7 +37,7 @@ func NewAlerts(componentName string) Alerts {
 	}
 }
 
-func (a alerts) Generate(path string, templateBytes []byte) error {
+func (a alerts) TemplateRender(path string, templateBytes []byte) error {
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, alertsFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)

@@ -17,7 +17,7 @@ const (
 )
 
 type Compose interface {
-	Generate(string, []byte) error
+	TemplateRender(string, []byte) error
 }
 
 type compose struct {
@@ -33,7 +33,7 @@ func NewCompose(componentName string) Compose {
 	}
 }
 
-func (c *compose) Generate(path string, templateBytes []byte) error {
+func (c *compose) TemplateRender(path string, templateBytes []byte) error {
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, compFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)

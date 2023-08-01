@@ -9,7 +9,11 @@ import (
 )
 
 // Assuming that the spec is in a JSON file named "spec.json"
-var specFile string
+var (
+	specFile string
+	outFile  string
+	provider string
+)
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
@@ -22,7 +26,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generator the needed files
 to quickly create a Cobra application.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return spec.Run(specFile)
+		return spec.Run(specFile, outFile, provider)
 	},
 }
 
@@ -31,6 +35,8 @@ func init() {
 
 	// Define the 'specFile' flag for the 'init' command.
 	initCmd.Flags().StringVarP(&specFile, "spec", "s", "", "Path to the spec file (required)")
+	initCmd.Flags().StringVarP(&outFile, "out", "o", "", "Path to the out file (required)")
+	initCmd.Flags().StringVarP(&provider, "provider", "p", "", "Provider (AWS | Azure | Collector) - (required)")
 
 	// Mark the 'specFile' flag as required.
 	cobra.CheckErr(initCmd.MarkFlagRequired("spec"))

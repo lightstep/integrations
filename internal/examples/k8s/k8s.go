@@ -18,7 +18,7 @@ const (
 )
 
 type K8s interface {
-	Generate(string, []byte) error
+	TemplateRender(string, []byte) error
 }
 
 type k8s struct {
@@ -36,7 +36,7 @@ func NewK8s(componentName string) K8s {
 	}
 }
 
-func (k k8s) Generate(path string, templateBytes []byte) error {
+func (k k8s) TemplateRender(path string, templateBytes []byte) error {
 	file, err := os.Create(fmt.Sprintf("%s/%s", path, deploymentFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)

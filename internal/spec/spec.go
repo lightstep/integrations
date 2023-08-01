@@ -39,7 +39,7 @@ var mockData = ReadmeData{
 
 // Run is the main function that starts the application. It reads a spec file, unmarshals it into a Spec object,
 // and renders the spec's components.
-func Run(specFile string) error {
+func Run(specFile string, outFile string, provider string) error {
 	// Read spec file
 	data, err := os.ReadFile(specFile)
 	if err != nil {
@@ -53,7 +53,7 @@ func Run(specFile string) error {
 		return fmt.Errorf("unable to unmarshal spec, ensure it is in the correct format: %v", err)
 	}
 
-	// Generate components
+	// TemplateRender components
 	if err = spec.Render(); err != nil {
 		return fmt.Errorf("error rendering service: %v", err)
 	}
@@ -74,36 +74,36 @@ func (f *FileSet) Render(componentName string) error {
 		switch componentName {
 		case constants.DashboardubDir:
 			newDashboard := dashboards.NewDashboard(componentName)
-			if err := newDashboard.Generate(file.Path, file.Content); err != nil {
+			if err := newDashboard.TemplateRender(file.Path, file.Content); err != nil {
 				return err
 			}
 		case constants.ComposeSubDir:
 			newCompose := compose.NewCompose(componentName)
-			if err := newCompose.Generate(file.Path, file.Content); err != nil {
+			if err := newCompose.TemplateRender(file.Path, file.Content); err != nil {
 				return err
 			}
 			// TODO: generate collector.yaml file
 			//receiver := collector.NewReceiver(prompt.GetCategory())
-			//receiver.Generate("", []byte{})
+			//receiver.TemplateRender("", []byte{})
 
 		case constants.HelmSubDir:
 			newHelm := helm2.NewHelm(componentName)
-			if err := newHelm.Generate(file.Path, file.Content); err != nil {
+			if err := newHelm.TemplateRender(file.Path, file.Content); err != nil {
 				return err
 			}
 		case constants.AlertsSubDir:
 			newAlerts := alerts2.NewAlerts(componentName)
-			if err := newAlerts.Generate(file.Path, file.Content); err != nil {
+			if err := newAlerts.TemplateRender(file.Path, file.Content); err != nil {
 				return err
 			}
 		case constants.K8sDir:
 			newK8s := k8s2.NewK8s(componentName)
-			if err := newK8s.Generate(file.Path, file.Content); err != nil {
+			if err := newK8s.TemplateRender(file.Path, file.Content); err != nil {
 				return err
 			}
 		default:
 			newImages := images2.NewIMages()
-			if err := newImages.Generate(file.Path, file.Content); err != nil {
+			if err := newImages.TemplateRender(file.Path, file.Content); err != nil {
 				return err
 			}
 		}

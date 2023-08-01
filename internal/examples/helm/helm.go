@@ -19,7 +19,7 @@ const (
 )
 
 type Helm interface {
-	Generate(string, []byte) error
+	TemplateRender(string, []byte) error
 }
 
 type Chart struct {
@@ -32,7 +32,7 @@ func NewHelm(componentName string) Helm {
 	}
 }
 
-func (h Chart) Generate(path string, templateBytes []byte) error {
+func (h Chart) TemplateRender(path string, templateBytes []byte) error {
 	//parts := strings.Split(string(templateBytes), "---")
 	//chart := parts[0]
 	//values := parts[1]

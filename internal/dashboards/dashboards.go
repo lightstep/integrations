@@ -18,7 +18,7 @@ const (
 )
 
 type Dashboard interface {
-	Generate(string, []byte) error
+	TemplateRender(string, []byte) error
 }
 
 type dashboard struct {
@@ -36,7 +36,7 @@ func NewDashboard(componentName string) Dashboard {
 	}
 }
 
-func (d *dashboard) Generate(path string, templateBytes []byte) error {
+func (d *dashboard) TemplateRender(path string, templateBytes []byte) error {
 	f, err := os.Create(fmt.Sprintf("%s/%s", path, dashboardFile))
 	if err != nil {
 		return fmt.Errorf("error creating file: %v", err)
