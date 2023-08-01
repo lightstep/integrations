@@ -24,9 +24,7 @@ changelog:
     - description: "Initial release"
       date: "2023-06-01"
 components:
-  - name: "compose"
-  - name: "helm"
-  - name: "k8s"
+  - name: "examples"
   - name: "dashboards"
   - name: "alerts"
   - name: "images"
