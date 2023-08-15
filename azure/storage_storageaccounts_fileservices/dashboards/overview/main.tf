@@ -33,7 +33,7 @@ resource "lightstep_dashboard" "otel_collector_dashboard" {
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_availability_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
+metric azure_availability_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
 EOT
     }
   }
@@ -48,7 +48,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_egress_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
+metric azure_egress_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
 EOT
     }
   }
@@ -63,7 +63,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_ingress_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
+metric azure_ingress_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
 EOT
     }
   }
@@ -78,7 +78,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_transactions_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_responsetype == $metadata_responsetype) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare) && (metadata_transactiontype == $metadata_transactiontype)) | delta | group_by [], sum
+metric azure_transactions_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
 EOT
     }
   }
@@ -93,7 +93,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_successserverlatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
+metric azure_successserverlatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
 EOT
     }
   }
@@ -108,7 +108,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_filecapacity_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_fileshare == $metadata_fileshare) && (metadata_tier == $metadata_tier)) | delta | group_by [], sum
+metric azure_filecapacity_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
 EOT
     }
   }
@@ -123,7 +123,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_filecount_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_fileshare == $metadata_fileshare) && (metadata_tier == $metadata_tier)) | delta | group_by [], sum
+metric azure_filecount_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_fileshare == $metadata_fileshare)) | delta | group_by [], sum
 EOT
     }
   }
@@ -198,29 +198,5 @@ EOT
     name                     = "metadata_fileshare"
     default_values           = []
     suggestion_attribute_key = "metadata_fileshare"
-  }
-
-  template_variable {
-    name                     = "metadata_geotype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_geotype"
-  }
-
-  template_variable {
-    name                     = "metadata_responsetype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_responsetype"
-  }
-
-  template_variable {
-    name                     = "metadata_tier"
-    default_values           = []
-    suggestion_attribute_key = "metadata_tier"
-  }
-
-  template_variable {
-    name                     = "metadata_transactiontype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_transactiontype"
   }
 }

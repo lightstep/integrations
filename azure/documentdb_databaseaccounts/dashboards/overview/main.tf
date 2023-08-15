@@ -33,7 +33,7 @@ resource "lightstep_dashboard" "otel_collector_dashboard" {
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_totalrequests_count | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region) && (metadata_statuscode == $metadata_statuscode) && (metadata_operationtype == $metadata_operationtype) && (metadata_status == $metadata_status) && (metadata_capacitytype == $metadata_capacitytype)) | delta | group_by [], sum
+metric azure_totalrequests_count | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region)) | delta | group_by [], sum
 EOT
     }
   }
@@ -93,7 +93,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_serversidelatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region) && (metadata_connectionmode == $metadata_connectionmode) && (metadata_operationtype == $metadata_operationtype) && (metadata_publicapitype == $metadata_publicapitype)) | delta | group_by [], sum
+metric azure_serversidelatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region)) | delta | group_by [], sum
 EOT
     }
   }
@@ -108,7 +108,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_metadatarequests_count | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region) && (metadata_statuscode == $metadata_statuscode) && (metadata_role == $metadata_role)) | delta | group_by [], sum
+metric azure_metadatarequests_count | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region)) | delta | group_by [], sum
 EOT
     }
   }
@@ -123,7 +123,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_provisionedthroughput_maximum | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_allowwrite == $metadata_allowwrite)) | delta | group_by [], sum
+metric azure_provisionedthroughput_maximum | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname)) | delta | group_by [], sum
 EOT
     }
   }
@@ -138,7 +138,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_serversidelatencydirect_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region) && (metadata_connectionmode == $metadata_connectionmode) && (metadata_operationtype == $metadata_operationtype) && (metadata_publicapitype == $metadata_publicapitype) && (metadata_apitype == $metadata_apitype)) | delta | group_by [], sum
+metric azure_serversidelatencydirect_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region)) | delta | group_by [], sum
 EOT
     }
   }
@@ -153,7 +153,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_totalrequestunits_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region) && (metadata_statuscode == $metadata_statuscode) && (metadata_operationtype == $metadata_operationtype) && (metadata_status == $metadata_status) && (metadata_capacitytype == $metadata_capacitytype)) | delta | group_by [], sum
+metric azure_totalrequestunits_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_databasename == $metadata_databasename) && (metadata_collectionname == $metadata_collectionname) && (metadata_region == $metadata_region)) | delta | group_by [], sum
 EOT
     }
   }
@@ -168,7 +168,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_replicationlatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_sourceregion == $metadata_sourceregion) && (metadata_targetregion == $metadata_targetregion)) | delta | group_by [], sum
+metric azure_replicationlatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -213,7 +213,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_tabletablethroughputupdate_count | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_resourcename == $metadata_resourcename) && (metadata_apikind == $metadata_apikind) && (metadata_apikindresourcetype == $metadata_apikindresourcetype) && (metadata_isthroughputrequest == $metadata_isthroughputrequest)) | delta | group_by [], sum
+metric azure_tabletablethroughputupdate_count | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -243,51 +243,9 @@ EOT
   }
 
   template_variable {
-    name                     = "metadata_allowwrite"
-    default_values           = []
-    suggestion_attribute_key = "metadata_allowwrite"
-  }
-
-  template_variable {
-    name                     = "metadata_apikind"
-    default_values           = []
-    suggestion_attribute_key = "metadata_apikind"
-  }
-
-  template_variable {
-    name                     = "metadata_apikindresourcetype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_apikindresourcetype"
-  }
-
-  template_variable {
-    name                     = "metadata_apitype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_apitype"
-  }
-
-  template_variable {
-    name                     = "metadata_capacitytype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_capacitytype"
-  }
-
-  template_variable {
     name                     = "metadata_collectionname"
     default_values           = []
     suggestion_attribute_key = "metadata_collectionname"
-  }
-
-  template_variable {
-    name                     = "metadata_collectionrid"
-    default_values           = []
-    suggestion_attribute_key = "metadata_collectionrid"
-  }
-
-  template_variable {
-    name                     = "metadata_connectionmode"
-    default_values           = []
-    suggestion_attribute_key = "metadata_connectionmode"
   }
 
   template_variable {
@@ -297,74 +255,8 @@ EOT
   }
 
   template_variable {
-    name                     = "metadata_isthroughputrequest"
-    default_values           = []
-    suggestion_attribute_key = "metadata_isthroughputrequest"
-  }
-
-  template_variable {
-    name                     = "metadata_operationtype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_operationtype"
-  }
-
-  template_variable {
-    name                     = "metadata_partitionkeyrangeid"
-    default_values           = []
-    suggestion_attribute_key = "metadata_partitionkeyrangeid"
-  }
-
-  template_variable {
-    name                     = "metadata_physicalpartitionid"
-    default_values           = []
-    suggestion_attribute_key = "metadata_physicalpartitionid"
-  }
-
-  template_variable {
-    name                     = "metadata_publicapitype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_publicapitype"
-  }
-
-  template_variable {
     name                     = "metadata_region"
     default_values           = []
     suggestion_attribute_key = "metadata_region"
-  }
-
-  template_variable {
-    name                     = "metadata_resourcename"
-    default_values           = []
-    suggestion_attribute_key = "metadata_resourcename"
-  }
-
-  template_variable {
-    name                     = "metadata_role"
-    default_values           = []
-    suggestion_attribute_key = "metadata_role"
-  }
-
-  template_variable {
-    name                     = "metadata_sourceregion"
-    default_values           = []
-    suggestion_attribute_key = "metadata_sourceregion"
-  }
-
-  template_variable {
-    name                     = "metadata_status"
-    default_values           = []
-    suggestion_attribute_key = "metadata_status"
-  }
-
-  template_variable {
-    name                     = "metadata_statuscode"
-    default_values           = []
-    suggestion_attribute_key = "metadata_statuscode"
-  }
-
-  template_variable {
-    name                     = "metadata_targetregion"
-    default_values           = []
-    suggestion_attribute_key = "metadata_targetregion"
   }
 }

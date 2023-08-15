@@ -33,7 +33,7 @@ resource "lightstep_dashboard" "otel_collector_dashboard" {
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cpu_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_clusterresourcename == $metadata_clusterresourcename) && (metadata_datacenterresourcename == $metadata_datacenterresourcename) && (metadata_address == $metadata_address) && (metadata_kind == $metadata_kind) && (metadata_cpu == $metadata_cpu)) | delta | group_by [], sum
+metric azure_cpu_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -48,7 +48,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_percent_mem_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_clusterresourcename == $metadata_clusterresourcename) && (metadata_datacenterresourcename == $metadata_datacenterresourcename) && (metadata_address == $metadata_address)) | delta | group_by [], sum
+metric azure_percent_mem_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -123,7 +123,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cassandra_client_request_failures_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node) && (metadata_request_type == $metadata_request_type)) | delta | group_by [], sum
+metric azure_cassandra_client_request_failures_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node)) | delta | group_by [], sum
 EOT
     }
   }
@@ -138,7 +138,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_disk_utilization_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_clusterresourcename == $metadata_clusterresourcename) && (metadata_datacenterresourcename == $metadata_datacenterresourcename) && (metadata_address == $metadata_address)) | delta | group_by [], sum
+metric azure_disk_utilization_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
@@ -153,7 +153,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cassandra_table_read_latency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node) && (metadata_table == $metadata_table) && (metadata_keyspace == $metadata_keyspace)) | delta | group_by [], sum
+metric azure_cassandra_table_read_latency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node)) | delta | group_by [], sum
 EOT
     }
   }
@@ -168,7 +168,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cassandra_table_write_latency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node) && (metadata_table == $metadata_table) && (metadata_keyspace == $metadata_keyspace)) | delta | group_by [], sum
+metric azure_cassandra_table_write_latency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node)) | delta | group_by [], sum
 EOT
     }
   }
@@ -198,7 +198,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cassandra_table_speculative_retries_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node) && (metadata_table == $metadata_table) && (metadata_keyspace == $metadata_keyspace)) | delta | group_by [], sum
+metric azure_cassandra_table_speculative_retries_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node)) | delta | group_by [], sum
 EOT
     }
   }
@@ -213,7 +213,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cassandra_thread_pools_active_tasks_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node) && (metadata_pool_name == $metadata_pool_name) && (metadata_pool_type == $metadata_pool_type)) | delta | group_by [], sum
+metric azure_cassandra_thread_pools_active_tasks_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node)) | delta | group_by [], sum
 EOT
     }
   }
@@ -228,7 +228,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_cassandra_thread_pools_pending_tasks_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node) && (metadata_pool_name == $metadata_pool_name) && (metadata_pool_type == $metadata_pool_type)) | delta | group_by [], sum
+metric azure_cassandra_thread_pools_pending_tasks_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_cassandra_datacenter == $metadata_cassandra_datacenter) && (metadata_cassandra_node == $metadata_cassandra_node)) | delta | group_by [], sum
 EOT
     }
   }
@@ -258,12 +258,6 @@ EOT
   }
 
   template_variable {
-    name                     = "metadata_address"
-    default_values           = []
-    suggestion_attribute_key = "metadata_address"
-  }
-
-  template_variable {
     name                     = "metadata_cache_name"
     default_values           = []
     suggestion_attribute_key = "metadata_cache_name"
@@ -279,59 +273,5 @@ EOT
     name                     = "metadata_cassandra_node"
     default_values           = []
     suggestion_attribute_key = "metadata_cassandra_node"
-  }
-
-  template_variable {
-    name                     = "metadata_clusterresourcename"
-    default_values           = []
-    suggestion_attribute_key = "metadata_clusterresourcename"
-  }
-
-  template_variable {
-    name                     = "metadata_cpu"
-    default_values           = []
-    suggestion_attribute_key = "metadata_cpu"
-  }
-
-  template_variable {
-    name                     = "metadata_datacenterresourcename"
-    default_values           = []
-    suggestion_attribute_key = "metadata_datacenterresourcename"
-  }
-
-  template_variable {
-    name                     = "metadata_keyspace"
-    default_values           = []
-    suggestion_attribute_key = "metadata_keyspace"
-  }
-
-  template_variable {
-    name                     = "metadata_kind"
-    default_values           = []
-    suggestion_attribute_key = "metadata_kind"
-  }
-
-  template_variable {
-    name                     = "metadata_pool_name"
-    default_values           = []
-    suggestion_attribute_key = "metadata_pool_name"
-  }
-
-  template_variable {
-    name                     = "metadata_pool_type"
-    default_values           = []
-    suggestion_attribute_key = "metadata_pool_type"
-  }
-
-  template_variable {
-    name                     = "metadata_request_type"
-    default_values           = []
-    suggestion_attribute_key = "metadata_request_type"
-  }
-
-  template_variable {
-    name                     = "metadata_table"
-    default_values           = []
-    suggestion_attribute_key = "metadata_table"
   }
 }
