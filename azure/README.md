@@ -39,7 +39,7 @@ Detailed description of available [Azure metrics per service](https://learn.micr
 
 Collector Azure Monitor receiver has to be configured to capture required Azure resources, [configuration description](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/azuremonitorreceiver#configuration).
 
-The following example configuration collects metrics from Kong and send them to Lightstep Observability:
+The following example configuration collects metrics from Azure and send them to Lightstep Observability:
 
 ```yaml
 receivers:

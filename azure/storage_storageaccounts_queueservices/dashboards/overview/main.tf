@@ -15,13 +15,13 @@ variable "lightstep_project" {
 
 output "dashboard_url" {
   value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
-  description = "OpenTelemetry Collector Storage Accounts Dashboard URL"
+  description = "OpenTelemetry Collector Storage Queue Services Dashboard URL"
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "Storage Accounts Metrics"
-  dashboard_description = "Monitor Storage Accounts with this metrics overview dashboard."
+  dashboard_name = "Storage Queue Services Metrics"
+  dashboard_description = "Monitor Storage Queue Services with this metrics overview dashboard."
 
   chart {
     name = "Availability"
@@ -39,53 +39,8 @@ EOT
   }
 
   chart {
-    name = "Transactions"
-    rank = "1"
-    type = "timeseries"
-
-    query {
-      query_name   = "a"
-      display      = "line"
-      hidden       = false
-      query_string = <<EOT
-metric azure_transactions_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication)) | delta | group_by [], sum
-EOT
-    }
-  }
-
-  chart {
-    name = "Used Capacity"
-    rank = "2"
-    type = "timeseries"
-
-    query {
-      query_name   = "a"
-      display      = "line"
-      hidden       = false
-      query_string = <<EOT
-metric azure_usedcapacity_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
-EOT
-    }
-  }
-
-  chart {
-    name = "Success Server Latency"
-    rank = "3"
-    type = "timeseries"
-
-    query {
-      query_name   = "a"
-      display      = "line"
-      hidden       = false
-      query_string = <<EOT
-metric azure_successserverlatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication)) | delta | group_by [], sum
-EOT
-    }
-  }
-
-  chart {
     name = "Egress"
-    rank = "4"
+    rank = "1"
     type = "timeseries"
 
     query {
@@ -100,7 +55,7 @@ EOT
 
   chart {
     name = "Ingress"
-    rank = "5"
+    rank = "2"
     type = "timeseries"
 
     query {
@@ -114,7 +69,52 @@ EOT
   }
 
   chart {
-    name = "Successful Requests Latency"
+    name = "Successful Server Latency"
+    rank = "3"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_successserverlatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Transactions"
+    rank = "4"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_transactions_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Queue Messages"
+    rank = "5"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_queuemessagecount_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Queue Capacity"
     rank = "6"
     type = "timeseries"
 
@@ -123,7 +123,22 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_successe2elatency_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication)) | delta | group_by [], sum
+metric azure_queuecapacity_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
+EOT
+    }
+  }
+
+  chart {
+    name = "Queue Count"
+    rank = "7"
+    type = "timeseries"
+
+    query {
+      query_name   = "a"
+      display      = "line"
+      hidden       = false
+      query_string = <<EOT
+metric azure_queuecount_average | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location)) | delta | group_by [], sum
 EOT
     }
   }
