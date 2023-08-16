@@ -21,7 +21,7 @@ output "dashboard_url" {
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
   dashboard_name = "DocumentDB Cassandra Clusters Metrics"
-  dashboard_description = "Monitor DocumentDB Cassandra Clusters with this metrics overview dashboard."
+  dashboard_description = "[Beta] Monitor DocumentDB Cassandra Clusters with this metrics overview dashboard."
 
   chart {
     name = "CPU"

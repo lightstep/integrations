@@ -21,7 +21,7 @@ output "dashboard_url" {
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
   dashboard_name = "Storage Object Replication Policies Metrics"
-  dashboard_description = "Monitor Storage Object Replication Policies with this metrics overview dashboard."
+  dashboard_description = "[Beta] Monitor Storage Object Replication Policies with this metrics overview dashboard."
 
   chart {
     name = "Pending Replication Bytes"
