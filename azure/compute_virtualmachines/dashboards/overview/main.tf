@@ -84,7 +84,7 @@ EOT
   }
 
   chart {
-    name = "Disk Bandwidth Consumed %"
+    name = "OS Disk Bandwidth Consumed %"
     rank = "4"
     type = "timeseries"
 
