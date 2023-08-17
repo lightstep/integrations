@@ -15,13 +15,13 @@ variable "lightstep_project" {
 
 output "dashboard_url" {
   value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
-  description = "OpenTelemetry Collector Api Management Service Dashboard URL"
+  description = "OpenTelemetry Collector API Management Service Dashboard URL"
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
-  dashboard_name = "Api Management Service Metrics"
-  dashboard_description = "Monitor Api Management Service with this metrics overview dashboard."
+  dashboard_name = "API Management Service Metrics"
+  dashboard_description = "Monitor API Management Service with this metrics overview dashboard."
 
   chart {
     name = "Requests"
