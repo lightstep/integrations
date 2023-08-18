@@ -3,7 +3,7 @@ services:
   wildfly:
     container_name: wildfly
     build: 
-      context: .
+      context: ./wildfly
       args:
           JAVA_OPTS_1: '-javaagent:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9404:/opt/jmx_exporter/jmx_exporter.yaml '
           LOGMANAGER: '-Djboss.modules.system.pkgs=org.jboss.byteman,org.jboss.logmanager -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dorg.jboss.logging.Logger.pluginClass=org.jboss.logging.logmanager.LoggerPluginImpl -Dsun.util.logging.disableCallerCheck=true '
@@ -11,12 +11,11 @@ services:
           WILDLFY_COMMON_JAR: '/modules/system/layers/base/org/wildfly/common/main/wildfly-common-1.5.4.Final.jar'
     ports:
       - "8080:8080"
+      - "8081:8081"
       - "9990:9990"
       - "9404:9404"
     volumes:
-      - ./jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar
       - ./jmx_exporter/jmx_exporter.yaml:/opt/jmx_exporter/jmx_exporter.yaml
-      - ./ping/deployments:/opt/jboss/wildfly/standalone/deployments
     networks:
       - integrations
 
@@ -32,6 +31,18 @@ services:
       LS_ACCESS_TOKEN: "${LS_ACCESS_TOKEN}"
     networks:
         - integrations
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./wildfly/src/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - wildfly
+    networks:
+      - integrations
 
 networks:
     integrations:
