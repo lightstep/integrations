@@ -15,13 +15,13 @@ variable "lightstep_project" {
 
 output "dashboard_url" {
   value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
-  description = "OpenTelemetry Collector Sql_managedinstances Dashboard URL"
+  description = "OpenTelemetry Collector SQL Managed Instances Dashboard URL"
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name   = var.lightstep_project
   dashboard_name = "SQL Managed Instances Metrics"
-  dashboard_description = "Monitor SQL Managed Instances with this metrics overview dashboard."
+  dashboard_description = "[Beta] Monitor SQL Managed Instances with this metrics overview dashboard."
 
   chart {
     name = "Avg CPU %"
