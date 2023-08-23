@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Container Service Managed Clusters Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "Container Service Managed Clusters Metrics"
   dashboard_description = "Monitor Container Service Managed Clusters with this metrics overview dashboard."
 
   chart {

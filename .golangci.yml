@@ -1,0 +1,45 @@
+linters-settings:
+  govet:
+    check-shadowing: true
+  golint:
+    min-confidence: 0.8
+  gofmt:
+    simplify: true
+  goimports:
+    local-prefixes: github.com/lightstep/integrations
+  maligned:
+    suggest-new: true
+  misspell:
+    locale: US
+
+linters:
+  enable:
+    - unused
+    - gosimple
+    - structcheck
+    - varcheck
+    - ineffassign
+    - deadcode
+    - gofmt
+    - goimports
+    - golint
+    - govet
+    - errcheck
+    - staticcheck
+    - typecheck
+  disable:
+    - megacheck
+
+issues:
+  exclude-rules:
+    # Exclude some linters from running on test files.
+    - path: _test\.go$
+      linters:
+        - gosimple
+        - staticcheck
+
+  # Exclude some directories from linting.
+  exclude-use-default: false
+
+run:
+  timeout: 5m

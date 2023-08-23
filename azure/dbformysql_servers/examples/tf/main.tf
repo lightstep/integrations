@@ -4,11 +4,11 @@ provider "azurerm" {
 
 variable "prefix" {
   description = "A prefix used for all resources in this example"
-  default = "ex-mysql-servers"
+  default     = "ex-mysql-servers"
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "${var.prefix}"
+  name     = var.prefix
   location = "East US"
 }
 
@@ -34,7 +34,7 @@ resource "azurerm_mysql_server" "example" {
 }
 
 resource "azurerm_mysql_database" "example" {
-  name                = "${var.prefix}"
+  name                = var.prefix
   resource_group_name = azurerm_resource_group.example.name
   server_name         = azurerm_mysql_server.example.name
   charset             = "utf8"

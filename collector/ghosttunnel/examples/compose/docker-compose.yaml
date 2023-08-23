@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:${OTEL_VERSION:-0.81.0}
+    hostname: otel-collector
+    restart: always
+    command: [ "--config=/conf/collector.yaml" ]
+    volumes:
+      - ./collector.yaml:/conf/collector.yaml:rw
+    environment:
+      LS_ACCESS_TOKEN: ${LS_ACCESS_TOKEN}
+    depends_on:
+      - ghostunnel-server
+
+  ghostunnel-server:
+    image: ghostunnel/ghostunnel:latest
+    hostname: ghostunnel-server
+    command:
+      - server
+      - "--listen=localhost:8443"
+      - "--target=localhost:8080"
+      - "--keystore=/certs/server-keystore.p12"
+      - "--storepass=password"
+      - "--cacert=/certs/ca-cert.pem"
+      - "--status=localhost:6060"
+      - "--allow-all"
+    ports:
+      - "8443:8443"
+      - "8080:8080"
+      - "6060:6060"  # Expose server's metrics port
+    volumes:
+      - ./certs:/certs
+
+  ghostunnel-client:
+    image: ghostunnel/ghostunnel
+    depends_on:
+      - ghostunnel-server  # Ensure server is up before the client
+    command:
+      - client
+      - "--listen=localhost:8081"
+      - "--target=ghostunnel-server:8443"
+      - "--keystore=/certs/client-keystore.p12"
+      - "--storepass=password"
+      - "--status=localhost:6061"
+    volumes:
+      - ./certs/client-keystore.p12:/certs/client-keystore.p12
+    ports:
+      - "8081:8081"  # Expose client's local port to the host
+      - "6061:6061"  # Expose client's metrics port to the host
