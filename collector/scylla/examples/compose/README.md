@@ -2,7 +2,7 @@
 
 ## Overview
 
- Name: natively exposes a Prometheus endpoint and the OpenTelemetry Collector has a [Prometheus receiver][otel-prom-receiver] that can be used to scrape its Prometheus endpoint. This directory contains an example showing how to configure Name: and the Collector to send metrics to Lightstep Observability.
+ Scylla natively exposes a Prometheus endpoint and the OpenTelemetry Collector has a [Prometheus receiver][otel-prom-receiver] that can be used to scrape its Prometheus endpoint. This directory contains an example showing how to configure Scylla and the Collector to send metrics to Lightstep Observability.
 
 ## Prerequisites
 
@@ -26,18 +26,18 @@
 
 ### Explore Metrics in Lightstep
 
-See the [Name: Telemetry Docs][scylla-docs-telemetry] for comprehensive documentation on metrics emitted and the [dashboard documentation][ls-docs-dashboards] for more details.
+See the [Scylla Telemetry Docs][scylla-docs-telemetry] for comprehensive documentation on metrics emitted and the [dashboard documentation][ls-docs-dashboards] for more details.
 
 ## Configure the Collector
 
-Below is a snippet showing how to configure the Prometheus Receiver to scrape the Prometheus endpoint exposed by the Name: Server.
+Below is a snippet showing how to configure the Prometheus Receiver to scrape the Prometheus endpoint exposed by the Scylla Server.
 
 ```yaml
 receivers:
   prometheus:
     config:
       scrape_configs:
-        - job_name: 'scylladb'
+        - job_Scylla 'scylladb'
           scrape_interval: 10s
           static_configs:
             - targets: ['localhost:9180']
@@ -47,7 +47,7 @@ receivers:
 ## Additional information
 
 - [OpenTelemetry Collector Prometheus Receiver][otel-prom-receiver]
-- [Name: Telemetry Reference][scylla-docs-telemetry]
+- [Scylla Telemetry Reference][scylla-docs-telemetry]
 
 [ls-docs-access-token]: https://docs.lightstep.com/docs/create-and-manage-access-tokens
 [ls-docs-dashboards]: https://docs.lightstep.com/docs/create-and-manage-dashboards
