@@ -1,0 +1,266 @@
+Name,Description,Unit,DataType
+arangodb_agency_cache_callback_number,"Current number of entries in agency cache callbacks table",,Gauge
+arangodb_agency_callback_number,"Current number of agency callbacks registered",,Gauge
+arangodb_agency_callback_registered_total,"Total number of agency callbacks registered",,Sum
+arangodb_agencycomm_request_time_msec,"Request time for Agency requests [ms]",,Histogram
+arangodb_aql_all_query_total,"Total number of AQL queries finished",,Sum
+arangodb_aql_current_query,"Current number of AQL queries executing",,Gauge
+arangodb_aql_global_memory_limit,"Total memory limit for all AQL queries combined [bytes]",,Gauge
+arangodb_aql_global_memory_usage,"Total memory usage of all AQL queries executing [bytes], granularity",,Gauge
+arangodb_aql_global_query_memory_limit_reached_total,"Number of global AQL query memory limit violations",,Sum
+arangodb_aql_local_query_memory_limit_reached_total,"Number of local AQL query memory limit violations",,Sum
+arangodb_aql_query_time,"Execution time histogram for all AQL queries [s]",,Histogram
+arangodb_aql_slow_query_time,"Execution time histogram for slow AQL queries [s]",,Histogram
+arangodb_aql_total_query_time_msec_total,"Total execution time of all AQL queries [ms]",,Sum
+arangodb_client_connection_statistics_bytes_received,"Bytes received for requests",,Histogram
+arangodb_client_connection_statistics_bytes_sent,"Bytes sent for responses",,Histogram
+arangodb_client_connection_statistics_client_connections,"The number of client connections that are currently open",,Gauge
+arangodb_client_connection_statistics_connection_time,"Total connection time of a client",,Histogram
+arangodb_client_connection_statistics_io_time,"Request time needed to answer a request",,Histogram
+arangodb_client_connection_statistics_queue_time,"Request time needed to answer a request",,Histogram
+arangodb_client_connection_statistics_request_time,"Request time needed to answer a request",,Histogram
+arangodb_client_connection_statistics_total_time,"Total time needed to answer a request",,Histogram
+arangodb_client_user_connection_statistics_bytes_received,"Bytes received for requests, only user traffic",,Histogram
+arangodb_client_user_connection_statistics_bytes_sent,"Bytes sent for responses, only user traffic",,Histogram
+arangodb_collection_lock_acquisition_micros_total,"Total amount of collection lock acquisition time [μs]",,Sum
+arangodb_collection_lock_acquisition_time,"Collection lock acquisition time histogram [s]",,Histogram
+arangodb_collection_lock_sequential_mode_total,"Number of transactions using sequential locking of collections to avoid deadlocking",,Sum
+arangodb_collection_lock_timeouts_exclusive_total,"Number of timeouts when trying to acquire collection exclusive locks",,Sum
+arangodb_collection_lock_timeouts_write_total,"Number of timeouts when trying to acquire collection write locks",,Sum
+arangodb_connection_pool_connections_created_total,"Total number of connections created",,Sum
+arangodb_connection_pool_connections_current,"Current number of connections in pool",,Gauge
+arangodb_connection_pool_lease_time_hist,"Time to lease a connection from pool [ms]",,Histogram
+arangodb_connection_pool_leases_failed_total,"Total number of failed connection leases",,Sum
+arangodb_connection_pool_leases_successful_total,"Total number of successful connection leases",,Sum
+arangodb_dirty_read_transactions_total,"Number of read transactions which can do dirty reads",,Sum
+arangodb_file_descriptors_current,"Number of currently open file descriptors for the arangod process",,Gauge
+arangodb_file_descriptors_limit,"Limit for the number of open file descriptors for the arangod process",,Gauge
+arangodb_flush_subscriptions,"Number of active flush subscriptions",,Gauge
+arangodb_heartbeat_failures_total,"Counting failed heartbeat transmissions",,Sum
+arangodb_heartbeat_send_time_msec,"Time required to send heartbeat [ms]",,Histogram
+arangodb_http1_connections_total,"Total number of HTTP/1.1 connections",,Sum
+arangodb_http2_connections_total,"Total number of HTTP/2 connections",,Sum
+arangodb_http_request_statistics_async_requests_total,"Number of asynchronously executed HTTP requests",,Sum
+arangodb_http_request_statistics_http_delete_requests_total,"Number of HTTP DELETE requests",,Sum
+arangodb_http_request_statistics_http_get_requests_total,"Number of HTTP GET requests",,Sum
+arangodb_http_request_statistics_http_head_requests_total,"Number of HTTP HEAD requests",,Sum
+arangodb_http_request_statistics_http_options_requests_total,"Number of HTTP OPTIONS requests",,Sum
+arangodb_http_request_statistics_http_patch_requests_total,"Number of HTTP PATCH requests",,Sum
+arangodb_http_request_statistics_http_post_requests_total,"Number of HTTP POST requests",,Sum
+arangodb_http_request_statistics_http_put_requests_total,"Number of HTTP PUT requests",,Sum
+arangodb_http_request_statistics_other_http_requests_total,"Number of other HTTP requests",,Sum
+arangodb_http_request_statistics_superuser_requests_total,"Total number of HTTP requests executed by superuser/JWT",,Sum
+arangodb_http_request_statistics_total_requests_total,"Total number of HTTP requests",,Sum
+arangodb_http_request_statistics_user_requests_total,"Total number of HTTP requests executed by clients",,Sum
+arangodb_intermediate_commits_total,"Number of intermediate commits performed in transactions",,Sum
+arangodb_ioheartbeat_delays_total,"Total number of delays in IO heartbeat",,Sum
+arangodb_ioheartbeat_duration,"Time to execute the io heartbeat once [us]",,Histogram
+arangodb_ioheartbeat_failures_total,"Total number of failures in IO heartbeat",,Sum
+arangodb_load_current_runtime,"Current loading runtimes [ms]",,Histogram
+arangodb_load_plan_runtime,"Plan loading runtimes [ms]",,Histogram
+arangodb_logger_errors_total,"Number of errors logged.",,Sum
+arangodb_logger_warnings_total,"Number of warnings logged.",,Sum
+arangodb_network_dequeue_duration,"Time to dequeue a queued network request in fuerte in seconds",,Histogram
+arangodb_network_forwarded_requests_total,"Number of requests forwarded to another coordinator",,Sum
+arangodb_network_request_duration_as_percentage_of_timeout,"Internal request round-trip time as a percentage of timeout [%]",,Histogram
+arangodb_network_request_timeouts_total,"Number of internal requests that have timed out",,Sum
+arangodb_network_requests_in_flight,"Number of outgoing internal requests in flight",,Gauge
+arangodb_network_response_duration,"Time to wait for network response after it was sent out in seconds",,Histogram
+arangodb_network_send_duration,"Time to send out internal requests in seconds",,Histogram
+arangodb_network_unfinished_sends_total,"Number of times the sending of a request remained unfinished",,Sum
+arangodb_pregel_conductors_loading_number,"Number of Pregel conductors in loading state",,Gauge
+arangodb_pregel_conductors_number,"Number of live Pregel conductors",,Gauge
+arangodb_pregel_conductors_running_number,"Number of Pregel conductors in running state",,Gauge
+arangodb_pregel_conductors_storing_number,"Number of Pregel conductors in storing state",,Gauge
+arangodb_pregel_graph_memory_bytes_number,"Amount of memory in use for Pregel graph storage",,Gauge
+arangodb_pregel_messages_received_total,"Number of messages received by Pregel",,Sum
+arangodb_pregel_messages_sent_total,"Number of messages sent by Pregel",,Sum
+arangodb_pregel_threads_number,"Number of threads used by Pregel",,Gauge
+arangodb_pregel_workers_loading_number,"Number of Pregel conductors in loading state",,Gauge
+arangodb_pregel_workers_number,"Number of live Pregel workers",,Gauge
+arangodb_pregel_workers_running_number,"Number of Pregel conductors in running state",,Gauge
+arangodb_pregel_workers_storing_number,"Number of Pregel conductors in storing state",,Gauge
+arangodb_process_statistics_major_page_faults_total,"On Windows, this figure contains the total number of page faults. On other system, this figure contains the number of major faults the process has made which have required loading a memory page from disk",,Sum
+arangodb_process_statistics_minor_page_faults_total,"The number of minor faults the process has made which have not required loading a memory page from disk. This figure is not reported on Windows",,Sum
+arangodb_process_statistics_number_of_threads,"Number of threads in the arangod process",,Gauge
+arangodb_process_statistics_resident_set_size,"The total size of the number of pages the process has in real memory. This is just the pages which count toward text, data, or stack space. This does not include pages which have not been demand-loaded in, or which are swapped out. The resident set size is reported in bytes",,Gauge
+arangodb_process_statistics_resident_set_size_percent,"The relative size of the number of pages the process has in real memory compared to system memory. This is just the pages which count toward text, data, or stack space. This does not include pages which have not been demand-loaded in, or which are swapped out. The value is a ratio between 0.00 and 1.00",,Gauge
+arangodb_process_statistics_system_time,"Amount of time that this process has been scheduled in kernel mode, measured in seconds",,Gauge
+arangodb_process_statistics_user_time,"Amount of time that this process has been scheduled in user mode, measured in seconds",,Gauge
+arangodb_process_statistics_virtual_memory_size,"On Windows, this figure contains the total amount of memory that the memory manager has committed for the arangod process. On other systems, this figure contains The size of the virtual memory the process is using",,Gauge
+arangodb_read_transactions_total,"Number of read transactions",,Sum
+arangodb_replication2_replicated_log_append_entries_rtt,"RTT for AppendEntries requests [us]",,Histogram
+arangodb_replication2_replicated_log_creation_total,"Number of replicated logs created since server start",,Sum
+arangodb_replication2_replicated_log_deletion_total,"Number of replicated logs deleted since server start",,Sum
+arangodb_replication2_replicated_log_follower_append_entries_rt,"RT for AppendEntries call [us]",,Histogram
+arangodb_replication2_replicated_log_follower_number,"Number of replicated logs this server has, and is currently a follower of",,Gauge
+arangodb_replication2_replicated_log_inactive_number,"Number of replicated logs this server has, and is currently neither leader nor follower of",,Gauge
+arangodb_replication2_replicated_log_inserts_bytes,"Number of bytes per insert in replicated log leader instances on this server [bytes]",,Histogram
+arangodb_replication2_replicated_log_inserts_rtt,"Histogram of round-trip times of replicated log inserts [us]",,Histogram
+arangodb_replication2_replicated_log_leader_number,"Number of replicated logs this server has, and is currently a leader of",,Gauge
+arangodb_replication2_replicated_log_leader_took_over_total,"Number of times a replicated log on this server took over as leader in a term",,Sum
+arangodb_replication2_replicated_log_number,"Number of replicated logs on this arangodb instance",,Gauge
+arangodb_replication2_replicated_log_number_accepted_entries_total,"Number of accepted (not yet committed) log entries",,Sum
+arangodb_replication2_replicated_log_number_committed_entries_total,"Number of committed log entries",,Sum
+arangodb_replication2_replicated_log_number_compacted_entries_total,"Number of compacted log entries",,Sum
+arangodb_replication2_replicated_log_number_meta_entries_total,"Number of meta log entries",,Sum
+arangodb_replication2_replicated_log_started_following_total,"Number of times a replicated log on this server started following a leader in a term",,Sum
+arangodb_replication_clients,"Number of replication clients connected",,Gauge
+arangodb_replication_cluster_inventory_requests_total,"(DC-2-DC only) Number of times the database and collection overviews have been requested.",,Sum
+arangodb_replication_dump_apply_time_total,"Accumulated time needed to apply asynchronously replicated data on initial synchronization of shards. [ms]",,Sum
+arangodb_replication_dump_bytes_received_total,"Total number of bytes replicated in initial asynchronous phase.",,Sum
+arangodb_replication_dump_documents_total,"Total number of documents replicated in initial asynchronous phase.",,Sum
+arangodb_replication_dump_request_time_total,"Accumulated wait time for replication requests in initial asynchronous phase. [ms]",,Sum
+arangodb_replication_dump_requests_total,"Number of requests used in initial asynchronous replication phase.",,Sum
+arangodb_replication_failed_connects_total,"Number of failed connection attempts and response errors during initial asynchronous replication",,Sum
+arangodb_replication_initial_chunks_requests_time_total,"Wait time for replication key chunks determination requests [ms]",,Sum
+arangodb_replication_initial_docs_requests_time_total,"Time needed to apply replication docs data [ms]",,Sum
+arangodb_replication_initial_insert_apply_time_total,"Time needed to apply replication initial sync insertions [ms]",,Sum
+arangodb_replication_initial_keys_requests_time_total,"Wait time for replication keys requests [ms]",,Sum
+arangodb_replication_initial_remove_apply_time_total,"Time needed to apply replication initial sync removals [ms]",,Sum
+arangodb_replication_initial_sync_bytes_received_total,"Number of bytes received during replication initial sync",,Sum
+arangodb_replication_initial_sync_docs_inserted_total,"Number of documents inserted by replication initial sync",,Sum
+arangodb_replication_initial_sync_docs_removed_total,"Number of documents removed by replication initial sync",,Sum
+arangodb_replication_initial_sync_docs_requested_total,"Number of documents requested by replication initial sync",,Sum
+arangodb_replication_initial_sync_docs_requests_total,"Number of replication initial sync docs requests",,Sum
+arangodb_replication_initial_sync_keys_requests_total,"Number of replication initial sync keys requests",,Sum
+arangodb_replication_synchronous_requests_total_number_total,"Total number of synchronous replication requests",,Sum
+arangodb_replication_synchronous_requests_total_time_total,"Total time needed for all synchronous replication requests [ns]",,Sum
+arangodb_replication_tailing_apply_time_total,"Time needed to apply replication tailing data [ms]",,Sum
+arangodb_replication_tailing_bytes_received_total,"Number of bytes received for replication tailing requests",,Sum
+arangodb_replication_tailing_documents_total,"Number of replication tailing document inserts/replaces processed",,Sum
+arangodb_replication_tailing_follow_tick_failures_total,"Number of replication tailing failures due to missing tick on leader",,Sum
+arangodb_replication_tailing_markers_total,"Number of replication tailing markers processed",,Sum
+arangodb_replication_tailing_removals_total,"Number of replication tailing document removals processed",,Sum
+arangodb_replication_tailing_request_time_total,"Wait time for replication tailing requests [ms]",,Sum
+arangodb_replication_tailing_requests_total,"Number of replication tailing requests",,Sum
+arangodb_request_body_size_http1,"Body size of HTTP/1.1 requests",,Histogram
+arangodb_request_body_size_http2,"Body size of HTTP/2 requests",,Histogram
+arangodb_request_body_size_vst,"Body size of VST requests",,Histogram
+arangodb_revision_tree_hibernations_total,"Number of revision tree hibernations",,Sum
+arangodb_revision_tree_memory_usage,"Total memory consumed by all revision trees",,Gauge
+arangodb_revision_tree_rebuilds_failure_total,"Number of failed revision tree rebuilds",,Sum
+arangodb_revision_tree_rebuilds_success_total,"Number of successful revision tree rebuilds",,Sum
+arangodb_revision_tree_resurrections_total,"Number of revision tree resurrections",,Sum
+arangodb_rocksdb_write_stalls_total,"Number of times RocksDB has entered a stalled (slowed) write state",,Sum
+arangodb_rocksdb_write_stops_total,"Number of times RocksDB has entered a stopped write state",,Sum
+arangodb_scheduler_handler_tasks_created_total,"Number of scheduler tasks created",,Sum
+arangodb_scheduler_high_prio_queue_length,"Current queue length of the high priority queue in the scheduler",,Gauge
+arangodb_scheduler_jobs_dequeued_total,"Total number of jobs dequeued",,Sum
+arangodb_scheduler_jobs_done_total,"Total number of queue jobs done",,Sum
+arangodb_scheduler_jobs_submitted_total,"Total number of jobs submitted to the scheduler",,Sum
+arangodb_scheduler_low_prio_queue_last_dequeue_time,"Last recorded dequeue time for a low priority queue item [ms]",,Gauge
+arangodb_scheduler_low_prio_queue_length,"Current queue length of the low priority queue in the scheduler",,Gauge
+arangodb_scheduler_maintenance_prio_queue_length,"Current queue length of the maintenance priority queue in the scheduler",,Gauge
+arangodb_scheduler_medium_prio_queue_length,"Current queue length of the medium priority queue in the scheduler",,Gauge
+arangodb_scheduler_num_awake_threads,"Number of awake worker threads",,Gauge
+arangodb_scheduler_num_worker_threads,"Number of worker threads",,Gauge
+arangodb_scheduler_num_working_threads,"Number of working threads",,Gauge
+arangodb_scheduler_ongoing_low_prio,"Total number of ongoing RestHandlers coming from the low prio queue",,Gauge
+arangodb_scheduler_queue_full_failures_total,"Tasks dropped and not added to internal queue",,Sum
+arangodb_scheduler_queue_length,"Server's internal queue length",,Gauge
+arangodb_scheduler_queue_time_violations_total,"Tasks dropped because the client-requested queue time restriction would be violated",,Sum
+arangodb_scheduler_threads_started_total,"Number of scheduler threads started",,Sum
+arangodb_scheduler_threads_stopped_total,"Number of scheduler threads stopped",,Sum
+arangodb_search_num_out_of_sync_links,"Number of arangosearch links/indexes currently out of sync",,Gauge
+arangodb_server_statistics_cpu_cores,"Number of CPU cores visible to the arangod process",,Gauge
+arangodb_server_statistics_idle_percent,"Percentage of time that the system CPUs have been idle",,Gauge
+arangodb_server_statistics_iowait_percent,"Percentage of time that the system CPUs have been waiting for I/O",,Gauge
+arangodb_server_statistics_physical_memory,"Physical memory in bytes",,Gauge
+arangodb_server_statistics_server_uptime_total,"Number of seconds elapsed since server start",,Sum
+arangodb_server_statistics_system_percent,"Percentage of time that the system CPUs have spent in kernel mode",,Gauge
+arangodb_server_statistics_user_percent,"Percentage of time that the system CPUs have spent in user mode",,Gauge
+arangodb_transactions_aborted_total,"Number of transactions aborted",,Sum
+arangodb_transactions_committed_total,"Number of transactions committed",,Sum
+arangodb_transactions_expired_total,"Total number of expired transactions",,Sum
+arangodb_transactions_started_total,"Number of transactions started",,Sum
+arangodb_v8_context_alive,"Number of V8 contexts currently alive",,Gauge
+arangodb_v8_context_busy,"Number of V8 contexts currently busy",,Gauge
+arangodb_v8_context_created_total,"V8 contexts created",,Sum
+arangodb_v8_context_creation_time_msec_total,"Total time for creating V8 contexts [ms]",,Sum
+arangodb_v8_context_destroyed_total,"V8 contexts destroyed",,Sum
+arangodb_v8_context_dirty,"Number of V8 contexts currently dirty",,Gauge
+arangodb_v8_context_enter_failures_total,"V8 context enter failures",,Sum
+arangodb_v8_context_entered_total,"V8 context enter events",,Sum
+arangodb_v8_context_exited_total,"V8 context exit events",,Sum
+arangodb_v8_context_free,"Number of V8 contexts currently free",,Gauge
+arangodb_v8_context_max,"Maximum number of concurrent V8 contexts",,Gauge
+arangodb_v8_context_min,"Minimum number of concurrent V8 contexts",,Gauge
+arangodb_vst_connections_total,"Total number of VST connections",,Sum
+rocksdb_actual_delayed_write_rate,"rocksdb_actual_delayed_write_rate",,Gauge
+rocksdb_archived_wal_files,"Number of archived RocksDB WAL files",,Gauge
+rocksdb_archived_wal_files_size,"Cumulated size of archived RocksDB WAL files",,Gauge
+rocksdb_background_errors,"rocksdb_background_errors",,Gauge
+rocksdb_base_level,"rocksdb_base_level",,Gauge
+rocksdb_block_cache_capacity,"rocksdb_block_cache_capacity",,Gauge
+rocksdb_block_cache_pinned_usage,"rocksdb_block_cache_pinned_usage",,Gauge
+rocksdb_block_cache_usage,"rocksdb_block_cache_usage",,Gauge
+rocksdb_cache_active_tables,"rocksdb_cache_active_tables",,Gauge
+rocksdb_cache_allocated,"rocksdb_cache_allocated",,Gauge
+rocksdb_cache_auto_refill_dropped_total,"Total number of dropped items for in-memory cache refilling",,Sum
+rocksdb_cache_auto_refill_loaded_total,"Total number of auto-refilled in-memory cache items",,Sum
+rocksdb_cache_edge_compression_ratio,"rocksdb_cache_edge_compression_ratio",,Gauge
+rocksdb_cache_edge_effective_entries_size,"Total effective memory size of all edge cache entries ever stored in memory (after compression)",,Gauge
+rocksdb_cache_edge_uncompressed_entries_size,"Total gross memory size of all edge cache entries ever stored in memory",,Gauge
+rocksdb_cache_full_index_refills_total,"Total number of completed full index cache refills",,Sum
+rocksdb_cache_hit_rate_lifetime,"rocksdb_cache_hit_rate_lifetime",,Gauge
+rocksdb_cache_hit_rate_recent,"rocksdb_cache_hit_rate_recent",,Gauge
+rocksdb_cache_limit,"rocksdb_cache_limit",,Gauge
+rocksdb_cache_peak_allocated,"rocksdb_cache_peak_allocated",,Gauge
+rocksdb_cache_unused_memory,"rocksdb_cache_unused_memory",,Gauge
+rocksdb_cache_unused_tables,"rocksdb_cache_unused_tables",,Gauge
+rocksdb_compaction_pending,"rocksdb_compaction_pending",,Gauge
+rocksdb_compression_ratio_at_level0,"rocksdb_compression_ratio_at_level0",,Gauge
+rocksdb_compression_ratio_at_level1,"rocksdb_compression_ratio_at_level1",,Gauge
+rocksdb_compression_ratio_at_level2,"rocksdb_compression_ratio_at_level2",,Gauge
+rocksdb_compression_ratio_at_level3,"rocksdb_compression_ratio_at_level3",,Gauge
+rocksdb_compression_ratio_at_level4,"rocksdb_compression_ratio_at_level4",,Gauge
+rocksdb_compression_ratio_at_level5,"rocksdb_compression_ratio_at_level5",,Gauge
+rocksdb_compression_ratio_at_level6,"rocksdb_compression_ratio_at_level6",,Gauge
+rocksdb_cur_size_active_mem_table,"rocksdb_cur_size_active_mem_table",,Gauge
+rocksdb_cur_size_all_mem_tables,"rocksdb_cur_size_all_mem_tables",,Gauge
+rocksdb_engine_throttle_bps,"rocksdb_engine_throttle_bps",,Gauge
+rocksdb_estimate_live_data_size,"rocksdb_estimate_live_data_size",,Gauge
+rocksdb_estimate_num_keys,"rocksdb_estimate_num_keys",,Gauge
+rocksdb_estimate_pending_compaction_bytes,"rocksdb_estimate_pending_compaction_bytes",,Gauge
+rocksdb_estimate_table_readers_mem,"rocksdb_estimate_table_readers_mem",,Gauge
+rocksdb_free_disk_space,"rocksdb_free_disk_space",,Gauge
+rocksdb_free_inodes,"rocksdb_free_inodes",,Gauge
+rocksdb_is_file_deletions_enabled,"rocksdb_is_file_deletions_enabled",,Gauge
+rocksdb_is_write_stopped,"rocksdb_is_write_stopped",,Gauge
+rocksdb_live_sst_files_size,"rocksdb_live_sst_files_size",,Gauge
+rocksdb_live_wal_files,"Number of live RocksDB WAL files",,Gauge
+rocksdb_live_wal_files_size,"Cumulated size of live RocksDB WAL files",,Gauge
+rocksdb_mem_table_flush_pending,"rocksdb_mem_table_flush_pending",,Gauge
+rocksdb_min_log_number_to_keep,"rocksdb_min_log_number_to_keep",,Gauge
+rocksdb_num_deletes_active_mem_table,"rocksdb_num_deletes_active_mem_table",,Gauge
+rocksdb_num_deletes_imm_mem_tables,"rocksdb_num_deletes_imm_mem_tables",,Gauge
+rocksdb_num_entries_active_mem_table,"rocksdb_num_entries_active_mem_table",,Gauge
+rocksdb_num_entries_imm_mem_tables,"rocksdb_num_entries_imm_mem_tables",,Gauge
+rocksdb_num_files_at_level0,"rocksdb_num_files_at_level0",,Gauge
+rocksdb_num_files_at_level1,"rocksdb_num_files_at_level1",,Gauge
+rocksdb_num_files_at_level2,"rocksdb_num_files_at_level2",,Gauge
+rocksdb_num_files_at_level3,"rocksdb_num_files_at_level3",,Gauge
+rocksdb_num_files_at_level4,"rocksdb_num_files_at_level4",,Gauge
+rocksdb_num_files_at_level5,"rocksdb_num_files_at_level5",,Gauge
+rocksdb_num_files_at_level6,"rocksdb_num_files_at_level6",,Gauge
+rocksdb_num_immutable_mem_table,"rocksdb_num_immutable_mem_table",,Gauge
+rocksdb_num_immutable_mem_table_flushed,"rocksdb_num_immutable_mem_table_flushed",,Gauge
+rocksdb_num_live_versions,"rocksdb_num_live_versions",,Gauge
+rocksdb_num_running_compactions,"rocksdb_num_running_compactions",,Gauge
+rocksdb_num_running_flushes,"rocksdb_num_running_flushes",,Gauge
+rocksdb_num_snapshots,"rocksdb_num_snapshots",,Gauge
+rocksdb_oldest_snapshot_time,"rocksdb_oldest_snapshot_time",,Gauge
+rocksdb_prunable_wal_files,"Number of prunable RocksDB WAL files",,Gauge
+rocksdb_read_only,"rocksdb_read_only",,Gauge
+rocksdb_size_all_mem_tables,"rocksdb_size_all_mem_tables",,Gauge
+rocksdb_total_disk_space,"rocksdb_total_disk_space",,Gauge
+rocksdb_total_inodes,"rocksdb_total_inodes",,Gauge
+rocksdb_total_sst_files,"rocksdb_total_sst_files",,Gauge
+rocksdb_total_sst_files_size,"rocksdb_total_sst_files_size",,Gauge
+rocksdb_wal_pruning_active,"Whether or not RocksDB WAL file pruning is active",,Gauge
+rocksdb_wal_released_tick_flush,"Released tick for RocksDB WAL deletion (flush-induced)",,Gauge
+rocksdb_wal_released_tick_replication,"Released tick for RocksDB WAL deletion (replication-induced)",,Gauge
+rocksdb_wal_sequence,"rocksdb_wal_sequence",,Gauge
+rocksdb_wal_sequence_lower_bound,"RocksDB WAL sequence number until which background thread has caught up",,Gauge
+up,"The scraping was successful",,Gauge
