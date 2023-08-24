@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:${OTEL_VERSION:-0.81.0}
+    hostname: otel-collector
+    restart: always
+    command: [ "--config=/conf/collector.yaml" ]
+    volumes:
+      - ./collector.yaml:/conf/collector.yaml:rw
+    environment:
+      LS_ACCESS_TOKEN: ${LS_ACCESS_TOKEN}
+
+  nats-node-1:
+    image: nats:2.9.12-alpine3.17
+    command: "--cluster_name spooky --cluster nats://0.0.0.0:6222 --http_port 8222 -js -sd /data -n nats-node-1 --routes=nats://nats-node-2:6222,nats://nats-node-3:6222 -p 4222"
+    ports:
+      - "4222:4222" # for local testing using nats cli
+      - "8222:8222" # access to nats monitoring dashboard
+    volumes:
+      - nats-cluster_data-1:/data
+
+  nats-node-2:
+    image: nats:2.9.12-alpine3.17
+    command: "--cluster_name spooky --cluster nats://0.0.0.0:6222 --http_port 8222 -js -sd /data -n nats-node-2 --routes=nats://nats-node-1:6222,nats://nats-node-3:6222 -p 4222"
+    volumes:
+      - nats-cluster_data-2:/data
+
+  nats-node-3:
+    image: nats:2.9.12-alpine3.17
+    command: "--cluster_name spooky --cluster nats://0.0.0.0:6222 --http_port 8222 -js -sd /data -n nats-node-3 --routes=nats://nats-node-1:6222,nats://nats-node-2:6222 -p 4222"
+    volumes:
+      - nats-cluster_data-3:/data
+
+  nats-exporter-1:
+    image: natsio/prometheus-nats-exporter:0.11.0
+    command: "-varz -jsz=all http://nats-node-1:8222"
+
+  nats-exporter-2:
+    image: natsio/prometheus-nats-exporter:0.11.0
+    command: "-varz -jsz=all http://nats-node-2:8222"
+
+  nats-exporter-3:
+    image: natsio/prometheus-nats-exporter:0.11.0
+    command: "-varz -jsz=all http://nats-node-3:8222"
+
+volumes:
+  nats-cluster_data-1:
+    driver: local
+  nats-cluster_data-2:
+    driver: local
+  nats-cluster_data-3:
+    driver: local

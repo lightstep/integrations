@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  arangodb:
+    container_name: arangodb
+    image: arangodb/arangodb:latest
+    environment:
+      - ARANGO_NO_AUTH=1
+    ports:
+      - 8529:8529
+    volumes:
+      - ./arangodb_data_container:/var/lib/arangodb3
+      - ./arangodb_apps_data_container:/var/lib/arangodb3-apps
+
+  otel-collector:
+      container_name: otel-collector
+      image: otel/opentelemetry-collector-contrib:0.81.0
+      hostname: otel-collector
+      restart: always
+      command: [ "--config=/conf/collector.yaml" ]
+      volumes:
+        - ./collector.yaml:/conf/collector.yaml:rw
+      environment:
+        LS_ACCESS_TOKEN: "${LS_ACCESS_TOKEN}"
+
+volumes:
+  arangodb_data_container:
+  arangodb_apps_data_container:

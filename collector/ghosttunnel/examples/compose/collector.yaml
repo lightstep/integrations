@@ -1,0 +1,31 @@
+receivers:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'ghostunnel-server'
+          metrics_path: '/_metrics/prometheus'
+          static_configs:
+            - targets: ['ghostunnel-server:6060']
+        - job_name: 'ghostunnel-client'
+          metrics_path: '/_metrics/prometheus'
+          static_configs:
+            - targets: ['ghostunnel-client:6061']
+
+processors:
+  batch:
+
+exporters:
+  logging:
+    loglevel: debug
+      # otlp:
+      # endpoint: ingest.lightstep.com:443
+      #headers:
+      #- lightstep-access-token: ${LS_ACCESS_TOKEN}
+
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus]
+      processors: [batch]
+      exporters: [logging]
+        #exporters: [logging, otlp]

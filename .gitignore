@@ -3,11 +3,3 @@
 *.tfstate.backup
 .terraform.lock.hcl
 logs.txt
-
-.idea
-.DS_Store
-
-*.jar
-
-.mvn/wrapper/maven-wrapper.jar
-.mvn/wrapper/maven-wrapper.properties

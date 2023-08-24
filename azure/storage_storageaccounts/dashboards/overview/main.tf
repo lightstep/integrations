@@ -15,7 +15,7 @@ variable "lightstep_project" {
 
 output "dashboard_url" {
   value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
-  description = "OpenTelemetry Collector Storage_storageaccounts Dashboard URL"
+  description = "OpenTelemetry Collector Storage Accounts Dashboard URL"
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
@@ -48,7 +48,7 @@ EOT
       display      = "line"
       hidden       = false
       query_string = <<EOT
-metric azure_transactions_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_responsetype == $metadata_responsetype) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication) && (metadata_transactiontype == $metadata_transactiontype)) | delta | group_by [], sum
+metric azure_transactions_total | filter ((azuremonitor.subscription_id == $azuremonitor_subscription_id) && (azuremonitor.tenant_id == $azuremonitor_tenant_id) && (azuremonitor.resource_id == $azuremonitor_resource_id) && (location == $location) && (metadata_geotype == $metadata_geotype) && (metadata_apiname == $metadata_apiname) && (metadata_authentication == $metadata_authentication)) | delta | group_by [], sum
 EOT
     }
   }
@@ -168,17 +168,5 @@ EOT
     name                     = "metadata_geotype"
     default_values           = []
     suggestion_attribute_key = "metadata_geotype"
-  }
-
-  template_variable {
-    name                     = "metadata_responsetype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_responsetype"
-  }
-
-  template_variable {
-    name                     = "metadata_transactiontype"
-    default_values           = []
-    suggestion_attribute_key = "metadata_transactiontype"
   }
 }
