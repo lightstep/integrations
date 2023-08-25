@@ -1,0 +1,16 @@
+Name,Description,Unit,DataType,Attributes
+kong_nginx_requests_total,Number of requests total,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
+kong_datastore_reachable,"Datastore reachable from Kong, 0 is unreachable",,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme
+kong_memory_lua_shared_dict_total_bytes,Total capacity in bytes of a shared_dict,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;kong_subsystem;node_id;shared_dict
+kong_memory_workers_lua_vms_bytes,Allocated bytes in worker Lua VM,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;kong_subsystem;node_id;pid
+kong_node_info,Kong Node metadata information,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
+kong_memory_lua_shared_dict_bytes,Allocated slabs in bytes in a shared_dict,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;kong_subsystem;node_id;shared_dict
+kong_nginx_connections_total,Number of connections by subsystem,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;node_id;state;subsystem
+kong_nginx_timers,Number of nginx timers,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
+
+kong_bandwidth_bytes,Total bandwidth (ingress/egress) throughput in bytes,,Counter,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
+kong_http_requests_total,HTTP status codes per consumer/service/route in Kong,,Counter,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
+kong_kong_latency_ms,Latency added by Kong and enabled plugins for each service/route in Kong,,Histogram,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
+kong_nginx_metric_errors_total,Number of nginx-lua-prometheus errors,,Counter,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
+kong_request_latency_ms,Total latency incurred during requests for each service/route in Kong,,Histogram,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
+kong_upstream_latency_ms,Latency added by upstream response for each service/route in Kong,,Histogram,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
