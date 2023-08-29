@@ -1,19 +1,19 @@
-# Monitor NATS with the OpenTelemetry Collector for Lightstep
+# Monitor NATS with the OpenTelemetry Collector for Cloud Observability
 
 ## Overview
 
-NATS is a simple, secure, and high-performance open source messaging system. To maintain the reliability and performance of a NATS setup, it's crucial to have real-time monitoring. With the OpenTelemetry Collector, metrics from NATS can be effectively channeled to Lightstep for comprehensive analysis and visualization. This README will guide you through integrating NATS metrics with Lightstep using the OpenTelemetry Collector.
+NATS is a simple, secure, and high-performance open source messaging system. To maintain the reliability and performance of a NATS setup, it's crucial to have real-time monitoring. With the OpenTelemetry Collector, metrics from NATS can be effectively channeled to Cloud Observability for comprehensive analysis and visualization. This README will guide you through integrating NATS metrics with Cloud Observability using the OpenTelemetry Collector.
 
 ## Prerequisites
 
 * Docker
 * Docker Compose
-* A Lightstep Observability account
-* Lightstep Observability [access token][ls-docs-access-token]
+* A Cloud Observability account
+* Cloud Observability [access token][ls-docs-access-token]
 
 ## How to set it up
 
-1. **Export your Lightstep access token**:
+1. **Export your Cloud Observability access token**:
     ```bash
     export LS_ACCESS_TOKEN=<YOUR_LIGHTSTEP_TOKEN>
     ```
@@ -22,7 +22,7 @@ NATS is a simple, secure, and high-performance open source messaging system. To 
     docker-compose up -d
     ```
 3. **Access the NATS dashboard**: Depending on your setup, typically you can visit a web UI to manage and observe NATS. In our case, you can NATS node 1 dashboard at `http://localhost:8222/`.
-4. **Monitor NATS Metrics in Lightstep**: After setting things up, NATS metrics should start populating in your Lightstep dashboard.
+4. **Monitor NATS Metrics in Cloud Observability**: After setting things up, NATS metrics should start populating in your Cloud Observability dashboard.
 5. **Shutting down the monitoring setup**:
     ```bash
     docker-compose down
