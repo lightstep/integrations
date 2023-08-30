@@ -8,19 +8,19 @@ terraform {
   required_version = ">= v1.0.11"
 }
 
-variable "lightstep_project" {
-  description = "Lightstep Project Name"
+variable "cloud_observability_project" {
+  description = "Cloud Observability Project Name"
   type        = string
 }
 
 output "dashboard_url" {
-  value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
+  value       = "https://app.lightstep.com/${var.cloud_observability_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
   description = "OpenTelemetry Collector Container Registry Registries Dashboard URL"
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Container Registry Metrics"
+  project_name          = var.cloud_observability_project
+  dashboard_name        = "Container Registry Metrics"
   dashboard_description = "Monitor Container Registry with this metrics overview dashboard."
 
   chart {
