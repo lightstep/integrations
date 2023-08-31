@@ -4,11 +4,11 @@ provider "azurerm" {
 
 variable "prefix" {
   description = "A prefix used for all resources in this example"
-  default     = "ex-storage-account"
+  default = "ex-storage-account"
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = var.prefix
+  name     = "${var.prefix}"
   location = "East US"
 }
 
@@ -30,10 +30,10 @@ resource "azurerm_mssql_server" "example" {
 }
 
 resource "azurerm_mssql_database" "example" {
-  name         = "${var.prefix}-db"
-  server_id    = azurerm_mssql_server.example.id
-  collation    = "SQL_Latin1_General_CP1_CI_AS"
-  license_type = "LicenseIncluded"
-  max_size_gb  = 2
-  sku_name     = "S0"
+  name           = "${var.prefix}-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  max_size_gb    = 2
+  sku_name       = "S0"
 }

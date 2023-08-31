@@ -4,16 +4,16 @@ provider "azurerm" {
 
 variable "prefix" {
   description = "A prefix used for all resources in this example"
-  default     = "ex-apimgmt"
+  default = "ex-apimgmt"
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = var.prefix
+  name     = "${var.prefix}"
   location = "East US"
 }
 
 resource "azurerm_api_management" "example" {
-  name                = var.prefix
+  name                = "${var.prefix}"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   publisher_name      = "My Company"

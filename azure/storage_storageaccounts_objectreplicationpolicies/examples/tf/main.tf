@@ -4,7 +4,7 @@ provider "azurerm" {
 
 variable "prefix" {
   description = "A prefix used for all resources in this example"
-  default     = "exstoragereplica"
+  default = "exstoragereplica"
 }
 
 resource "azurerm_resource_group" "src" {
