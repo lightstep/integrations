@@ -3,12 +3,12 @@
 
 The OTel Collector has a variety of [third party receivers](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/master/receiver) that provide integration with a wide variety of metric sources.
 
-Please note that not all metrics receivers available for the OpenTelemetry Collector have been tested by Cloud Observability, and there may be bugs or unexpected issues in using these contributed receivers with Cloud Observability metrics. File any issues with the appropriate OpenTelemetry community.
+Please note that not all metrics receivers available for the OpenTelemetry Collector have been tested by Lightstep Observability, and there may be bugs or unexpected issues in using these contributed receivers with Lightstep Observability metrics. File any issues with the appropriate OpenTelemetry community.
 {: .callout}
 
 ## Prerequisites for local installation
 
-You must have a Cloud Observability [access token](/docs/create-and-manage-access-tokens) for the project to report metrics to.
+You must have a Lightstep Observability [access token](/docs/create-and-manage-access-tokens) for the project to report metrics to.
 Also you must have Azure account credentials.
 
 ## Running the Example
@@ -39,7 +39,7 @@ Detailed description of available [Azure metrics per service](https://learn.micr
 
 Collector Azure Monitor receiver has to be configured to capture required Azure resources, [configuration description](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/azuremonitorreceiver#configuration).
 
-The following example configuration collects metrics from Azure and send them to Cloud Observability:
+The following example configuration collects metrics from Azure and send them to Lightstep Observability:
 
 ```yaml
 receivers:

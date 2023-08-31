@@ -4,11 +4,11 @@ provider "azurerm" {
 
 variable "prefix" {
   description = "A prefix used for all resources in this example"
-  default     = "ex-network-ni"
+  default = "ex-network-ni"
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = var.prefix
+  name     = "${var.prefix}"
   location = "East US"
 }
 
@@ -47,9 +47,9 @@ resource "azurerm_network_interface" "primary" {
 }
 
 resource "azurerm_network_interface" "internal" {
-  name                = "${var.prefix}-internal-net"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  name                      = "${var.prefix}-internal-net"
+  resource_group_name       = azurerm_resource_group.example.name
+  location                  = azurerm_resource_group.example.location
 
   ip_configuration {
     name                          = "internal"
@@ -81,16 +81,16 @@ resource "azurerm_network_interface_security_group_association" "example" {
 }
 
 resource "azurerm_virtual_machine" "vm" {
-  name                = "${var.prefix}-vm1"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  vm_size             = "Standard_A1_v2"
+  name                  = "${var.prefix}-vm1"
+  location              = azurerm_resource_group.example.location
+  resource_group_name   = azurerm_resource_group.example.name
+  vm_size               = "Standard_A1_v2"
   network_interface_ids = [
     azurerm_network_interface.primary.id,
     azurerm_network_interface.internal.id
   ]
   primary_network_interface_id = azurerm_network_interface.primary.id
-
+  
   delete_os_disk_on_termination = true
 
   storage_image_reference {
@@ -101,9 +101,9 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   storage_os_disk {
-    caching           = "ReadWrite"
-    name              = "osdisk1"
-    create_option     = "FromImage"
+    caching       = "ReadWrite"
+    name          = "osdisk1"
+    create_option = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
