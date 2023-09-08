@@ -5,7 +5,7 @@ receivers:
     client_id: "${AZURE_CLIENT_ID}"
     client_secret: "${AZURE_CLIENT_SECRET}"
     resource_groups:
-      - "examplestoragefile"
+      - "exstoragefile"
     services:
       - "Microsoft.Storage/storageAccounts/fileServices"
     collection_interval: 60s
