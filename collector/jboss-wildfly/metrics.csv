@@ -1,0 +1,135 @@
+Name,Description,Unit,DataType
+jmx_config_reload_failure_created,"Number of times configuration have failed to be reloaded.",,Sum
+jmx_config_reload_failure_total,"Number of times configuration have failed to be reloaded.",,Sum
+jmx_config_reload_success_created,"Number of times configuration have successfully been reloaded.",,Sum
+jmx_config_reload_success_total,"Number of times configuration have successfully been reloaded.",,Sum
+jmx_exporter_build_info,"A metric with a constant '1' value labeled with the version of the JMX exporter.",,Gauge
+jmx_scrape_cached_beans,"Number of beans with their matching rule cached",,Gauge
+jmx_scrape_duration_seconds,"Time this JMX scrape took, in seconds.",,Gauge
+jmx_scrape_error,"Non-zero if this scrape failed.",,Gauge
+jvm,"VM version info",,Sum
+jvm_buffer_pool_capacity_bytes,"Bytes capacity of a given JVM buffer pool.",,Gauge
+jvm_buffer_pool_used_buffers,"Used buffers of a given JVM buffer pool.",,Gauge
+jvm_buffer_pool_used_bytes,"Used bytes of a given JVM buffer pool.",,Gauge
+jvm_classes_currently_loaded,"The number of classes that are currently loaded in the JVM",,Gauge
+jvm_classes_loaded_total,"The total number of classes that have been loaded since the JVM has started execution",,Sum
+jvm_classes_unloaded_total,"The total number of classes that have been unloaded since the JVM has started execution",,Sum
+jvm_gc_collection_seconds,"Time spent in a given JVM garbage collector in seconds.",,Summary
+jvm_memory_bytes_committed,"Committed (bytes) of a given JVM memory area.",,Gauge
+jvm_memory_bytes_init,"Initial bytes of a given JVM memory area.",,Gauge
+jvm_memory_bytes_max,"Max (bytes) of a given JVM memory area.",,Gauge
+jvm_memory_bytes_used,"Used bytes of a given JVM memory area.",,Gauge
+jvm_memory_objects_pending_finalization,"The number of objects waiting in the finalizer queue.",,Gauge
+jvm_memory_pool_allocated_bytes_created,"Total bytes allocated in a given JVM memory pool. Only updated after GC, not continuously.",,Sum
+jvm_memory_pool_allocated_bytes_total,"Total bytes allocated in a given JVM memory pool. Only updated after GC, not continuously.",,Sum
+jvm_memory_pool_bytes_committed,"Committed bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_bytes_init,"Initial bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_bytes_max,"Max bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_bytes_used,"Used bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_collection_committed_bytes,"Committed after last collection bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_collection_init_bytes,"Initial after last collection bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_collection_max_bytes,"Max bytes after last collection of a given JVM memory pool.",,Gauge
+jvm_memory_pool_collection_used_bytes,"Used bytes after last collection of a given JVM memory pool.",,Gauge
+jvm_threads_current,"Current thread count of a JVM",,Gauge
+jvm_threads_daemon,"Daemon thread count of a JVM",,Gauge
+jvm_threads_deadlocked,"Cycles of JVM-threads that are in deadlock waiting to acquire object monitors or ownable synchronizers",,Gauge
+jvm_threads_deadlocked_monitor,"Cycles of JVM-threads that are in deadlock waiting to acquire object monitors",,Gauge
+jvm_threads_peak,"Peak thread count of a JVM",,Gauge
+jvm_threads_started_total,"Started thread count of a JVM",,Sum
+jvm_threads_state,"Current count of threads by state",,Gauge
+process_cpu_seconds_total,"Total user and system CPU time spent in seconds.",,Sum
+process_max_fds,"Maximum number of open file descriptors.",,Gauge
+process_open_fds,"Number of open file descriptors.",,Gauge
+process_resident_memory_bytes,"Resident memory size in bytes.",,Gauge
+process_start_time_seconds,"Start time of the process since unix epoch in seconds.",,Gauge
+process_virtual_memory_bytes,"Virtual memory size in bytes.",,Gauge
+scrape_duration_seconds,"Duration of the scrape",seconds,Gauge
+scrape_samples_post_metric_relabeling,"The number of samples remaining after metric relabeling was applied",,Gauge
+scrape_samples_scraped,"The number of samples the target exposed",,Gauge
+scrape_series_added,"The approximate number of new series in this scrape",,Gauge
+up,"The scraping was successful",,Gauge
+wildfly_datasource_jdbc_prepared_statement_cache_access_count,"The number of times that the statement cache was accessed jboss.as:name=null,type=null,attribute=PreparedStatementCacheAccessCount",,Gauge
+wildfly_datasource_jdbc_prepared_statement_cache_add_count,"The number of statements added to the statement cache jboss.as:name=null,type=null,attribute=PreparedStatementCacheAddCount",,Gauge
+wildfly_datasource_jdbc_prepared_statement_cache_current_size,"The number of prepared and callable statements currently cached in the statement cache jboss.as:name=null,type=null,attribute=PreparedStatementCacheCurrentSize",,Gauge
+wildfly_datasource_jdbc_prepared_statement_cache_delete_count,"The number of statements discarded from the cache jboss.as:name=null,type=null,attribute=PreparedStatementCacheDeleteCount",,Gauge
+wildfly_datasource_jdbc_prepared_statement_cache_hit_count,"The number of times that statements from the cache were used jboss.as:name=null,type=null,attribute=PreparedStatementCacheHitCount",,Gauge
+wildfly_datasource_jdbc_prepared_statement_cache_miss_count,"The number of times that a statement request could not be satisfied with a statement from the cache jboss.as:name=null,type=null,attribute=PreparedStatementCacheMissCount",,Gauge
+wildfly_datasource_jdbc_statistics_enabled,"Define whether runtime statistics are enabled or not. jboss.as:name=null,type=null,attribute=statisticsEnabled",,Gauge
+wildfly_datasource_pool_active_count,"The active count jboss.as:name=null,type=null,attribute=ActiveCount",,Gauge
+wildfly_datasource_pool_available_count,"The available count jboss.as:name=null,type=null,attribute=AvailableCount",,Gauge
+wildfly_datasource_pool_average_blocking_time,"Average Blocking Time for pool jboss.as:name=null,type=null,attribute=AverageBlockingTime",,Gauge
+wildfly_datasource_pool_average_creation_time,"The average time spent creating a physical connection jboss.as:name=null,type=null,attribute=AverageCreationTime",,Gauge
+wildfly_datasource_pool_average_get_time,"The average time spent obtaining a physical connection jboss.as:name=null,type=null,attribute=AverageGetTime",,Gauge
+wildfly_datasource_pool_average_pool_time,"The average time for a physical connection spent in the pool jboss.as:name=null,type=null,attribute=AveragePoolTime",,Gauge
+wildfly_datasource_pool_average_usage_time,"The average time spent using a physical connection jboss.as:name=null,type=null,attribute=AverageUsageTime",,Gauge
+wildfly_datasource_pool_blocking_failure_count,"The number of failures trying to obtain a physical connection jboss.as:name=null,type=null,attribute=BlockingFailureCount",,Gauge
+wildfly_datasource_pool_created_count,"The created count jboss.as:name=null,type=null,attribute=CreatedCount",,Gauge
+wildfly_datasource_pool_destroyed_count,"The destroyed count jboss.as:name=null,type=null,attribute=DestroyedCount",,Gauge
+wildfly_datasource_pool_idle_count,"The number of physical connections currently idle jboss.as:name=null,type=null,attribute=IdleCount",,Gauge
+wildfly_datasource_pool_in_use_count,"The number of physical connections currently in use jboss.as:name=null,type=null,attribute=InUseCount",,Gauge
+wildfly_datasource_pool_max_creation_time,"The maximum time for creating a physical connection jboss.as:name=null,type=null,attribute=MaxCreationTime",,Gauge
+wildfly_datasource_pool_max_get_time,"The maximum time for obtaining a physical connection jboss.as:name=null,type=null,attribute=MaxGetTime",,Gauge
+wildfly_datasource_pool_max_pool_time,"The maximum time for a physical connection in the pool jboss.as:name=null,type=null,attribute=MaxPoolTime",,Gauge
+wildfly_datasource_pool_max_usage_time,"The maximum time using a physical connection jboss.as:name=null,type=null,attribute=MaxUsageTime",,Gauge
+wildfly_datasource_pool_max_used_count,"The maximum number of connections used jboss.as:name=null,type=null,attribute=MaxUsedCount",,Gauge
+wildfly_datasource_pool_max_wait_count,"The maximum number of threads waiting for a connection jboss.as:name=null,type=null,attribute=MaxWaitCount",,Gauge
+wildfly_datasource_pool_max_wait_time,"The maximum wait time for a connection jboss.as:name=null,type=null,attribute=MaxWaitTime",,Gauge
+wildfly_datasource_pool_statistics_enabled,"Define whether runtime statistics are enabled or not. jboss.as:name=null,type=null,attribute=statisticsEnabled",,Gauge
+wildfly_datasource_pool_timed_out,"The timed out count jboss.as:name=null,type=null,attribute=TimedOut",,Gauge
+wildfly_datasource_pool_total_blocking_time,"The total blocking time jboss.as:name=null,type=null,attribute=TotalBlockingTime",,Gauge
+wildfly_datasource_pool_total_creation_time,"The total time spent creating physical connections jboss.as:name=null,type=null,attribute=TotalCreationTime",,Gauge
+wildfly_datasource_pool_total_get_time,"The total time spent obtaining physical connections jboss.as:name=null,type=null,attribute=TotalGetTime",,Gauge
+wildfly_datasource_pool_total_pool_time,"The total time spent by physical connections in the pool jboss.as:name=null,type=null,attribute=TotalPoolTime",,Gauge
+wildfly_datasource_pool_total_usage_time,"The total time spent using physical connections jboss.as:name=null,type=null,attribute=TotalUsageTime",,Gauge
+wildfly_datasource_pool_wait_count,"The number of requests that had to wait to obtain a physical connection jboss.as:name=null,type=null,attribute=WaitCount",,Gauge
+wildfly_datasource_pool_xacommit_average_time,"The average time for a XAResource commit invocation jboss.as:name=null,type=null,attribute=XACommitAverageTime",,Gauge
+wildfly_datasource_pool_xacommit_count,"The number of XAResource commit invocations jboss.as:name=null,type=null,attribute=XACommitCount",,Gauge
+wildfly_datasource_pool_xacommit_max_time,"The maximum time for a XAResource commit invocation jboss.as:name=null,type=null,attribute=XACommitMaxTime",,Gauge
+wildfly_datasource_pool_xacommit_total_time,"The total time for all XAResource commit invocations jboss.as:name=null,type=null,attribute=XACommitTotalTime",,Gauge
+wildfly_datasource_pool_xaend_average_time,"The average time for a XAResource end invocation jboss.as:name=null,type=null,attribute=XAEndAverageTime",,Gauge
+wildfly_datasource_pool_xaend_count,"The number of XAResource end invocations jboss.as:name=null,type=null,attribute=XAEndCount",,Gauge
+wildfly_datasource_pool_xaend_max_time,"The maximum time for a XAResource end invocation jboss.as:name=null,type=null,attribute=XAEndMaxTime",,Gauge
+wildfly_datasource_pool_xaend_total_time,"The total time for all XAResource end invocations jboss.as:name=null,type=null,attribute=XAEndTotalTime",,Gauge
+wildfly_datasource_pool_xaforget_average_time,"The average time for a XAResource forget invocation jboss.as:name=null,type=null,attribute=XAForgetAverageTime",,Gauge
+wildfly_datasource_pool_xaforget_count,"The number of XAResource forget invocations jboss.as:name=null,type=null,attribute=XAForgetCount",,Gauge
+wildfly_datasource_pool_xaforget_max_time,"The maximum time for a XAResource forget invocation jboss.as:name=null,type=null,attribute=XAForgetMaxTime",,Gauge
+wildfly_datasource_pool_xaforget_total_time,"The total time for all XAResource forget invocations jboss.as:name=null,type=null,attribute=XAForgetTotalTime",,Gauge
+wildfly_datasource_pool_xaprepare_average_time,"The average time for a XAResource prepare invocation jboss.as:name=null,type=null,attribute=XAPrepareAverageTime",,Gauge
+wildfly_datasource_pool_xaprepare_count,"The number of XAResource prepare invocations jboss.as:name=null,type=null,attribute=XAPrepareCount",,Gauge
+wildfly_datasource_pool_xaprepare_max_time,"The maximum time for a XAResource prepare invocation jboss.as:name=null,type=null,attribute=XAPrepareMaxTime",,Gauge
+wildfly_datasource_pool_xaprepare_total_time,"The total time for all XAResource prepare invocations jboss.as:name=null,type=null,attribute=XAPrepareTotalTime",,Gauge
+wildfly_datasource_pool_xarecover_average_time,"The average time for a XAResource recover invocation jboss.as:name=null,type=null,attribute=XARecoverAverageTime",,Gauge
+wildfly_datasource_pool_xarecover_count,"The number of XAResource recover invocations jboss.as:name=null,type=null,attribute=XARecoverCount",,Gauge
+wildfly_datasource_pool_xarecover_max_time,"The maximum time for a XAResource recover invocation jboss.as:name=null,type=null,attribute=XARecoverMaxTime",,Gauge
+wildfly_datasource_pool_xarecover_total_time,"The total time for all XAResource recover invocations jboss.as:name=null,type=null,attribute=XARecoverTotalTime",,Gauge
+wildfly_datasource_pool_xarollback_average_time,"The average time for a XAResource rollback invocation jboss.as:name=null,type=null,attribute=XARollbackAverageTime",,Gauge
+wildfly_datasource_pool_xarollback_count,"The number of XAResource rollback invocations jboss.as:name=null,type=null,attribute=XARollbackCount",,Gauge
+wildfly_datasource_pool_xarollback_max_time,"The maximum time for a XAResource rollback invocation jboss.as:name=null,type=null,attribute=XARollbackMaxTime",,Gauge
+wildfly_datasource_pool_xarollback_total_time,"The total time for all XAResource rollback invocations jboss.as:name=null,type=null,attribute=XARollbackTotalTime",,Gauge
+wildfly_datasource_pool_xastart_average_time,"The average time for a XAResource start invocation jboss.as:name=null,type=null,attribute=XAStartAverageTime",,Gauge
+wildfly_datasource_pool_xastart_count,"The number of XAResource start invocations jboss.as:name=null,type=null,attribute=XAStartCount",,Gauge
+wildfly_datasource_pool_xastart_max_time,"The maximum time for a XAResource start invocation jboss.as:name=null,type=null,attribute=XAStartMaxTime",,Gauge
+wildfly_datasource_pool_xastart_total_time,"The total time for all XAResource start invocations jboss.as:name=null,type=null,attribute=XAStartTotalTime",,Gauge
+wildfly_messaging_consumer_count,"The number of consumers consuming messages from this queue. jboss.as:name=null,type=null,attribute=consumerCount",,Gauge
+wildfly_messaging_delivering_count,"The number of messages that this queue is currently delivering to its consumers. jboss.as:name=null,type=null,attribute=deliveringCount",,Gauge
+wildfly_messaging_durable,"Whether the queue is durable or not. jboss.as:name=null,type=null,attribute=durable",,Gauge
+wildfly_messaging_message_count,"The number of messages currently in this queue. jboss.as:name=null,type=null,attribute=messageCount",,Gauge
+wildfly_messaging_messages_added,"The number of messages added to this queue since it was created. jboss.as:name=null,type=null,attribute=messagesAdded",,Gauge
+wildfly_messaging_paused,"Whether the queue is paused. jboss.as:name=null,type=null,attribute=paused",,Gauge
+wildfly_messaging_scheduled_count,"The number of scheduled messages in this queue. jboss.as:name=null,type=null,attribute=scheduledCount",,Gauge
+wildfly_messaging_temporary,"Whether the queue is temporary. jboss.as:name=null,type=null,attribute=temporary",,Gauge
+wildfly_transaction_aborted_transactions,"The number of aborted (i.e. rolled-back) transactions. jboss.as:name=null,type=null,attribute=numberOfAbortedTransactions",,Gauge
+wildfly_transaction_application_rollbacks,"The number of transactions that have been rolled back by application request. This includes those that timeout, since the timeout behavior is considered an attribute of the application configuration. jboss.as:name=null,type=null,attribute=numberOfApplicationRollbacks",,Gauge
+wildfly_transaction_committed_transactions,"The number of committed transactions. jboss.as:name=null,type=null,attribute=numberOfCommittedTransactions",,Gauge
+wildfly_transaction_heuristics,"The number of transactions which have terminated with heuristic outcomes. jboss.as:name=null,type=null,attribute=numberOfHeuristics",,Gauge
+wildfly_transaction_inflight_transactions,"The number of transactions that have begun but not yet terminated. jboss.as:name=null,type=null,attribute=numberOfInflightTransactions",,Gauge
+wildfly_transaction_nested_transactions,"The total number of nested (sub) transactions created. jboss.as:name=null,type=null,attribute=numberOfNestedTransactions",,Gauge
+wildfly_transaction_resource_rollbacks,"The number of transactions that rolled back due to resource (participant) failure. jboss.as:name=null,type=null,attribute=numberOfResourceRollbacks",,Gauge
+wildfly_transaction_system_rollbacks,"The number of transactions that have been rolled back due to internal system errors. jboss.as:name=null,type=null,attribute=numberOfSystemRollbacks",,Gauge
+wildfly_transaction_timed_out_transactions,"The number of transactions that have rolled back due to timeout. jboss.as:name=null,type=null,attribute=numberOfTimedOutTransactions",,Gauge
+wildfly_transaction_transactions,"The total number of transactions (top-level and nested) created. jboss.as:name=null,type=null,attribute=numberOfTransactions",,Gauge
+wildfly_undertow_bytes_received,"The number of bytes that have been received by this listener jboss.as:name=null,type=null,attribute=bytesReceived",,Gauge
+wildfly_undertow_bytes_sent,"The number of bytes that have been sent out on this listener jboss.as:name=null,type=null,attribute=bytesSent",,Gauge
+wildfly_undertow_error_count,"The number of 500 responses that have been sent by this listener jboss.as:name=null,type=null,attribute=errorCount",,Gauge
+wildfly_undertow_processing_time,"The total processing time of all requests handed by this listener jboss.as:name=null,type=null,attribute=processingTime",,Gauge
+wildfly_undertow_request_count,"The number of requests this listener has served jboss.as:name=null,type=null,attribute=requestCount",,Gauge
