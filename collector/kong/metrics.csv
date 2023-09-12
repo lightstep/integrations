@@ -7,7 +7,6 @@ kong_node_info,Kong Node metadata information,,Gauge,service.name;net.host.name;
 kong_memory_lua_shared_dict_bytes,Allocated slabs in bytes in a shared_dict,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;kong_subsystem;node_id;shared_dict
 kong_nginx_connections_total,Number of connections by subsystem,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;node_id;state;subsystem
 kong_nginx_timers,Number of nginx timers,,Gauge,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
-
 kong_bandwidth_bytes,Total bandwidth (ingress/egress) throughput in bytes,,Counter,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
 kong_http_requests_total,HTTP status codes per consumer/service/route in Kong,,Counter,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
 kong_kong_latency_ms,Latency added by Kong and enabled plugins for each service/route in Kong,,Histogram,service.name;net.host.name;service.instance.id;net.host.port;http.scheme;state
