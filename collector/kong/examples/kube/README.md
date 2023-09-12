@@ -16,7 +16,7 @@ You must have a ServiceNow Cloud Observability [access token](/docs/create-and-m
 ```bash
 make all
 ```
-that will create local kubernetes cluster and install kong and collector.
+That will create local kubernetes cluster and install kong and collector.
 
 ### Otherwise you can use following commands:
 
@@ -28,7 +28,7 @@ kind create cluster --config kind-config.yaml
 
 #### 2. Run kong
 
-Needs to create kong namespace, add kong secret(empty test secret in this case), install kong and expose metrics endpoint
+Next create kong namespace, add kong secret(empty test secret in this case), install kong and expose metrics endpoint
 
 ```bash
 kubectl create namespace kong
@@ -38,7 +38,7 @@ kubectl apply -f metrics-service.yaml
 ```
 #### 3. Run collector
 
-Needs to install collector and point it to the kong metrics endpoint, "kong-metrics.kong:8100" in this case.
+Next install collector and point it to the kong metrics endpoint, "kong-metrics.kong:8100" in this case.
 
 ```bash
 ./install_collector.sh
@@ -46,7 +46,7 @@ Needs to install collector and point it to the kong metrics endpoint, "kong-metr
 
 ## Configuration
 
-Installation of the OpenTelemetry Collector varies, please refer to the [collector documentation](https://opentelemetry.io/docs/collector/) for more information.
+Installation procedures for the OpenTelemetry Collector varies by deployment mode. Please refer to the [collector documentation](https://opentelemetry.io/docs/collector/) for more information.
 
 Detailed description of available [Kong metrics](https://docs.konghq.com/hub/kong-inc/prometheus/#available-metrics).
 
