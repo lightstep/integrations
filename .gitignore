@@ -3,3 +3,10 @@
 *.tfstate.backup
 .terraform.lock.hcl
 logs.txt
+
+
+.DS_Store
+*.DS_Store
+
+.idea
+*.idea
