@@ -2,7 +2,7 @@
 
 ## Overview
 
- Hikaricp natively exposes a Prometheus endpoint and the OpenTelemetry Collector has a [Prometheus receiver][otel-prom-receiver] that can be used to scrape its Prometheus endpoint. This directory contains an example showing how to configure Hikaricp and the Collector to send metrics to Lightstep Observability.
+ Hikaricp natively exposes a Prometheus endpoint and the OpenTelemetry Collector has a [Prometheus receiver][otel-prom-receiver] that can be used to scrape its Prometheus endpoint. This directory contains an example showing how to configure Hikaricp and the Collector to send metrics to SN Observability.
 
 ## Prerequisites
 
