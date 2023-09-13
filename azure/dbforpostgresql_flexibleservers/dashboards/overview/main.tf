@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "PostgreSQL Flexible Servers Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "PostgreSQL Flexible Servers Metrics"
   dashboard_description = "Monitor PostgreSQL Flexible Servers with this metrics overview dashboard."
 
   chart {

@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "API Management Service Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "API Management Service Metrics"
   dashboard_description = "Monitor API Management Service with this metrics overview dashboard."
 
   chart {
