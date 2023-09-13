@@ -3,3 +3,15 @@
 *.tfstate.backup
 .terraform.lock.hcl
 logs.txt
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+.DS_Store
+*.DS_Store
