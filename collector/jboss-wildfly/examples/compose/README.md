@@ -1,4 +1,4 @@
-# Arangodb metrics using the OpenTelemetry Collector
+# Jboss Wildfly metrics using the OpenTelemetry Collector
 
 ## Overview
 
@@ -24,9 +24,9 @@
   docker-compose up -d
   ```
 
-### Explore Metrics in Cloud Observability
+### Explore Metrics in Cloud Observability 
 
-See the [Name: Telemetry Docs][arangodb-docs-telemetry] for comprehensive documentation on metrics emitted and the [dashboard documentation][ls-docs-dashboards] for more details.
+See the [Name: Telemetry Docs][jboss-wildfly-docs-telemetry] for comprehensive documentation on metrics emitted and the [dashboard documentation][ls-docs-dashboards] for more details.
 
 ## Configure the Collector
 
@@ -37,20 +37,19 @@ receivers:
   prometheus:
     config:
       scrape_configs:
-        - job_name: 'arangodb'
-          scrape_interval: 10s
+        - job_name: 'wildfly'
+          scrape_interval: 8s
           static_configs:
-            - targets: ['localhost:8529']
-          metrics_path: '/_admin/metrics/v2'
+            - targets: ['localhost:9404']
 ```
 
 
 ## Additional information
 
 - [OpenTelemetry Collector Prometheus Receiver][otel-prom-receiver]
-- [Name: Telemetry Reference][arangodb-docs-telemetry]
+- [Name: Telemetry Reference][jboss-wildfly-docs-telemetry]
 
 [ls-docs-access-token]: https://docs.lightstep.com/docs/create-and-manage-access-tokens
 [ls-docs-dashboards]: https://docs.lightstep.com/docs/create-and-manage-dashboards
 [otel-prom-receiver]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
-[arangodb-docs-telemetry]: https://www.arangodb.com/2020/03/monitoring-arangodb-prometheus-grafana/
+[jboss-wildfly-docs-telemetry]: https://docs.wildfly.org/24/Admin_Guide.html

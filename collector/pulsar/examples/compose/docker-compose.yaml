@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  pulsar:
+    container_name: pulsar
+    image: apachepulsar/pulsar:latest
+    environment:
+      - PULSAR_URL=pulsar://pulsar:6650
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    command: bin/pulsar standalone
+    healthcheck:
+      test: ["CMD", "netstat", "-an", "|", "grep", "6650"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+            - integrations
+  
+  pulsar_demo_app:
+    container_name: pulsar_demo_app
+    build:
+      context: ./app
+    depends_on:
+      - pulsar
+    networks:
+            - integrations
+
+  otel-collector:
+    container_name: otel-collector
+    image: otel/opentelemetry-collector-contrib:0.81.0
+    hostname: otel-collector
+    restart: always
+    command: [ "--config=/conf/collector.yaml" ]
+    volumes:
+      - ./collector.yaml:/conf/collector.yaml:rw
+    environment:
+      LS_ACCESS_TOKEN: "${LS_ACCESS_TOKEN}"
+    depends_on: 
+      - pulsar
+    networks:
+            - integrations
+
+networks:
+    integrations:
+

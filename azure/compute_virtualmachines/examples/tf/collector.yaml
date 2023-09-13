@@ -5,7 +5,7 @@ receivers:
     client_id: "${AZURE_CLIENT_ID}"
     client_secret: "${AZURE_CLIENT_SECRET}"
     resource_groups:
-      - "example-compute-vm"
+      - "ex-compute-vm"
     services:
       - "Microsoft.Compute/virtualMachines"
     collection_interval: 60s
