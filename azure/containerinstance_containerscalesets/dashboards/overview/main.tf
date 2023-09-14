@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Container Instance Container Scale Sets Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "Container Instance Container Scale Sets Metrics"
   dashboard_description = "[Beta] Monitor Container Instance Container Scale Sets with this metrics overview dashboard."
 
   chart {

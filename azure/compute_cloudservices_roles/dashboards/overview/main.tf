@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Compute Cloud Services Roles Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "Compute Cloud Services Roles Metrics"
   dashboard_description = "[Beta] Monitor Compute Cloud Services Roles with this metrics overview dashboard."
 
   chart {
