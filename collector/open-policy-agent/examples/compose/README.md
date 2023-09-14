@@ -15,7 +15,7 @@ Open Policy Agent (OPA) is a powerful open-source policy engine that enables fin
 
 1. **Export your Cloud Observability access token**:
     ```bash
-    export LS_ACCESS_TOKEN=<YOUR_LIGHTSTEP_TOKEN>
+    export LS_ACCESS_TOKEN=<YOUR_CLOUD_OBSERVABILITY_TOKEN>
     ```
 2. **Run the docker compose example to spin up Gitea and the OpenTelemetry Collector**:
     ```bash
