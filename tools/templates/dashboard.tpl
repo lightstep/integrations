@@ -9,7 +9,7 @@ terraform {
 }
 
 variable "lightstep_project" {
-  description = "Lightstep Project Name"
+  description = "Cloud Observability Project Name"
   type        = string
 }
 
@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "{{ .Name }} Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "{{ .Name }} Metrics"
   dashboard_description = "Monitor {{ .Name }} with this metrics overview dashboard."{{ range $index, $graph := .Graphs }}
 
   chart {

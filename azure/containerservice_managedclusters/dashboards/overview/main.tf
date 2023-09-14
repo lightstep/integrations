@@ -24,7 +24,7 @@ resource "lightstep_dashboard" "otel_collector_dashboard" {
   dashboard_description = "Monitor Container Service Managed Clusters with this metrics overview dashboard."
 
   chart {
-    name = "Apiserver Current Inflight Requests"
+    name = "API Server Current Inflight Requests"
     rank = "0"
     type = "timeseries"
 
