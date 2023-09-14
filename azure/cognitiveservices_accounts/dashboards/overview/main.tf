@@ -21,7 +21,7 @@ output "dashboard_url" {
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name          = var.cloud_observability_project
   dashboard_name        = "Cognitive Services Accounts Metrics"
-  dashboard_description = "Monitor Cognitive Services Accounts with this metrics overview dashboard."
+  dashboard_description = "[Beta] Monitor Cognitive Services Accounts with this metrics overview dashboard."
 
   chart {
     name = "Success Rate"

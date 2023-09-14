@@ -21,7 +21,7 @@ output "dashboard_url" {
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name          = var.cloud_observability_project
   dashboard_name        = "CDN Web Application Firewall Policies Metrics"
-  dashboard_description = "Monitor CDN Web Application Firewall Policies with this metrics overview dashboard."
+  dashboard_description = "[Beta] Monitor CDN Web Application Firewall Policies with this metrics overview dashboard."
 
   chart {
     name = "Web Application Firewall Requests"

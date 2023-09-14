@@ -21,7 +21,7 @@ output "dashboard_url" {
 resource "lightstep_dashboard" "otel_collector_dashboard" {
   project_name          = var.cloud_observability_project
   dashboard_name        = "Cache Redis Metrics"
-  dashboard_description = "Monitor Cache Redis with this metrics overview dashboard."
+  dashboard_description = "[Beta] Monitor Cache Redis with this metrics overview dashboard."
 
   chart {
     name = "All Operations per Second"
