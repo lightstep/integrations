@@ -14,13 +14,11 @@ var (
 	ErrEmptyKeyOrValue      = errors.New("empty key or value in pair")
 )
 
-type Context any
-
-// Validate is a run-time type check to ensure that the Context is one of
+// Validate is a run-time type check to ensure the variable is one of
 //   - a string with key=value pairs delimited by commas: e.g. "ServicePort=8888,ScrapePort=9090"
 //   - a map of type map[string]any
 //   - any Go struct
-func Validate(c Context) error {
+func Validate(c interface{}) error {
 	switch v := c.(type) {
 	case string:
 		_, err := ParseKeyValuePairs(v)
@@ -72,6 +70,6 @@ func ParseKeyValuePairs(input string) (map[string]string, error) {
 //     2.
 //
 // Type notes: if you know how to constrain
-func TemplateFileRender(path string, c Context) ([]byte, error) {
+func TemplateFileRender(path string, c interface{}) ([]byte, error) {
 	return nil, nil
 }
