@@ -11,7 +11,7 @@ import (
 
 func TestValidate(t *testing.T) {
 	tests := []struct {
-		input   text.Context
+		input   interface{}
 		isValid bool
 		errMsg  error
 	}{
