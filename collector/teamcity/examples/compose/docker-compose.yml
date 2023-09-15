@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  teamcity-server:
+    container_name: teamcity-server
+    image: jetbrains/teamcity-server:latest
+    ports:
+      - "8111:8111"
+    volumes:
+      - ./data/teamcity_server/datadir:/data/teamcity_server/datadir
+      - ./logs:/opt/teamcity/logs
+
+  teamcity-agent:
+    container_name: teamcity-agent
+    image: jetbrains/teamcity-agent:latest
+    environment:
+      - SERVER_URL=http://teamcity-server:8111
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  otel-collector:
+    container_name: otel-collector
+    image: otel/opentelemetry-collector-contrib:0.81.0
+    hostname: otel-collector
+    restart: always
+    command: [ "--config=/conf/collector.yaml" ]
+    volumes:
+      - ./collector.yaml:/conf/collector.yaml:rw
+    environment:
+      LS_ACCESS_TOKEN: "${LS_ACCESS_TOKEN}"

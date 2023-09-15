@@ -1,0 +1,29 @@
+receivers:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'teamcity'
+          scrape_interval: 10s
+          metrics_path: "/app/metrics"
+          static_configs:
+            - targets: ['teamcity-server:8111']
+          tls_config:
+            insecure_skip_verify: true
+
+processors:
+  batch:
+
+exporters:
+  logging:
+    loglevel: debug
+  otlp:
+    endpoint: "ingest.lightstep.com:443"
+    headers:
+      "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus]
+      processors: [batch]
+      exporters: [logging,otlp]
