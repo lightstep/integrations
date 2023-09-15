@@ -16,7 +16,6 @@ services:
     depends_on:
       - bundle_server
     networks:
-      - default
       - integrations
 
   api_server:
