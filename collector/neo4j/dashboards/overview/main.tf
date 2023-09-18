@@ -8,17 +8,17 @@ terraform {
   required_version = ">= v1.0.11"
 }
 
-variable "cloud_observability_project" {
+variable "lightstep_project" {
   description = "Cloud Observability Project Name"
   type        = string
 }
 
 output "dashboard_url" {
-  value       = "https://app.lightstep.com/${var.cloud_observability_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
+  value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
   description = "OpenTelemetry Collector Neo4J Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "collector_neo4j_overview" {
   dashboard_name        = "Neo4J - Overview"
   project_name          = "dev_bcronin"
   dashboard_description = "A Prometheus-integrated Neo4j metrics monitoring dashboard provides real-time insights into Neo4j database performance and health."
