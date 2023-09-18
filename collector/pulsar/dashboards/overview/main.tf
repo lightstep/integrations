@@ -8,11 +8,11 @@ terraform {
   required_version = ">= v1.0.11"
 }
 
-resource "lightstep_dashboard" "otel_collector_pulsar_dashboard" {
-  project_name          = var.cloud_observability_project
+resource "lightstep_dashboard" "collector_pulsar_overview" {
+  project_name          = var.lightstep_project
   dashboard_name        = "OpenTelemetry Pulsar & Dashboard"
   dashboard_description = "Monitor Pulsar and metrics with this summary dashboard."
-  
+
   chart {
     name = "CPU Time Spent"
     rank = "0"
