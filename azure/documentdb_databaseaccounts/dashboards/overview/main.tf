@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector DocumentDB Database Accounts Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_documentdb_databaseaccounts_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "DocumentDB Database Accounts Metrics"
   dashboard_description = "Monitor DocumentDB Database Accounts with this metrics overview dashboard."

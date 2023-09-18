@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Cache Redis Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_cache_redis_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Cache Redis Metrics"
   dashboard_description = "[Beta] Monitor Cache Redis with this metrics overview dashboard."
