@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Network Interfaces Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "Network Interfaces Metrics"
   dashboard_description = "Monitor Network Interfaces with this metrics overview dashboard."
 
   chart {

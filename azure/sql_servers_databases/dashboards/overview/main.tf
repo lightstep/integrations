@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "SQL Servers Databases Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "SQL Servers Databases Metrics"
   dashboard_description = "Monitor SQL Servers Databases with this metrics overview dashboard."
 
   chart {

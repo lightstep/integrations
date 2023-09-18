@@ -19,8 +19,8 @@ output "dashboard_url" {
 }
 
 resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Storage Tasks Metrics"
+  project_name          = var.lightstep_project
+  dashboard_name        = "Storage Tasks Metrics"
   dashboard_description = "[Beta] Monitor Storage Tasks with this metrics overview dashboard."
 
   chart {
