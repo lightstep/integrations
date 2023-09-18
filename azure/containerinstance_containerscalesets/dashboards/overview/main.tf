@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Container Instance Container Scale Sets Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_containerinstance_containerscalesets_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Container Instance Container Scale Sets Metrics"
   dashboard_description = "[Beta] Monitor Container Instance Container Scale Sets with this metrics overview dashboard."

@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Container Service Managed Clusters Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_containerservice_managedclusters_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Container Service Managed Clusters Metrics"
   dashboard_description = "Monitor Container Service Managed Clusters with this metrics overview dashboard."

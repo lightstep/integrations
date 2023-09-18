@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector NATS Server Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "collector_nats_server" {
   project_name          = var.lightstep_project
   dashboard_name        = "NATS Server"
   dashboard_description = "A real-time Nats server monitoring dashboard providing insights into server performance and message traffic."

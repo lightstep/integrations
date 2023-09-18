@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector MariaDB Servers Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_dbformariadb_servers_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "MariaDB Servers Metrics"
   dashboard_description = "Monitor MariaDB Servers with this metrics overview dashboard."

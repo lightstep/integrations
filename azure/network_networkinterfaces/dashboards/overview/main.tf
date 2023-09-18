@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Network Interfaces Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_network_networkinterfaces_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Network Interfaces Metrics"
   dashboard_description = "Monitor Network Interfaces with this metrics overview dashboard."
