@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector DocumentDB Mongo Cluster Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_documentdb_mongocluster_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "DocumentDB Mongo Cluster Metrics"
   dashboard_description = "[Beta] Monitor DocumentDB Mongo Cluster with this metrics overview dashboard."
