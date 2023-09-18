@@ -1,0 +1,20 @@
+receivers:
+  prometheus/neo4j:
+    config:
+      scrape_configs:
+        - job_name: 'neo4j'
+          scrape_interval: 10s
+          static_configs:
+            - targets: ["neo4j:2004"]
+exporters:
+  logging:
+    loglevel: debug
+  otlp:
+    endpoint: ingest.lightstep.com:443
+    headers:
+      - lightstep-access-token: ${LS_ACCESS_TOKEN}
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus/neo4j]
+      exporters: [logging, otlp]
