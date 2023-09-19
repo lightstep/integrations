@@ -1,6 +1,6 @@
 services:
   opa:
-    image: openpolicyagent/opa:0.40.0-rootless
+    image: openpolicyagent/opa:0.56.0-rootless
     ports:
       - "8181:8181"
     command:
