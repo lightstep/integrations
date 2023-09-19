@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Storage Object Replication Policies Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_storage_storageaccounts_objectreplicationpolicies_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Storage Object Replication Policies Metrics"
   dashboard_description = "[Beta] Monitor Storage Object Replication Policies with this metrics overview dashboard."

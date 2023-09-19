@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Data Protection Backup Vaults Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_dataprotection_backupvaults_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Data Protection Backup Vaults Metrics"
   dashboard_description = "[Beta] Monitor Data Protection Backup Vaults with this metrics overview dashboard."

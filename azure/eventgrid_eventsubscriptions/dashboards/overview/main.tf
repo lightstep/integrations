@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Event Grid Event Subscriptions Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_eventgrid_eventsubscriptions_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Event Grid Event Subscriptions Metrics"
   dashboard_description = "[Beta] Monitor Event Grid Event Subscriptions with this metrics overview dashboard."

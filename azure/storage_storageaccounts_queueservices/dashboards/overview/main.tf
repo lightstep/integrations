@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Storage Queue Services Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_storage_storageaccounts_queueservices_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Storage Queue Services Metrics"
   dashboard_description = "Monitor Storage Queue Services with this metrics overview dashboard."

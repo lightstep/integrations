@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector PostgreSQL Servers Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_dbforpostgresql_servers_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "PostgreSQL Servers Metrics"
   dashboard_description = "Monitor PostgreSQL Servers with this metrics overview dashboard."
