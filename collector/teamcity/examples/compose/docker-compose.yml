@@ -14,8 +14,6 @@ services:
     image: jetbrains/teamcity-agent:latest
     environment:
       - SERVER_URL=http://teamcity-server:8111
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
 
   otel-collector:
     container_name: otel-collector
