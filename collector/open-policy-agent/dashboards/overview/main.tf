@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Open Policy Agent Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_opa_dashboard" {
+resource "lightstep_dashboard" "collector_openpolicyagent_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Open Policy Agent"
   dashboard_description = "Monitoring dashboard for Open Policy Agent (OPA), allowing real-time tracking of resource utilization."
