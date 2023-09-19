@@ -1,6 +1,6 @@
 services:
   opa:
-    image: openpolicyagent/opa:0.40.0-rootless
+    image: openpolicyagent/opa:0.56.0-rootless
     ports:
       - "8181:8181"
     command:
@@ -16,6 +16,7 @@ services:
     depends_on:
       - bundle_server
     networks:
+      - policy
       - integrations
 
   api_server:
@@ -27,13 +28,18 @@ services:
       - POLICY_PATH=/v1/data/httpapi/authz
     depends_on:
       - opa
+    networks:
+      - policy
 
   bundle_server:
     image: nginx:1.20.0-alpine
+    hostname: bundle_server
     ports:
       - 8888:80
     volumes:
       - ./bundle.tar.gz:/usr/share/nginx/html/bundle.tar.gz:ro
+    networks:
+      - policy
 
   otel-collector:
     container_name: otel-collector
@@ -52,3 +58,5 @@ services:
 
 networks:
   integrations:
+  policy:
+
