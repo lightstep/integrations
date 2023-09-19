@@ -18,9 +18,9 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Kong Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Kong Metrics"
+resource "lightstep_dashboard" "collector_kong_overview" {
+  project_name          = var.lightstep_project
+  dashboard_name        = "Kong Metrics"
   dashboard_description = "Monitor Kong with this metrics overview dashboard."
 
   chart {

@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector DocumentDB Cassandra Clusters Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_documentdb_cassandraclusters_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "DocumentDB Cassandra Clusters Metrics"
   dashboard_description = "[Beta] Monitor DocumentDB Cassandra Clusters with this metrics overview dashboard."

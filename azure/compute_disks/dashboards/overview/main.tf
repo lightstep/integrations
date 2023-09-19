@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Compute Disks Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_compute_disks_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "Compute Disks Metrics"
   dashboard_description = "Monitor Compute Disks with this metrics overview dashboard."

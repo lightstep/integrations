@@ -18,7 +18,7 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector CDN Profiles Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
+resource "lightstep_dashboard" "azure_cdn_profiles_overview" {
   project_name          = var.lightstep_project
   dashboard_name        = "CDN Profiles Metrics"
   dashboard_description = "[Beta] Monitor CDN Profiles with this metrics overview dashboard."
