@@ -18,9 +18,9 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector SQL Managed Instances Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "SQL Managed Instances Metrics"
+resource "lightstep_dashboard" "azure_sql_managedinstances_overview" {
+  project_name          = var.lightstep_project
+  dashboard_name        = "SQL Managed Instances Metrics"
   dashboard_description = "[Beta] Monitor SQL Managed Instances with this metrics overview dashboard."
 
   chart {

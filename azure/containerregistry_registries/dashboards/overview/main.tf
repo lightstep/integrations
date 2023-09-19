@@ -18,9 +18,9 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Container Registry Registries Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Container Registry Metrics"
+resource "lightstep_dashboard" "azure_containerregistry_registries_overview" {
+  project_name          = var.lightstep_project
+  dashboard_name        = "Container Registry Metrics"
   dashboard_description = "Monitor Container Registry with this metrics overview dashboard."
 
   chart {

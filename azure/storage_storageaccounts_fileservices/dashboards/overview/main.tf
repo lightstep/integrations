@@ -18,9 +18,9 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Storage File Services Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Storage File Services Metrics"
+resource "lightstep_dashboard" "azure_storage_storageaccounts_fileservices_overview" {
+  project_name          = var.lightstep_project
+  dashboard_name        = "Storage File Services Metrics"
   dashboard_description = "Monitor Storage File Services with this metrics overview dashboard."
 
   chart {

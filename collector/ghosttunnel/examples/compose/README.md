@@ -1,8 +1,6 @@
-# Monitor NATS with the OpenTelemetry Collector for Cloud Observability
+# Monitor Ghostunnel with the OpenTelemetry Collector for Lightstep
 
 ## Overview
-
-NATS is a simple, secure, and high-performance open source messaging system. To maintain the reliability and performance of a NATS setup, it's crucial to have real-time monitoring. With the OpenTelemetry Collector, metrics from NATS can be effectively channeled to Cloud Observability for comprehensive analysis and visualization. This README will guide you through integrating NATS metrics with Cloud Observability using the OpenTelemetry Collector.
 
 ## Prerequisites
 
@@ -17,11 +15,11 @@ NATS is a simple, secure, and high-performance open source messaging system. To 
     ```bash
     export LS_ACCESS_TOKEN=<YOUR_LIGHTSTEP_TOKEN>
     ```
-2. **Run the docker compose example to spin up NATS and the OpenTelemetry Collector**:
+2. **Run the docker compose example to spin up Ghostunnel and the OpenTelemetry Collector**:
     ```bash
     docker-compose up -d
     ```
-3. **Access the NATS dashboard**: Depending on your setup, typically you can visit a web UI to manage and observe NATS. In our case, you can NATS node 1 dashboard at `http://localhost:8222/`.
+3. **Access the G dashboard**: Depending on your setup, typically you can visit a web UI to manage and observe NATS. In our case, you can NATS node 1 dashboard at `http://localhost:8222/`.
 4. **Monitor NATS Metrics in Cloud Observability**: After setting things up, NATS metrics should start populating in your Cloud Observability dashboard.
 5. **Shutting down the monitoring setup**:
     ```bash
