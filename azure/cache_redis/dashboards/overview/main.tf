@@ -8,20 +8,20 @@ terraform {
   required_version = ">= v1.0.11"
 }
 
-variable "cloud_observability_project" {
+variable "lightstep_project" {
   description = "Cloud Observability Project Name"
   type        = string
 }
 
 output "dashboard_url" {
-  value       = "https://app.lightstep.com/${var.cloud_observability_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
+  value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
   description = "OpenTelemetry Collector Cache Redis Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name          = var.cloud_observability_project
+resource "lightstep_dashboard" "azure_cache_redis_overview" {
+  project_name          = var.lightstep_project
   dashboard_name        = "Cache Redis Metrics"
-  dashboard_description = "Monitor Cache Redis with this metrics overview dashboard."
+  dashboard_description = "[Beta] Monitor Cache Redis with this metrics overview dashboard."
 
   chart {
     name = "All Operations per Second"

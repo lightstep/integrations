@@ -18,9 +18,9 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector SQL Servers Databases Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "SQL Servers Databases Metrics"
+resource "lightstep_dashboard" "azure_sql_servers_databases_overview" {
+  project_name          = var.lightstep_project
+  dashboard_name        = "SQL Servers Databases Metrics"
   dashboard_description = "Monitor SQL Servers Databases with this metrics overview dashboard."
 
   chart {

@@ -1,0 +1,26 @@
+receivers:
+  prometheus/opa:
+    config:
+      scrape_configs:
+        - job_name: 'opa'
+          scrape_interval: 15s
+          static_configs:
+            - targets: ['opa:8181']
+
+processors:
+  batch:
+
+exporters:
+  logging:
+    loglevel: debug
+  otlp:
+    endpoint: ingest.lightstep.com:443
+    headers:
+      - lightstep-access-token: ${LS_ACCESS_TOKEN}
+
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus/opa]
+      processors: [batch]
+      exporters: [logging,otlp]
