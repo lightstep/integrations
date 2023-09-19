@@ -18,9 +18,9 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector MySQL Servers Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "MySQL Servers Metrics"
+resource "lightstep_dashboard" "azure_dbformysql_servers_overview" {
+  project_name          = var.lightstep_project
+  dashboard_name        = "MySQL Servers Metrics"
   dashboard_description = "Monitor MySQL Servers with this metrics overview dashboard."
 
   chart {

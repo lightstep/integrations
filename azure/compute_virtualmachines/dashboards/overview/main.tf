@@ -18,9 +18,9 @@ output "dashboard_url" {
   description = "OpenTelemetry Collector Compute Virtual Machines Dashboard URL"
 }
 
-resource "lightstep_dashboard" "otel_collector_dashboard" {
-  project_name   = var.lightstep_project
-  dashboard_name = "Compute Virtual Machines Metrics"
+resource "lightstep_dashboard" "azure_compute_virtualmachines_overview" {
+  project_name          = var.lightstep_project
+  dashboard_name        = "Compute Virtual Machines Metrics"
   dashboard_description = "Monitor Compute Virtual Machines with this metrics overview dashboard."
 
   chart {
