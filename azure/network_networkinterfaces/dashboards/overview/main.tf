@@ -14,7 +14,7 @@ variable "lightstep_project" {
 }
 
 output "dashboard_url" {
-  value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.otel_collector_dashboard.id}"
+  value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.azure_network_networkinterfaces_overview.id}"
   description = "OpenTelemetry Collector Network Interfaces Dashboard URL"
 }
 
