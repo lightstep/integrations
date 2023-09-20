@@ -122,7 +122,3 @@ EOT
     suggestion_attribute_key = "location"
   }
 }
-
-
-
-azure/dbformysql_servers/dashboards/overview/main.tf azure/dbforpostgresql_flexibleservers/dashboards/overview/main.tf azure/dbforpostgresql_servergroupsv2/dashboards/overview/main.tf azure/dbforpostgresql_servers/dashboards/overview/main.tf azure/dbforpostgresql_serversv2/dashboards/overview/main.tf azure/documentdb_cassandraclusters/dashboards/overview/main.tf azure/documentdb_databaseaccounts/dashboards/overview/main.tf azure/eventgrid_domains/dashboards/overview/main.tf azure/eventgrid_eventsubscriptions/dashboards/overview/main.tf azure/network_networkinterfaces/dashboards/overview/main.tf azure/sql_managedinstances/dashboards/overview/main.tf azure/sql_servers_databases/dashboards/overview/main.tf azure/sql_servers_elasticpools/dashboards/overview/main.tf azure/storage_storageaccounts/dashboards/overview/main.tf azure/storage_storageaccounts_blobservices/dashboards/overview/main.tf azure/storage_storageaccounts_fileservices/dashboards/overview/main.tf azure/storage_storageaccounts_objectreplicationpolicies/dashboards/overview/main.tf azure/storage_storageaccounts_queueservices/dashboards/overview/main.tf azure/storage_storageaccounts_storagetasks/dashboards/overview/main.tf azure/storage_storageaccounts_tableservices/dashboards/overview/main.tf
