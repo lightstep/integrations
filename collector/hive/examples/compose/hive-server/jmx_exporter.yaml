@@ -1,0 +1,12 @@
+---
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+rules:
+- pattern: 'org.apache.hadoop.hive<type=HiveServer2, name=.*><>Value'
+  name: hive_jmx_$1_$2
+  type: COUNTER
+- pattern: 'org.apache.hadoop.hive<type=HiveMetaStore, name=.*><>Value'
+  name: hive_metastore_jmx_$1_$2
+  type: COUNTER
+- pattern: 'org.apache.hadoop.hive<type=MetricsSystem, name=(.+)><>Value'
+  name: hive_$1
