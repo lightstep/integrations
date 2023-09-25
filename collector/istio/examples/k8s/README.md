@@ -113,6 +113,9 @@ make deploy-image
 
 #### Apply the otel deployment to your Kubernetes cluster
 
+First edit the `[lightstep-secret.yaml](lightstep-secret.yaml)` file and replace `${LS_ACCESS_TOKEN}` with your [access token][ls-docs-access-token].
+Then apply the secret & other otel resources to your cluster:
+
 ```sh
 make deploy-otel
 ```
