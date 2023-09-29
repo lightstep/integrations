@@ -1,13 +1,15 @@
 version: '3.8'
 
 services:
-  purefa:
+  pure-fa-om-exporter:
     image: quay.io/purestorage/pure-fa-om-exporter:latest
     command: 
       - '--port=9490'
     ports:
       - 9490:9490
     restart: on-failure
+    depends_on: 
+      - otel-collector
 
   otel-collector:
     container_name: otel-collector
@@ -19,5 +21,3 @@ services:
       - ./collector.yaml:/conf/collector.yaml:rw
     environment:
       LS_ACCESS_TOKEN: "${LS_ACCESS_TOKEN}"
-    depends_on: 
-      - purefa
