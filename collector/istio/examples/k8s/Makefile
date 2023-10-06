@@ -4,6 +4,7 @@ docker := $(shell command -v docker 2> /dev/null)
 @kill := $(shell command -v kill 2> /dev/null)
 @curl := $(shell command -v curl 2> /dev/null)
 @lsof := $(shell command -v lsof 2> /dev/null)
+@istioctl := $(shell command -v istioctl 2> /dev/null)
 
 CLUSTER_NAME := "go-istio-cluster"
 CLUSTER_CONFIG := "kind-config.yaml"
@@ -12,6 +13,25 @@ IMAGE_TAG := "latest"
 
 .PHONY: all
 all: create-cluster deploy-image deploy-otel deploy-isito-telemetry
+
+.PHONY: check-istioctl
+check-istioctl:
+	@echo "Checking istioctl..."
+ifndef @istioctl
+	$(error "istioctl is not available please install it")
+else
+	@echo "istioctl is available"
+endif
+
+.PHONY: install-istioctl
+install-istioctl:
+	@echo "Installing istioctl..."
+ifndef @istioctl
+	curl -sL https://istio.io/downloadIstioctl | sh -
+	sudo mv ~/.istioctl/bin/istioctl /usr/local/bin/istioctl
+else
+	@echo "istioctl is already installed"
+endif
 
 .PHONY: create-cluster
 create-cluster:
@@ -64,8 +84,9 @@ undeploy-otel:
 	@kubectl delete -f namespace.yaml
 
 .PHONY: deploy-isito-telemetry
-deploy-isito-telemetry:
+deploy-isito-telemetry: check-istioctl
 	@echo "Deploying Istio..."
+	@istioctl install
 	@kubectl apply -f istio-telemetry.yaml
 
 .PHONY: undeploy-istio-telemetry
@@ -79,3 +100,4 @@ test:
 	@kubectl -n go-istio-demo port-forward svc/go-istio-demo 8080:80 &
 	@curl -s http://localhost:8080/healthz | jq
 	@kill -9 $(lsof -t -i:8080)
+
