@@ -46,6 +46,7 @@ undeploy-image:
 .PHONY: deploy-otel
 deploy-otel:
 	@echo "Deploying OpenTelemetry..."
+	@kubectl apply -f namespace.yaml
 	@kubectl apply -f lightstep-secret.yaml
 	@kubectl apply -f otel-collector-service.yaml
 	@kubectl apply -f otel-collector-rbac.yaml
@@ -60,6 +61,7 @@ undeploy-otel:
 	@kubectl delete -f otel-collector-rbac.yaml
 	@kubectl delete -f otel-collector-service.yaml
 	@kubectl delete -f lightstep-secret.yaml
+	@kubectl delete -f namespace.yaml
 
 .PHONY: deploy-isito-telemetry
 deploy-isito-telemetry:
