@@ -1,0 +1,202 @@
+version: '3.7'
+
+services:
+  zookeeper:
+    container_name: 'zookeeper'
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9101:/usr/share/jmx_exporter/zookeeper.yml
+    ports:
+      - "9101:9101"
+    volumes: 
+      - ./data/container_data/zk-data:/var/lib/zookeeper/data
+      - ./data/container_data/zk-txn-logs:/var/lib/zookeeper/log
+      - ./jmx_exporter:/usr/share/jmx_exporter/
+    networks:
+      - integrations
+
+  kafka:
+    container_name: kafka
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9102:/usr/share/jmx_exporter/kafka-broker.yml
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:39092,HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:39092,HOST://kafka:9092
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: localhost:9092
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+    volumes: 
+      - ./data/container_data/kafka-data:/var/lib/kafka/data
+      - ./jmx_exporter:/usr/share/jmx_exporter/
+    networks:
+      - integrations
+
+  schema-registry:
+    container_name: schema-registry
+    image: confluentinc/cp-schema-registry:latest
+    depends_on:
+      - kafka
+    environment:
+      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9103:/usr/share/jmx_exporter/schema-registry.yml
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+      SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL: PLAINTEXT
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
+    volumes: 
+      - ./jmx_exporter:/usr/share/jmx_exporter/
+    ports:
+      - 8081:8081
+      - "9103:9103"
+    networks:
+      - integrations
+
+  ksqldb-server:
+    container_name: ksqldb-server
+    image: confluentinc/ksqldb-server:latest
+    depends_on:
+      - kafka
+    environment:
+      KSQL_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=8089:/usr/share/jmx_exporter/ksqldb-server.yml
+      KSQL_LISTENERS: http://0.0.0.0:8088
+      KSQL_BOOTSTRAP_SERVERS: kafka:9092
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+    volumes: 
+      - ./jmx_exporter:/usr/share/jmx_exporter/
+    ports:
+      - 8089:8089
+      - 8088:8088
+    networks:
+      - integrations
+
+  ksqldb-cli:
+    container_name: ksqldb
+    image: confluentinc/ksqldb-cli:latest
+    depends_on:
+      - ksqldb-server
+    entrypoint: /bin/sh
+    tty: true
+    networks:
+        - integrations
+
+  rest-proxy:
+    container_name: rest-proxy
+    image: confluentinc/cp-kafka-rest:latest
+    depends_on:
+      - kafka
+    environment:
+      KAFKAREST_OPTS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9104:/usr/share/jmx_exporter/rest-proxy.yml
+      KAFKA_REST_BOOTSTRAP_SERVERS: kafka:9092
+      KAFKA_REST_HOST_NAME: rest-proxy
+    ports:
+      - "9104:9104"
+    volumes: 
+      - ./jmx_exporter:/usr/share/jmx_exporter/
+    networks:
+      - integrations
+
+  kafka-connect:
+    container_name: kafka-connect 
+    image: confluentinc/cp-kafka-connect:latest
+    depends_on:
+      - kafka
+      - schema-registry
+    environment:
+      EXTRA_ARGS: -javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=8085:/usr/share/jmx_exporter/kafka-connect.yml -Xmx256M -Xms256M
+      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: kafka-connect-group
+      CONNECT_PRODUCER_COMPRESSION_TYPE: lz4
+      CONNECT_CONFIG_STORAGE_TOPIC: connect-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_TOPIC: connect-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_TOPIC: connect-status
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_LOG4J_LOGGERS: "org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR"
+      CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
+      CONNECT_INTERNAL_KEY_CONVERTER_SCHEMAS_ENABLE: 'false'
+      CONNECT_INTERNAL_VALUE_CONVERTER_SCHEMAS_ENABLE: 'false'
+    volumes: 
+      - ./jmx_exporter:/usr/share/jmx_exporter/
+    ports:
+      - "8083:8083"
+      - "8085:8085"
+    networks:
+      - integrations
+
+  replicator:
+    container_name: replicator
+    image: confluentinc/cp-enterprise-replicator:latest
+    depends_on:
+      - kafka
+      - schema-registry
+    ports:
+      - 58083:58083
+      - 58084:58084
+    environment:
+      EXTRA_ARGS: "-javaagent:/usr/share/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=58084:/usr/share/jmx_exporter/replicator.yml"
+      CONFLUENT_REPLICATOR_BOOTSTRAP_SERVERS: kafka:9092
+      CONFLUENT_REPLICATOR_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+      CONNECT_GROUP_ID: replicator-group-id
+      CONNECT_CONFIG_STORAGE_TOPIC: replicator-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_TOPIC: replicator-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_TOPIC: replicator-statuses
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_REST_ADVERTISED_HOST_NAME: replicator
+      CONNECT_REST_PORT: 58083
+      CONNECT_INTERNAL_KEY_CONVERTER: 'org.apache.kafka.connect.json.JsonConverter'
+      CONNECT_INTERNAL_VALUE_CONVERTER: 'org.apache.kafka.connect.json.JsonConverter'
+      CONNECT_LOG4J_ROOT_LOGLEVEL: 'INFO'
+      CONNECT_LOG4J_LOGGERS: 'org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR'
+      CONNECT_LOG4J_APPENDER_STDOUT_LAYOUT_CONVERSIONPATTERN: "[%d] %p %X{connector.context}%m (%c:%L)%n"
+      CONNECT_CONFIG_PROVIDERS: 'file'
+      CONNECT_CONFIG_PROVIDERS_FILE_CLASS: 'org.apache.kafka.common.config.provider.FileConfigProvider'
+    volumes:
+        - ./jmx_exporter:/usr/share/jmx_exporter/
+    networks:
+      - integrations
+
+  otel-collector:
+    container_name: otel-collector
+    image: otel/opentelemetry-collector-contrib:0.81.0
+    hostname: otel-collector
+    restart: always
+    command: [ "--config=/conf/collector.yaml" ]
+    volumes:
+      - ./collector.yaml:/conf/collector.yaml:rw
+    environment:
+      LS_ACCESS_TOKEN: "${LS_ACCESS_TOKEN}"
+    depends_on:
+      - kafka
+      - zookeeper
+    networks:
+        - integrations
+
+networks:
+    integrations:
