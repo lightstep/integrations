@@ -57,10 +57,12 @@ load-image:
 deploy-image: build-image load-image
 	@echo "Deploying image..."
 	@kubectl apply -f go-istio-demo.yaml
+	@kubectl apply -f sleep-demo.yaml
 
 .PHONY: undeploy-image
 undeploy-image:
 	@echo "Undeploying image..."
+	@kubectl delete -f sleep-demo.yaml
 	@kubectl delete -f go-istio-demo.yaml
 
 .PHONY: deploy-otel
@@ -97,7 +99,5 @@ undeploy-istio-telemetry:
 .PHONY: test
 test:
 	@echo "Testing..."
-	@kubectl -n go-istio-demo port-forward svc/go-istio-demo 8080:80 &
-	@curl -s http://localhost:8080/healthz | jq
-	@kill -9 $(lsof -t -i:8080)
-
+	@SOURCE_POD=$$(kubectl get pod -l app=sleep -n go-istio-demo -o jsonpath={.items..metadata.name}); \
+	kubectl -n go-istio-demo exec "$$SOURCE_POD" -c sleep -- curl -sS -v go-istio-demo:80/healthz
