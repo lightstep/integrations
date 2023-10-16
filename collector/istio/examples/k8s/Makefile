@@ -90,10 +90,12 @@ deploy-isito-telemetry: check-istioctl
 	@echo "Deploying Istio..."
 	@istioctl install
 	@kubectl apply -f istio-telemetry.yaml
+	@kubectl apply -f sleep-demo-telemtry.yaml
 
 .PHONY: undeploy-istio-telemetry
 undeploy-istio-telemetry:
 	@echo "Undeploying Istio..."
+	@kubectl delete -f sleep-demo-telemtry.yaml
 	@kubectl delete -f istio-telemetry.yaml
 
 .PHONY: test

@@ -49,19 +49,3 @@ spec:
         secret:
           secretName: sleep-secret
           optional: true
----
-apiVersion: telemetry.istio.io/v1alpha1
-kind: Telemetry
-metadata:
-  name: sleep-logging
-  namespace: go-istio-demo
-spec:
-  selector:
-    matchLabels:
-      app: sleep
-  accessLogging:
-    - providers:
-        - name: otel-logging
-  tracing:
-    - providers:
-        - name: otel-tracing
