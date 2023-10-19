@@ -14,7 +14,7 @@ terraform {
     dashboard_description = "Monitor key metrics from Pure FlashArray"
   
     chart {
-      name = "FlashArray Throughput (IOPS)"
+      name = "Throughput (IOPS)"
       rank = "0"
       type = "timeseries"
   
@@ -27,7 +27,7 @@ terraform {
     }
   
     chart {
-      name = "FlashArray Space Utilization"
+      name = "Space Utilization"
       rank = "1"
       type = "timeseries"
   
@@ -40,7 +40,7 @@ terraform {
     }
   
     chart {
-      name = "FlashArray Latency (µs)"
+      name = "Latency (µs)"
       rank = "2"
       type = "timeseries"
   
@@ -53,7 +53,7 @@ terraform {
     }
   
   chart {
-    name = "FlashArray Volume Throughput (IOPS)"
+    name = "Volume Throughput (IOPS)"
     rank = "3"
     type = "timeseries"
 
@@ -66,7 +66,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Volume Latency (µs)"
+    name = "Volume Latency (µs)"
     rank = "4"
     type = "timeseries"
 
@@ -79,7 +79,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Pod Throughput (Bytes/sec)"
+    name = "Pod Throughput (Bytes/sec)"
     rank = "5"
     type = "timeseries"
 
@@ -92,7 +92,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Network Interface Throughput (pkts/sec)"
+    name = "Network Interface Throughput (pkts/sec)"
     rank = "6"
     type = "timeseries"
 
@@ -105,7 +105,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Hardware Component Temperature (C)"
+    name = "Hardware Component Temperature (C)"
     rank = "7"
     type = "timeseries"
 
@@ -118,7 +118,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Directory Space (Bytes)"
+    name = "Directory Space (Bytes)"
     rank = "8"
     type = "timeseries"
 
@@ -131,7 +131,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Host Throughput (IOPS)"
+    name = "Host Throughput (IOPS)"
     rank = "9"
     type = "timeseries"
 
@@ -144,7 +144,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Host Latency (µs)"
+    name = "Host Latency (µs)"
     rank = "10"
     type = "timeseries"
 
@@ -157,7 +157,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Pod Replication Bandwidth (Bytes/sec)"
+    name = "Pod Replication Bandwidth (Bytes/sec)"
     rank = "11"
     type = "timeseries"
 
@@ -170,7 +170,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Directory Throughput (IOPS)"
+    name = "Directory Throughput (IOPS)"
     rank = "12"
     type = "timeseries"
 
@@ -183,7 +183,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Space Data Reduction Ratio"
+    name = "Space Data Reduction Ratio"
     rank = "13"
     type = "timeseries"
 
@@ -196,7 +196,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Network Interface Errors (Errors/sec)"
+    name = "Network Interface Errors (Errors/sec)"
     rank = "14"
     type = "timeseries"
 
@@ -209,7 +209,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Hardware Component Voltage (Volt)"
+    name = "Hardware Component Voltage (Volt)"
     rank = "15"
     type = "timeseries"
 
@@ -222,7 +222,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Volume Performance (Latency µs)"
+    name = "Volume Performance (Latency µs)"
     rank = "16"
     type = "timeseries"
 
@@ -235,7 +235,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Volume Throughput (Bytes/sec)"
+    name = "Volume Throughput (Bytes/sec)"
     rank = "17"
     type = "timeseries"
 
@@ -248,7 +248,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Directory Space (Bytes)"
+    name = "Directory Space (Bytes)"
     rank = "18"
     type = "timeseries"
 
@@ -261,7 +261,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Pod Average Operations Size (Bytes)"
+    name = "Pod Average Operations Size (Bytes)"
     rank = "19"
     type = "timeseries"
 
@@ -274,7 +274,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Hardware Component Temperature (Celsius)"
+    name = "Hardware Component Temperature (Celsius)"
     rank = "20"
     type = "timeseries"
 
@@ -287,7 +287,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Network Interface Throughput (Packets/sec)"
+    name = "Network Interface Throughput (Packets/sec)"
     rank = "21"
     type = "timeseries"
 
@@ -300,7 +300,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Network Interface Errors (Errors/sec)"
+    name = "Network Interface Errors (Errors/sec)"
     rank = "22"
     type = "timeseries"
 
@@ -313,7 +313,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Pod Space (Bytes)"
+    name = "Pod Space (Bytes)"
     rank = "23"
     type = "timeseries"
 
@@ -326,7 +326,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Pod Data Reduction Ratio"
+    name = "Pod Data Reduction Ratio"
     rank = "24"
     type = "timeseries"
 
@@ -339,7 +339,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Pod Replication Bandwidth (Bytes/sec)"
+    name = "Pod Replication Bandwidth (Bytes/sec)"
     rank = "25"
     type = "timeseries"
 
@@ -352,7 +352,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Pod Replica Link Bandwidth (Bytes/sec)"
+    name = "Pod Replica Link Bandwidth (Bytes/sec)"
     rank = "26"
     type = "timeseries"
 
@@ -365,7 +365,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Pod Replica Link Max Lag (Seconds)"
+    name = "Pod Replica Link Max Lag (Seconds)"
     rank = "27"
     type = "timeseries"
 
@@ -378,7 +378,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Volume Performance (Bytes/sec)"
+    name = "Volume Performance (Bytes/sec)"
     rank = "28"
     type = "timeseries"
 
@@ -391,7 +391,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Volume Latency (Microseconds)"
+    name = "Volume Latency (Microseconds)"
     rank = "29"
     type = "timeseries"
 
@@ -404,7 +404,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Volume Throughput (IOPS)"
+    name = "Volume Throughput (IOPS)"
     rank = "30"
     type = "timeseries"
 
@@ -417,7 +417,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Volume Space (Bytes)"
+    name = "Volume Space (Bytes)"
     rank = "31"
     type = "timeseries"
 
@@ -430,7 +430,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Volume Data Reduction Ratio"
+    name = "Volume Data Reduction Ratio"
     rank = "32"
     type = "timeseries"
 
@@ -443,7 +443,7 @@ terraform {
   }
 
   chart {
-    name = "FlashArray Hardware Component Temperature (Celsius)"
+    name = "Hardware Component Temperature (Celsius)"
     rank = "33"
     type = "timeseries"
 
