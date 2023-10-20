@@ -8,9 +8,19 @@ terraform {
   required_version = ">= v1.0.11"
 }
 
+variable "lightstep_project" {
+  description = "Cloud Observability Project Name"
+  type        = string
+}
+
+output "dashboard_url" {
+  value       = "https://app.lightstep.com/${var.lightstep_project}/dashboard/${lightstep_dashboard.collector_pulsar_overview.id}"
+  description = "OpenTelemetry Collector Pulsar Dashboard URL"
+}
+
 resource "lightstep_dashboard" "collector_pulsar_overview" {
   project_name          = var.lightstep_project
-  dashboard_name        = "OpenTelemetry Pulsar & Dashboard"
+  dashboard_name        = "OpenTelemetry Pulsar Dashboard"
   dashboard_description = "Monitor Pulsar and metrics with this summary dashboard."
 
   chart {

@@ -1,0 +1,45 @@
+jmx_config_reload_failure_created,"Number of times configuration have failed to be reloaded.",,Sum
+jmx_config_reload_failure_total,"Number of times configuration have failed to be reloaded.",,Sum
+jmx_config_reload_success_created,"Number of times configuration have successfully been reloaded.",,Sum
+jmx_config_reload_success_total,"Number of times configuration have successfully been reloaded.",,Sum
+jmx_exporter_build_info,"A metric with a constant '1' value labeled with the version of the JMX exporter.",,Gauge
+jmx_scrape_cached_beans,"Number of beans with their matching rule cached",,Gauge
+jmx_scrape_duration_seconds,"Time this JMX scrape took, in seconds.",,Gauge
+jmx_scrape_error,"Non-zero if this scrape failed.",,Gauge
+jvm,"VM version info",,Sum
+jvm_buffer_pool_capacity_bytes,"Bytes capacity of a given JVM buffer pool.",,Gauge
+jvm_buffer_pool_used_buffers,"Used buffers of a given JVM buffer pool.",,Gauge
+jvm_buffer_pool_used_bytes,"Used bytes of a given JVM buffer pool.",,Gauge
+jvm_classes_currently_loaded,"The number of classes that are currently loaded in the JVM",,Gauge
+jvm_classes_loaded_total,"The total number of classes that have been loaded since the JVM has started execution",,Sum
+jvm_classes_unloaded_total,"The total number of classes that have been unloaded since the JVM has started execution",,Sum
+jvm_gc_collection_seconds,"Time spent in a given JVM garbage collector in seconds.",,Summary
+jvm_memory_bytes_committed,"Committed (bytes) of a given JVM memory area.",,Gauge
+jvm_memory_bytes_init,"Initial bytes of a given JVM memory area.",,Gauge
+jvm_memory_bytes_max,"Max (bytes) of a given JVM memory area.",,Gauge
+jvm_memory_bytes_used,"Used bytes of a given JVM memory area.",,Gauge
+jvm_memory_objects_pending_finalization,"The number of objects waiting in the finalizer queue.",,Gauge
+jvm_memory_pool_allocated_bytes_created,"Total bytes allocated in a given JVM memory pool. Only updated after GC, not continuously.",,Sum
+jvm_memory_pool_allocated_bytes_total,"Total bytes allocated in a given JVM memory pool. Only updated after GC, not continuously.",,Sum
+jvm_memory_pool_bytes_committed,"Committed bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_bytes_init,"Initial bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_bytes_max,"Max bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_bytes_used,"Used bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_collection_committed_bytes,"Committed after last collection bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_collection_init_bytes,"Initial after last collection bytes of a given JVM memory pool.",,Gauge
+jvm_memory_pool_collection_max_bytes,"Max bytes after last collection of a given JVM memory pool.",,Gauge
+jvm_memory_pool_collection_used_bytes,"Used bytes after last collection of a given JVM memory pool.",,Gauge
+jvm_threads_current,"Current thread count of a JVM",,Gauge
+jvm_threads_daemon,"Daemon thread count of a JVM",,Gauge
+jvm_threads_deadlocked,"Cycles of JVM-threads that are in deadlock waiting to acquire object monitors or ownable synchronizers",,Gauge
+jvm_threads_deadlocked_monitor,"Cycles of JVM-threads that are in deadlock waiting to acquire object monitors",,Gauge
+jvm_threads_peak,"Peak thread count of a JVM",,Gauge
+jvm_threads_started_total,"Started thread count of a JVM",,Sum
+jvm_threads_state,"Current count of threads by state",,Gauge
+process_cpu_seconds_total,"Total user and system CPU time spent in seconds.",,Sum
+process_max_fds,"Maximum number of open file descriptors.",,Gauge
+process_open_fds,"Number of open file descriptors.",,Gauge
+process_resident_memory_bytes,"Resident memory size in bytes.",,Gauge
+process_start_time_seconds,"Start time of the process since unix epoch in seconds.",,Gauge
+process_virtual_memory_bytes,"Virtual memory size in bytes.",,Gauge
+up,"The scraping was successful",,Gauge
