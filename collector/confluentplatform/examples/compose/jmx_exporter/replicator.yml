@@ -1,0 +1,6 @@
+---
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+rules:
+- pattern: io.confluent.connect.replicator<type=(.+), id=(.+)><>Value
+  name: replicator_$1_$2
