@@ -9,7 +9,7 @@ terraform {
 }
 
 variable "lightstep_project" {
-  description = "Lightstep Project Name"
+  description = "ServiceNow Cloud Observability Project Name"
   type        = string
 }
 

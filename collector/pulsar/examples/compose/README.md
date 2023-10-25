@@ -2,29 +2,29 @@
 
 ## Overview
 
- Pulsar natively exposes a Prometheus endpoint and the OpenTelemetry Collector has a [Prometheus receiver][otel-prom-receiver] that can be used to scrape its Prometheus endpoint. This directory contains an example showing how to configure Pulsar and the Collector to send metrics to Lightstep Observability.
+ Pulsar natively exposes a Prometheus endpoint and the OpenTelemetry Collector has a [Prometheus receiver][otel-prom-receiver] that can be used to scrape its Prometheus endpoint. This directory contains an example showing how to configure Pulsar and the Collector to send metrics to ServiceNow Cloud Observability Observability.
 
 ## Prerequisites
 
 * Docker
 * Docker Compose
-* A Lightstep Observability [access token][ls-docs-access-token]
+* A ServiceNow Cloud Observability Observability [access token][ls-docs-access-token]
 
 ## How to run the example
 
-* Export your Lightstep access token
-  
+* Export your ServiceNow Cloud Observability access token
+
   ```sh
   export LS_ACCESS_TOKEN=<YOUR_TOKEN>
   ```
 
 * Run the docker compose example
-  
+
   ```sh
   docker-compose up -d
   ```
 
-### Explore Metrics in Lightstep
+### Explore Metrics in ServiceNow Cloud Observability
 
 See the [Pulsar Telemetry Docs][pulsar-docs-telemetry] for comprehensive documentation on metrics emitted and the [dashboard documentation][ls-docs-dashboards] for more details.
 
