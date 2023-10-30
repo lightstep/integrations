@@ -8,7 +8,7 @@
 
 * Docker
 * Docker Compose
-* A Lightstep Observability [access token][ls-docs-access-token]
+* A ServiceNow Cloud Observability Observability [access token][ls-docs-access-token]
 
 ### Java application with Spring framework and a Postgres database
 
@@ -28,7 +28,7 @@ Example structure:
 
 ## How to run the example
 
-* Export your Lightstep access token
+* Export your ServiceNow Cloud Observability access token
   ```
   export LS_ACCESS_TOKEN=<YOUR_TOKEN>
   ```
@@ -41,7 +41,7 @@ Example structure:
   docker-compose down`
   ```
 
-### Explore Metrics in Lightstep
+### Explore Metrics in ServiceNow Cloud Observability
 
 See the [Hikaricp Telemetry Docs][hikaricp-prometheus-docs] for comprehensive documentation on metrics emitted and the [dashboard documentation][ls-docs-dashboards] for more details.
 
@@ -67,7 +67,7 @@ spring.datasource.hikari.maximum-pool-size=5
 
 management.endpoints.web.exposure.include=*
 management.endpoints.web.exposure.include=prometheus,health,info,metric
- 
+
 management.health.probes.enabled=true
 management.endpoint.health.show-details=always
 ```

@@ -1,4 +1,4 @@
-# Monitor Ghostunnel with the OpenTelemetry Collector for Lightstep
+# Monitor Ghostunnel with the OpenTelemetry Collector for ServiceNow Cloud Observability
 
 ## Overview
 
