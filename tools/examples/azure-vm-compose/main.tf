@@ -3,42 +3,44 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "compose_example" {
-  name     = "myResourceGroup"
+  name     = "kongComposeResourceGroup"
   location = "East US"
 }
 
 resource "azurerm_virtual_network" "compose_example" {
-  name                = "myVNet"
+  name                = "kongComposeVNet"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.compose_example.location
   resource_group_name = azurerm_resource_group.compose_example.name
 }
 
 resource "azurerm_subnet" "compose_example" {
-  name                 = "mySubnet"
+  name                 = "kongComposeSubnet"
   resource_group_name  = azurerm_resource_group.compose_example.name
   virtual_network_name = azurerm_virtual_network.compose_example.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_network_interface" "compose_example" {
-  name                = "myNIC"
+  name                = "kongComposeNIC"
   location            = azurerm_resource_group.compose_example.location
   resource_group_name = azurerm_resource_group.compose_example.name
 
   ip_configuration {
-    name                          = "myNICConfiguration"
+    name                          = "kongComposeNICConfiguration"
     subnet_id                     = azurerm_subnet.compose_example.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
 resource "azurerm_linux_virtual_machine" "compose_example" {
-  name                = "myVM"
+  name                = "kongComposeVM"
   resource_group_name = azurerm_resource_group.compose_example.name
   location            = azurerm_resource_group.compose_example.location
   size                = "Standard_DS1_v2"
   admin_username      = "azureuser"
+  admin_password      = "Strong_2_Secure"
+  disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.compose_example.id,
   ]
@@ -59,28 +61,29 @@ resource "azurerm_linux_virtual_machine" "compose_example" {
 }
 
 resource "azurerm_public_ip" "compose_example" {
-  name                = "myPublicIP"
+  name                = "kongComposePublicIP"
   location            = azurerm_resource_group.compose_example.location
   resource_group_name = azurerm_resource_group.compose_example.name
   allocation_method   = "Dynamic"
 }
 
 resource "azurerm_network_security_group" "compose_example" {
-  name                = "myNSG"
+  name                = "kongComposeNSG"
   location            = azurerm_resource_group.compose_example.location
   resource_group_name = azurerm_resource_group.compose_example.name
 
   security_rule {
-    name                       = "KongAPIGateway"
-    priority                   = 1001
+    name                       = "DenyAllInbound"
+    priority                   = 1000
     direction                  = "Inbound"
-    access                     = "Allow"
+    access                     = "Deny"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_ranges    = ["8000", "8443", "8001", "8444"]
+    destination_port_range     = "*"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
 }
 
 resource "azurerm_network_interface_security_group_association" "compose_example" {
