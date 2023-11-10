@@ -5,7 +5,6 @@
 
 function install_kind() {
   snap install go --classic
-  snap install kubectl --classic
   go install sigs.k8s.io/kind@v0.20.0
 }
 
@@ -79,7 +78,7 @@ function checkout_if_exists() {
 }
 
 function load_profile() {
-  echo 'export PATH=$PATH:$HOME/go/bin' > $HOME/.profile
+  echo 'export PATH=$HOME/go/bin:$PATH' >> $HOME/.profile
   source $HOME/.profile
 }
 
@@ -87,7 +86,7 @@ function main() {
   setup_tools
 
   setup_code
-  checkout_if_exists njs/add-kong-compose-eg
+  # checkout_if_exists njs/add-kong-compose-eg
 
   make_compose_app_service
   set_environment

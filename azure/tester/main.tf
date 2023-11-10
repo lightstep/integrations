@@ -2,29 +2,29 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "kong_compose_example" {
-  name     = "kong_compose_example-resources"
+resource "azurerm_resource_group" "test_runner" {
+  name     = "test_runner-resources"
   location = "East US"
 }
 
-resource "azurerm_virtual_network" "kong_compose_example" {
-  name                = "kong_compose_example-network"
+resource "azurerm_virtual_network" "test_runner" {
+  name                = "test_runner-network"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.kong_compose_example.location
-  resource_group_name = azurerm_resource_group.kong_compose_example.name
+  location            = azurerm_resource_group.test_runner.location
+  resource_group_name = azurerm_resource_group.test_runner.name
 }
 
-resource "azurerm_subnet" "kong_compose_example" {
-  name                 = "kong_compose_example-subnet"
-  resource_group_name  = azurerm_resource_group.kong_compose_example.name
-  virtual_network_name = azurerm_virtual_network.kong_compose_example.name
+resource "azurerm_subnet" "test_runner" {
+  name                 = "test_runner-subnet"
+  resource_group_name  = azurerm_resource_group.test_runner.name
+  virtual_network_name = azurerm_virtual_network.test_runner.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-resource "azurerm_network_security_group" "kong_compose_example" {
-  name                = "kong_compose_example-nsg"
-  location            = azurerm_resource_group.kong_compose_example.location
-  resource_group_name = azurerm_resource_group.kong_compose_example.name
+resource "azurerm_network_security_group" "test_runner" {
+  name                = "test_runner-nsg"
+  location            = azurerm_resource_group.test_runner.location
+  resource_group_name = azurerm_resource_group.test_runner.name
 
   security_rule {
     name                       = "AllowBastionInbound"
@@ -41,23 +41,23 @@ resource "azurerm_network_security_group" "kong_compose_example" {
 
 resource "azurerm_subnet" "bastion_subnet" {
   name                 = "AzureBastionSubnet"
-  resource_group_name  = azurerm_resource_group.kong_compose_example.name
-  virtual_network_name = azurerm_virtual_network.kong_compose_example.name
+  resource_group_name  = azurerm_resource_group.test_runner.name
+  virtual_network_name = azurerm_virtual_network.test_runner.name
   address_prefixes     = ["10.0.2.0/27"]
 }
 
 resource "azurerm_public_ip" "bastion_public_ip" {
   name                = "kong-compose-example-bastion-ip"
-  location            = azurerm_resource_group.kong_compose_example.location
-  resource_group_name = azurerm_resource_group.kong_compose_example.name
+  location            = azurerm_resource_group.test_runner.location
+  resource_group_name = azurerm_resource_group.test_runner.name
   allocation_method   = "Static"
   sku                 = "Standard"
 }
 
-resource "azurerm_bastion_host" "kong_compose_example" {
-  name                = "kong_compose_example-bastion-host"
-  location            = azurerm_resource_group.kong_compose_example.location
-  resource_group_name = azurerm_resource_group.kong_compose_example.name
+resource "azurerm_bastion_host" "test_runner" {
+  name                = "test_runner-bastion-host"
+  location            = azurerm_resource_group.test_runner.location
+  resource_group_name = azurerm_resource_group.test_runner.name
 
   ip_configuration {
     name                 = "configuration"
@@ -72,10 +72,10 @@ variable "LS_ACCESS_TOKEN" {
   sensitive   = true
 }
 
-resource "azurerm_linux_virtual_machine" "kong_compose_example" {
+resource "azurerm_linux_virtual_machine" "test_runner" {
   name                = "kong-compose-example-vm"
-  resource_group_name = azurerm_resource_group.kong_compose_example.name
-  location            = azurerm_resource_group.kong_compose_example.location
+  resource_group_name = azurerm_resource_group.test_runner.name
+  location            = azurerm_resource_group.test_runner.location
   size                = "Standard_DS1_v2"
   admin_username      = "azureuser"
 
@@ -86,7 +86,7 @@ resource "azurerm_linux_virtual_machine" "kong_compose_example" {
 
   // disable_password_authentication = false
   network_interface_ids = [
-    azurerm_network_interface.kong_compose_example.id,
+    azurerm_network_interface.test_runner.id,
   ]
 
   os_disk {
@@ -106,14 +106,14 @@ resource "azurerm_linux_virtual_machine" "kong_compose_example" {
   }))
 }
 
-resource "azurerm_network_interface" "kong_compose_example" {
-  name                = "kong_compose_example-nic"
-  location            = azurerm_resource_group.kong_compose_example.location
-  resource_group_name = azurerm_resource_group.kong_compose_example.name
+resource "azurerm_network_interface" "test_runner" {
+  name                = "test_runner-nic"
+  location            = azurerm_resource_group.test_runner.location
+  resource_group_name = azurerm_resource_group.test_runner.name
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.kong_compose_example.id
+    subnet_id                     = azurerm_subnet.test_runner.id
     private_ip_address_allocation = "Dynamic"
   }
 }
