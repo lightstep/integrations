@@ -79,18 +79,6 @@ resource "azurerm_linux_virtual_machine" "kong_compose_example" {
   size                = "Standard_DS1_v2"
   admin_username      = "azureuser"
 
-  /*
-  os_profile {
-    computer_name  = "hostname"
-    admin_username = "azureuser"
-  }
-  */
-
-  // os_profile_linux_config {
-  //  disable_password_authentication = true
-  // }
-  
-  // admin_password      = "Azure_2_Password"
   admin_ssh_key {
     username  = "azureuser"
     public_key = file("~/.ssh/id_rsa.pub")
@@ -112,21 +100,6 @@ resource "azurerm_linux_virtual_machine" "kong_compose_example" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
-
-  /*
-  provisioner "remote-exec" {
-    inline = [
-      "echo 'export LS_ACCESS_TOKEN=${var.LS_ACCESS_TOKEN}' >> /etc/profile.d/lightstep.sh"
-    ]
-
-    connection {
-      type     = "ssh"
-      user     = "azureuser"
-      private_key = file("~/.ssh/id_rsa")
-      host     = self.public_ip_address
-    }
-  }
-  */
 
   custom_data = base64encode(templatefile("${path.module}/setup.sh", {
     LS_ACCESS_TOKEN = var.LS_ACCESS_TOKEN
