@@ -47,7 +47,7 @@ resource "azurerm_subnet" "bastion_subnet" {
 }
 
 resource "azurerm_public_ip" "bastion_public_ip" {
-  name                = "kong-compose-example-bastion-ip"
+  name                = "test-runner-bastion-ip"
   location            = azurerm_resource_group.test_runner.location
   resource_group_name = azurerm_resource_group.test_runner.name
   allocation_method   = "Static"
@@ -73,7 +73,7 @@ variable "LS_ACCESS_TOKEN" {
 }
 
 resource "azurerm_linux_virtual_machine" "test_runner" {
-  name                = "kong-compose-example-vm"
+  name                = "test-runner-vm"
   resource_group_name = azurerm_resource_group.test_runner.name
   location            = azurerm_resource_group.test_runner.location
   size                = "Standard_DS1_v2"
