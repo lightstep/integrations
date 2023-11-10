@@ -78,6 +78,11 @@ function checkout_if_exists() {
   fi
 }
 
+function load_profile() {
+  echo 'export PATH=$PATH:$HOME/go/bin' > $HOME/.profile
+  source $HOME/.profile
+}
+
 function main() {
   setup_tools
 
@@ -87,6 +92,8 @@ function main() {
   make_compose_app_service
   set_environment
   start_app_service
+
+  load_profile
 }
 
 main "$@"
