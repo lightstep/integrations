@@ -1,11 +1,23 @@
 #!/bin/bash
 #
-# Setup Debian flavor instance to run docker-compose example for kong
+# Setup Debian flavor (apt) instance to run examples in containers
+# currently supported toolchain - docker, docker-compose, k8s, helm, kind 
+
+function install_kind() {
+  snap install go --classic
+  snap install kubectl --classic
+  go install sigs.k8s.io/kind@v0.20.0
+}
 
 function setup_tools() {
   apt-get update
+  # docker
   apt-get install -y docker.io docker-compose git
   usermod -aG docker azureuser
+  # kubectl
+  apt-get install -y apt-transport-https ca-certificates curl software-properties-common kubectl
+  # kind
+  install_kind
 }
 
 function setup_code() {
@@ -68,10 +80,12 @@ function checkout_if_exists() {
 
 function main() {
   setup_tools
+
   setup_code
   checkout_if_exists njs/add-kong-compose-eg
-  set_environment
+
   make_compose_app_service
+  set_environment
   start_app_service
 }
 
