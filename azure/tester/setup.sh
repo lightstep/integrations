@@ -10,6 +10,7 @@ function install_kind() {
 
 function setup_tools() {
   apt-get update
+  apt-get install -y make
   # docker
   apt-get install -y docker.io docker-compose git
   usermod -aG docker azureuser
