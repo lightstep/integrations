@@ -1,12 +1,8 @@
 
-# keep this first if you add rules, so service files don't
-# have to update rule names
-run: systemd-job-service 
-
 systemd-job-service:
-	docker-compose up kong-database -d
-	docker-compose up kong-db-init -d
-	docker-compose up kong-gateway -d
-	docker-compose up client -d
-	docker-compose up otel-collector
+	docker-compose up -d kong-database
+	docker-compose up -d kong-db-init
+	docker-compose up -d kong-gateway
+	docker-compose up -d client
+	docker-compose up -d otel-collector
 
