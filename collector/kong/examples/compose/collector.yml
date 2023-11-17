@@ -7,25 +7,51 @@ receivers:
             - "*"
       grpc:
         tls:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: "otel-collector"
+          static_configs:
+            - targets: ["kong-gateway:8001"]
+  # filelog:
+  #   path: /tmp/otel-collector.log
+  #   include: ["stdout", "stderr"]
 
 exporters:
-    logging:
-        loglevel: debug
-    # configuring otlp to Lightstep
-    otlp:
-      endpoint: ingest.lightstep.com:443
-      headers:
-        "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+  logging:
+    loglevel: debug
+  # configuring otlp to Lightstep
+  otlp:
+    endpoint: ingest.lightstep.com:443
+    headers:
+      "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+
+  otlp/logs:
+    endpoint: logingest.lightstep.com:443
+    headers:
+      "lightstep-access-token": "${LS_ACCESS_TOKEN}"
 
 processors:
-    batch:
+  batch:
+  memory_limiter:
+    check_interval: 5s
+    limit_percentage: 80
+    spike_limit_percentage: 25
 
 service:
-    telemetry:
-      logs:
-        level: debug
-    pipelines:
-      traces:
-        receivers: [otlp]
-        processors: [batch]
-        exporters: [logging, otlp]
+  telemetry:
+    logs:
+      level: debug
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [logging, otlp]
+    # metrics:
+    #   receivers: [prometheus]
+    #   processors: [memory_limiter, batch]
+    #   exporters: [logging, otlp]
+    # traces:
+    #   receivers: [otlp]
+    #   processors: [memory_limiter, batch]
+    #   exporters: [logging, otlp]

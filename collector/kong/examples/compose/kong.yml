@@ -1,0 +1,29 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  # configure servicenow_service like in app/client.py
+  - name: httpbin_service
+    host: httpbin.org
+    # port: 443
+    protocol: http
+    url: http://httpbin.org
+    routes:
+      - name: httpbin_route
+        paths:
+          - /httpbin
+        methods:
+          - GET
+    plugins:
+      # blog: https://konghq.com/blog/engineering/how-to-parse-and-forward-api-logs
+      - name: http-log
+        config:
+          http_endpoint: http://otel-collector:4318/v1/logs
+
+          # http_endpoint: https://logingest.lightstep.com:443
+      - name: opentelemetry
+        config:
+          endpoint: http://otel-collector:4318/v1/traces
+          resource_attributes:
+            service.name: httpbin_service
+      - name: prometheus
