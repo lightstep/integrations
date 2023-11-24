@@ -7,16 +7,6 @@ services:
           - KONG_DATABASE=off
           - KONG_DECLARATIVE_CONFIG=/etc/kong/kong.yml
 
-          # - KONG_DATABASE=postgres
-          # - KONG_PG_HOST=kong-database
-          # - KONG_PG_USER=kong
-          # - KONG_PG_PASSWORD=kongpass
-
-          - KONG_PROXY_ACCESS_LOG=/dev/stdout
-          - KONG_ADMIN_ACCESS_LOG=/dev/stdout
-          - KONG_PROXY_ERROR_LOG=/dev/stderr
-          - KONG_ADMIN_ERROR_LOG=/dev/stderr
-
           - KONG_ADMIN_LISTEN=0.0.0.0:8001
           - KONG_ADMIN_GUI_URL=http://localhost:8002
           - KONG_PORTAL_GUI_HOST=http://localhost:8003/default
@@ -32,11 +22,14 @@ services:
           - '8003:8003'
           - '8004:8004'
           - '8100:8100'
-        # depends_on:
-        #   - kong-db-init
+        logging:
+          driver: "json-file"
+          options:
+            tag: kong.logs
         volumes:
           - ./kong.conf:/etc/kong/kong.conf:rw
           - ./kong.yml:/etc/kong/kong.yml:rw
+          - ./logs/kong:/var/log/kong
     client:
         build: ./app
           # container_name: client
@@ -56,5 +49,14 @@ services:
         ports:
           - "4317:4317"
           - "4318:4318"
+          #- "8006:8006"
+        logging:
+          driver: "json-file"
+          options:
+            max-size: "200m"
+            max-file: "100"
         volumes:
             - ./collector.yml:/conf/collector.yml:rw
+            - ./logs/kong:/var/log/kong
+volumes:
+  kong-logs:

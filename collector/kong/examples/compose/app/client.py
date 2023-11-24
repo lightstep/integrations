@@ -30,4 +30,4 @@ if __name__ == "__main__":
     target = f"http://{host}:{gateway_port}/httpbin/bytes/111"
     while True:
         send_requests(target)
-        time.sleep(5)
+        time.sleep(1)

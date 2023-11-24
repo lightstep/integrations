@@ -4,8 +4,17 @@ KONG_DECLARATIVE_CONFIG_LOCAL := kong.yml
 KONG_CONF_REMOTE := /etc/kong/kong.conf
 KONG_DECLARATIVE_CONFIG_REMOTE := /etc/kong/kong.yml
 KONG_IMAGE := kong:latest
+LOGS_DIR := logs/kong
 
 .DEFAULT_GOAL := run
+
+## run: Run the kong-gateway, client and otel-collector containers (default goal)
+.PHONY: run
+run: setup down up
+
+setup:
+	mkdir -p $(LOGS_DIR)
+	chmod 777 $(LOGS_DIR)
 
 up:
 	docker-compose up -d --build kong-gateway
@@ -13,10 +22,6 @@ up:
 	docker-compose up -d --build client
 	sleep 5
 	docker-compose up -d --build otel-collector
-
-## run: Run the kong-gateway, client and otel-collector containers (default goal)
-.PHONY: run
-run: up
 
 ## check: Check kong.conf and kong.yml
 check:
@@ -56,7 +61,7 @@ start:
 	docker-compose start
 
 ## reload: Tear it down and bring it back up
-reload: down up
+fresh: down clean up
 
 # appends help from this Makefile to the README.md
 # TODO integrate this in assembling README, so no manual follow up is required
