@@ -1,0 +1,24 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  # configure servicenow_service like in app/client.py
+  - name: httpbin_service
+    host: httpbin.org
+    protocol: http
+    url: http://httpbin.org
+    routes:
+      - name: httpbin_route
+        paths:
+          - /httpbin
+        methods:
+          - GET
+    plugins:
+      - name: file-log
+        config:
+          path: /var/log/kong/kong.log
+      - name: opentelemetry
+        config:
+          endpoint: http://otel-collector:4318/v1/traces
+          resource_attributes:
+            service.name: httpbin_service
