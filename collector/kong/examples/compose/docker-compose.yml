@@ -6,7 +6,6 @@ services:
         environment:
           - KONG_DATABASE=off
           - KONG_DECLARATIVE_CONFIG=/etc/kong/kong.yml
-
           - KONG_ADMIN_LISTEN=0.0.0.0:8001
           - KONG_ADMIN_GUI_URL=http://localhost:8002
           - KONG_PORTAL_GUI_HOST=http://localhost:8003/default
@@ -15,17 +14,12 @@ services:
           - '8000:8000'
           - '8001:8001'
           - '8002:8002'
-          # - '8080:8080'
           - '8443:8443'
           - '8444:8444'
           - '8445:8445'
           - '8003:8003'
           - '8004:8004'
           - '8100:8100'
-        logging:
-          driver: "json-file"
-          options:
-            tag: kong.logs
         volumes:
           - ./kong.conf:/etc/kong/kong.conf:rw
           - ./kong.yml:/etc/kong/kong.yml:rw
@@ -49,12 +43,6 @@ services:
         ports:
           - "4317:4317"
           - "4318:4318"
-          #- "8006:8006"
-        logging:
-          driver: "json-file"
-          options:
-            max-size: "200m"
-            max-file: "100"
         volumes:
             - ./collector.yml:/conf/collector.yml:rw
             - ./logs/kong:/var/log/kong

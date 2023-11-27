@@ -14,7 +14,7 @@ receivers:
           static_configs:
             - targets: ["kong-gateway:8001"]
   filelog:
-    include: [ "/var/log/kong/kong.log" ]
+    include: ["/var/log/kong/kong.log"]
     start_at: "beginning"
 
 exporters:
