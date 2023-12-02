@@ -12,10 +12,10 @@ services:
           - KONG_PORTAL="on kong reload exit"
         ports:
           - '8000:8000'
-          - '8001:8001'
-          - '8002:8002'
           - '8443:8443'
+          - '8001:8001'
           - '8444:8444'
+          - '8002:8002'
           - '8445:8445'
           - '8003:8003'
           - '8004:8004'
@@ -24,9 +24,13 @@ services:
           - ./kong.conf:/etc/kong/kong.conf:rw
           - ./kong.yml:/etc/kong/kong.yml:rw
           - ./logs/kong:/var/log/kong
+    httpbin:
+        image: kennethreitz/httpbin
+        container_name: httpbin
+        ports:
+          - '8080:80'
     client:
         build: ./app
-          # container_name: client
         environment:
           - DESTINATION_HOST=kong-gateway
           - COLLECTOR_HOST=otel-collector

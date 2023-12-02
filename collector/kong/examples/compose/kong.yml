@@ -4,21 +4,72 @@ _transform: true
 services:
   # configure servicenow_service like in app/client.py
   - name: httpbin_service
-    host: httpbin.org
+    host: httpbin_container
+    port: 8080
+    url: http://httpbin # to httpbin service
     protocol: http
-    url: http://httpbin.org
     routes:
-      - name: httpbin_route
+      - name: httpbin_route_bytes
         paths:
-          - /httpbin
+          - /bytes
+        strip_path: false
         methods:
           - GET
-    plugins:
-      - name: file-log
-        config:
-          path: /var/log/kong/kong.log
-      - name: opentelemetry
-        config:
-          endpoint: http://otel-collector:4318/v1/traces
-          resource_attributes:
-            service.name: httpbin_service
+        plugins:
+          - name: file-log
+            config:
+              path: /var/log/kong/kong.log
+          - name: opentelemetry
+            config:
+              endpoint: http://otel-collector:4318/v1/traces
+              resource_attributes:
+                route.name: httpbin_route_bytes
+          - name: prometheus
+            config:
+              status_code_metrics: true
+              latency_metrics: true
+              bandwidth_metrics: true
+              upstream_health_metrics: true
+      - name: httpbin_route_post
+        paths:
+          - /post
+        strip_path: false
+        methods:
+          - POST
+        plugins:
+          - name: file-log
+            config:
+              path: /var/log/kong/kong.log
+          - name: opentelemetry
+            config:
+              endpoint: http://otel-collector:4318/v1/traces
+              resource_attributes:
+                route.name: httpbin_route_post
+          - name: prometheus
+            config:
+              status_code_metrics: true
+              latency_metrics: true
+              bandwidth_metrics: true
+              upstream_health_metrics: true
+      - name: httpbin_route_anything
+        paths:
+          - /anything
+        strip_path: false
+        methods:
+          - GET
+          - POST
+        plugins:
+          - name: file-log
+            config:
+              path: /var/log/kong/kong.log
+          - name: opentelemetry
+            config:
+              endpoint: http://otel-collector:4318/v1/traces
+              resource_attributes:
+                route.name: httpbin_route_anything
+          - name: prometheus
+            config:
+              status_code_metrics: true
+              latency_metrics: true
+              bandwidth_metrics: true
+              upstream_health_metrics: true
