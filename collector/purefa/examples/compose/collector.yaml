@@ -1,0 +1,67 @@
+receivers:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'purestorage-fa'
+          scrape_interval: 10s
+          metrics_path: "/metrics/array"
+          static_configs:
+            - targets: ['pure-fa-om-exporter:9490']
+          params:
+            endpoint: ["${YOUR_FLASHARRAY_IP}"]
+          headers:
+            Authorization: "Bearer ${YOUR_API_TOKEN}"
+
+        - job_name: 'purestorage-fa_volumes'
+          metrics_path: "/metrics/volumes"
+          static_configs:
+            - targets: ['pure-fa-om-exporter:9490']
+          params:
+            endpoint: ["${YOUR_FLASHARRAY_IP}"]
+          headers:
+            Authorization: "Bearer ${YOUR_API_TOKEN}"
+
+        - job_name: 'purestorage-fa_hosts'
+          metrics_path: "/metrics/hosts"
+          static_configs:
+            - targets: ['pure-fa-om-exporter:9490']
+          params:
+            endpoint: ["${YOUR_FLASHARRAY_IP}"]
+          headers:
+            Authorization: "Bearer ${YOUR_API_TOKEN}"
+
+        - job_name: 'purestorage-fa_pods'
+          metrics_path: "/metrics/pods"
+          static_configs:
+            - targets: ['pure-fa-om-exporter:9490']
+          params:
+            endpoint: ["${YOUR_FLASHARRAY_IP}"]
+          headers:
+            Authorization: "Bearer ${YOUR_API_TOKEN}"
+
+        - job_name: 'purestorage-fa_directories'
+          metrics_path: "/metrics/directories"
+          static_configs:
+            - targets: ['pure-fa-om-exporter:9490']
+          params:
+            endpoint: ["${YOUR_FLASHARRAY_IP}"]
+          headers:
+            Authorization: "Bearer ${YOUR_API_TOKEN}"
+
+processors:
+  batch:
+
+exporters:
+  logging:
+    loglevel: debug
+  otlp:
+    endpoint: ingest.lightstep.com:443
+    headers:
+      lightstep-access-token: "${LS_ACCESS_TOKEN}"
+
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus]
+      processors: [batch]
+      exporters: [logging, otlp]
