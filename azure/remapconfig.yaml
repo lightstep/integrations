@@ -1,0 +1,37 @@
+--- transformprocessor config to remap log and resource attributes to semantic conventions
+
+transform:
+  error_mode: ignore
+  log_statements:
+    - context: resource
+      statements:
+        - set(cloud.provider, "azure") where true
+        - set(cloud.region, attributes["location"]) where attributes["location"] != null
+        - set(faas.name, attributes["operationName"]) where attributes["operationName"] != null
+
+    - context: log
+      statements:
+        - set(time, attributes["time"]) where attributes["time"] != null
+        - set(log.logger.name, attributes["category"]) where attributes["category"] != null
+        - set(log.level, map_log_level(attributes["resultType"])) where attributes["resultType"] != null
+        - set(log.message, attributes["resultDescription"]) where attributes["resultDescription"] != null
+        - set(faas.duration, to_int(attributes["durationMs"]) * 1000000) where attributes["durationMs"] != null
+        - set(net.peer.ip, attributes["callerIpAddress"]) where attributes["callerIpAddress"] != null
+        - set(trace.id, attributes["correlationId"]) where attributes["correlationId"] != null
+        - set(http.status_code, to_int(attributes["properties.statusCode"])) where attributes["properties.statusCode"] != null
+        - set(azure.identity.authorization.scope, attributes["identity.authorization.scope"]) where attributes["identity.authorization.scope"] != null
+
+  functions:
+    - map_log_level:
+        input: log_level
+        output: level
+        statements:
+          - set(level, "Error") where log_level == "Error"
+          - set(level, "Warning") where log_level == "Warning"
+          - set(level, "Info") where log_level == "Informational" or log_level == "Success"
+          - set(level, "Debug") where log_level == "Verbose"
+    - to_int:
+        input: str
+        output: int_value
+        statements:
+          - set(int_value, cast(str, int))

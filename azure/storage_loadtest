@@ -1,0 +1,152 @@
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+import { SharedArray } from 'k6/data';
+
+// Azure Storage connection settings
+const storageAccountName = `${__ENV.STORAGE_ACCOUNT_NAME}`;
+const storageAccountKey = `${__ENV.STORAGE_ACCOUNT_KEY}`;
+const storageEndpoint = `https://${storageAccountName}.blob.core.windows.net`;
+
+// Storage container/share/queue/table names
+const blobContainerName = 'loadtest-blob';
+const fileShareName = 'loadtest-file';
+const queueName = 'loadtest-queue';
+const tableName = 'loadtest-table';
+
+// Shared array to store created item IDs
+const createdItems = new SharedArray('createdItems', function () {
+  return [];
+});
+
+// Function to get the current storage usage
+function getStorageUsage() {
+  const url = `https://management.azure.com/subscriptions/${__ENV.SUBSCRIPTION_ID}/resourceGroups/${__ENV.RESOURCE_GROUP_NAME}/providers/Microsoft.Storage/storageAccounts/${storageAccountName}?api-version=2021-04-01`;
+  const params = {
+    headers: {
+      'Authorization': `Bearer ${__ENV.ACCESS_TOKEN}`,
+    },
+  };
+  const res = http.get(url, params);
+  check(res, {
+    'Storage usage request status is 200': (r) => r.status === 200,
+  });
+  const usage = JSON.parse(res.body).properties.primaryEndpoints.blob.split('/')[2].split('.')[0];
+  return parseInt(usage);
+}
+
+// Function to delete all items
+function deleteAllItems() {
+  const itemsToDelete = createdItems.length;
+  console.log(`Deleting ${itemsToDelete} items...`);
+
+  for (let i = 0; i < itemsToDelete; i++) {
+    const itemId = createdItems.shift();
+    const deleteUrl = `${storageEndpoint}/${blobContainerName}/${itemId}`;
+    const deleteParams = {
+      headers: {
+        'Authorization': `Bearer ${storageAccountKey}`,
+        'x-ms-delete-snapshots': 'include',
+      },
+    };
+    const deleteRes = http.del(deleteUrl, deleteParams);
+    check(deleteRes, {
+      'Delete item request status is 202': (r) => r.status === 202,
+    });
+  }
+}
+
+// Test configuration
+export let options = {
+  scenarios: {
+    storage_load_test: {
+      executor: 'constant-arrival-rate',
+      rate: 1,
+      timeUnit: '1m',
+      duration: '240m',
+      preAllocatedVUs: 1,
+      maxVUs: 1,
+    },
+  },
+};
+
+// Test scenario
+export default function () {
+  // Cycle through operations
+  const operation = __ITER % 4;
+
+  switch (operation) {
+    case 0:
+      // Write operation
+      const writeItemId = `item-${__VU}-${__ITER}`;
+      const writeUrl = `${storageEndpoint}/${blobContainerName}/${writeItemId}`;
+      const writeParams = {
+        headers: {
+          'Authorization': `Bearer ${storageAccountKey}`,
+          'x-ms-blob-type': 'BlockBlob',
+        },
+        body: 'Lorem ipsum dolor sit amet',
+      };
+      const writeRes = http.put(writeUrl, writeParams.body, writeParams);
+      check(writeRes, {
+        'Write item request status is 201': (r) => r.status === 201,
+      });
+      createdItems.push(writeItemId);
+      break;
+
+    case 1:
+      // Read operation
+      const readItemId = createdItems[Math.floor(Math.random() * createdItems.length)];
+      const readUrl = `${storageEndpoint}/${blobContainerName}/${readItemId}`;
+      const readParams = {
+        headers: {
+          'Authorization': `Bearer ${storageAccountKey}`,
+        },
+      };
+      const readRes = http.get(readUrl, readParams);
+      check(readRes, {
+        'Read item request status is 200': (r) => r.status === 200,
+      });
+      break;
+
+    case 2:
+      // Update operation
+      const updateItemId = createdItems[Math.floor(Math.random() * createdItems.length)];
+      const updateUrl = `${storageEndpoint}/${blobContainerName}/${updateItemId}`;
+      const updateParams = {
+        headers: {
+          'Authorization': `Bearer ${storageAccountKey}`,
+          'x-ms-blob-type': 'BlockBlob',
+        },
+        body: 'Updated content',
+      };
+      const updateRes = http.put(updateUrl, updateParams.body, updateParams);
+      check(updateRes, {
+        'Update item request status is 201': (r) => r.status === 201,
+      });
+      break;
+
+    case 3:
+      // List operation
+      const listUrl = `${storageEndpoint}/${blobContainerName}?restype=container&comp=list`;
+      const listParams = {
+        headers: {
+          'Authorization': `Bearer ${storageAccountKey}`,
+        },
+      };
+      const listRes = http.get(listUrl, listParams);
+      check(listRes, {
+        'List items request status is 200': (r) => r.status === 200,
+      });
+      break;
+  }
+
+  // Check storage usage and delete items if necessary
+  const currentUsage = getStorageUsage();
+  console.log(`Current storage usage: ${currentUsage} bytes`);
+
+  if (currentUsage > 100 * 1024 * 1024 || __ITER % (20 * 4) === 0) {
+    deleteAllItems();
+  }
+
+  sleep(60); // Wait for 1 minute before the next iteration
+}
