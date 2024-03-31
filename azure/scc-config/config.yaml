@@ -1,0 +1,20 @@
+resource:
+  match: ".*"
+  include:
+    - notexists.ycdbsoya
+
+trace:
+
+metrics:
+
+log:
+  - match: ".*"
+    include:
+      - instrumentation.name
+      - service.name
+      - notexists.ycdbsoya
+    report_additional: true
+
+report_unmatched: true
+server_address: 0.0.0.0:4318
+disable_error: true

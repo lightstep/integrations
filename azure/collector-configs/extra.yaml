@@ -1,0 +1,98 @@
+receivers:
+  azureeventhub:
+    connection: ${AZURE_EVENTHUB_CONNECTION}
+  # basic command for all to listen for signals over HTTP
+  otlp:
+    protocols:
+      http:
+
+processors:
+  batch:
+  # attributes:
+  #   actions:
+  #     - key: cloud.diddler
+  #       action: upsert
+  #       value: "doo-diddle-diddle"
+  #     - key: cloud.resource_id
+  #       action: upsert
+  #       from_attribute: resource.attributes["resourceId"]
+
+  # - key: azure.resource.id
+  #   action: extract
+  #   pattern: ^/SUBSCRIPTIONS/(?P<cloud_account_id>[^/]+)/.*/PROVIDERS/(?P<cloud_resource_type>[^/]+)/(?P<cloud_resource_name>[^/]+)$
+  resource:
+    attributes:
+      - key: cloud.account.id
+        from_attribute: attributes["resourceId"]
+        pattern: ^/subscriptions/(?P<cloud_account_id>[^/]+)/(.*)$
+        action: upsert
+      - key: cloud.resource.type
+        from_attribute: attributes["resourceId"]
+        pattern: ^/subscriptions/[^/]+/.*?/providers/(?P<cloud_resource_type>(.*))/[^/]+$
+        action: upsert
+      - key: cloud.resource.name
+        from_attribute: attributes["resourceId"]
+        pattern: ^/subscriptions/[^/]+/.*?/providers/[^/]+/(?P<cloud_resource_name>[^/]+)$
+        action: upsert
+    # actions:
+    #   - key: cloud.account.id
+    #     action: upsert
+    #   - key: cloud.resource.type
+    #     action: upsert
+    #   - key: cloud.resource.name
+    #     action: upsert
+    #   - key: cloud.availability_zone
+    #     action: upsert
+  transform:
+    error_mode: ignore
+    log_statements:
+      # if context if log then assume `log.` prefix is already present
+      # scope is `.scope`
+      - context: resource
+        statements:
+          # resource
+          # scope
+          # record (attributes: map)
+          #         ### Copy value to new key
+          #          - set(cache, attributes["azure.resource.id"])
+          #         ### Extract values from azures.resource.id
+          #         ### example azure.resource.id: /subscriptions/12345678-1234-5678-1234-567812345678/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1
+          #         ### subscription_id is the first part of resource_id - prefixed by /subscriptions/ - capture group is named <SubscriptionID>
+          - set(cache, ExtractPatterns(attributes["resourceId"], "/subscriptions/(?P<cloud_account_id>[^/]+)/"))
+          - set(attributes["cloud_account_id"], cache["cloud_account_id"])
+  #         ### resource_type is the part after "/providers/" up to the last "/" in the ID - capture group is named <ResourceType>
+  #         - set(cache, ExtractPatterns(resource["azure.resource.id"], "/PROVIDERS/(?P<cloud_resource_type>[^/]+)/+"))
+  #         ### resource_name is the part after the last "/"" in the resource_id - capture group is named <ResourceName>
+  #         - set(cache, ExtractPatterns(resource["azure.resource.id"], "/[^/](?P<cloud_resource_name>)+$"))
+  #         ### NOTE: there is no availability zone in Azure.
+  #         ### Allowing user control over multi-zonal deployments is in early stages.
+  #         - merge_maps(attributes, cache, "upsert")
+  resourcedetection:
+    detectors: [azure]
+    timeout: 5s
+    override: false
+
+exporters:
+  otlp/scc:
+    endpoint: ${SCC_ENDPOINT}:4318
+    tls: { "insecure": true }
+
+  otlp:
+    endpoint: ingest.lightstep.com:443
+    headers:
+      "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+  debug:
+    verbosity: detailed
+
+extensions:
+  health_check:
+
+service:
+  extensions: [health_check]
+  telemetry:
+    logs:
+  pipelines:
+    logs:
+      receivers: [azureeventhub]
+      processors: [batch]
+      exporters: [otlp, otlp/scc]

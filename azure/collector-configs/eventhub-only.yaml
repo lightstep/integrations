@@ -1,0 +1,56 @@
+receivers:
+  azureeventhub:
+    connection: ${AZURE_EVENTHUB_CONNECTION_LOGS}
+
+processors:
+  batch:
+  attributes:
+    actions:
+      - key: cloud.diddle.doo
+        action: upsert
+        value: "doo-diddle-diddle"
+      - key: cloud.resource_id
+        action: upsert
+        from_attribute: resourceId
+  resource:
+    attributes:
+      - key: cloud.account.id
+        from_attribute: azure.resource.id
+        action: upsert
+  transform:
+    error_mode: ignore
+    log_statements:
+      - context: log
+        statements:
+          - set(attributes["azure.subscription.id"], resource.attributes["azure.resource.id"])
+          - replace_pattern(attributes["azure.subscription.id"], "SUBSCRIPTIONS\/([\w\-]+)\/RESOURCEGROUPS", "$$1")
+          # capture the subscription id from the resource id with ottl pattern matching
+          - set(attributes["cloud_account_name"], "name-me")
+  resourcedetection:
+    detectors: [azure]
+    timeout: 5s
+    override: false
+
+exporters:
+  otlp/scc:
+    endpoint: ${SCC_ENDPOINT}:4318
+    tls: { "insecure": true }
+  otlp/snco:
+    endpoint: ingest.lightstep.com:443
+    headers:
+      "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+  debug:
+    verbosity: detailed
+
+extensions:
+  health_check:
+
+service:
+  extensions: [health_check]
+  telemetry:
+    logs:
+  pipelines:
+    logs:
+      receivers: [azureeventhub]
+      processors: [batch, transform]
+      exporters: [otlp/scc, otlp/snco, debug]
