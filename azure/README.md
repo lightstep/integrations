@@ -1,78 +1,126 @@
----
-# Ingest metrics using the Azure integration
+# SGC Demo
 
-The OTel Collector has a variety of [third party receivers](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/master/receiver) that provide integration with a wide variety of metric sources.
+This directory contains all the Terraform configurations required to manage the infrastructure for Azure-based log ingest. It's structured to support multiple environments (e.g., staging, public, etc), although the that now seems like overkill at this stage.
 
-Please note that not all metrics receivers available for the OpenTelemetry Collector have been tested by ServiceNow Cloud Observability Observability, and there may be bugs or unexpected issues in using these contributed receivers with ServiceNow Cloud Observability Observability metrics. File any issues with the appropriate OpenTelemetry community.
-{: .callout}
+## Status and Work Scope
 
-## Prerequisites for local installation
+This demo is in development, meaning it's not ready for production use. However, it can deploy a variety of resources to Azure that send logs to the cloud observability backend.
 
-You must have a ServiceNow Cloud Observability Observability [access token](/docs/create-and-manage-access-tokens) for the project to report metrics to.
-Also you must have Azure account credentials.
+See the PRD [CI Categories](https://lightstep.atlassian.net/wiki/spaces/EPD/pages/3181019147/PRD+Service+Graph+Connector+for+OpenTelemetry+v1.4). The listed categories in that document for Azure are: Datacenters and Resource Groups, Compute, Database and Storage, Load Balancers and Networking.
 
-## Running the Example
+You can see the log's sent to the cloud observability backend in the [Lightstep Observability](https://app.lightstep.com/internal-sgcdev-azure/logs).
 
-### 1. Apply terraform configuration to create Azure test env
+### Would be nice to have ...
 
-First you'll need to create a resource.
+* Modules to send load (`k6`, `ab`, etc.) - to generate additional telemetry.
+* Modules covering other Azure resources.
 
-Terraform requires Azure account credentials ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, ARM_TENANT_ID to be set as ENV variables.
+### Need TODO ...
 
-```bash
-make apply-terraform
-```
+* Reduce module interfaces to essentials.
+* Remove TFVARS file and manually set defaults in module variables.
+* Fix spec on Collector container, for alternating between builds (e.g. point to official container registry or ACR).
+* Setup an ACR registry for containers.
+* Add a Terraform backend for Azure.
 
-### 2. Run collector
 
-Collector requires Azure account credentials AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_SUBSCRIPTION_ID, AZURE_TENANT_ID to be set as ENV variables.
+## Quick Notes on Azure
 
-```bash
-make run-collector
-```
+If you aren't acquainted to Azure, take note the following:
 
-## Configuration
+- Azure has a concept of Resource Groups. They logically group resources, so you can manage them together. Resource groups can't be nested.
+- Azure's log format is JSON, the top-level schema is common to all resource logs, and the `properties` key is where the attributes specific to a resource type schema are provided.
+- Availability Zones are a new concept in Azure. They previously managed by letting customers specify Availability Sets they've only partially migrated the platform.
+- `resourceId` is the typical spelling of Azure's partially readable resource identifiers like ARNs. It includes subscription ID, resource group, resource type, and name.
+- Telemetry received from Logs Analytics Workspaces has a different schema than what's received from EventHubs. This includes the presence of some fields in only one or the other.
 
-Installation of the OpenTelemetry Collector varies, please refer to the [collector documentation](https://opentelemetry.io/docs/collector/) for more information.
+## Resources Monitored
 
-Detailed description of available [Azure metrics per service](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported).
+### Compute/Network
 
-Collector Azure Monitor receiver has to be configured to capture required Azure resources, [configuration description](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/azuremonitorreceiver#configuration).
+- [x] Virtual Machine (no enhanced metrics with Azure agent deployed on host)
+- [x] Load Balancer
+- [x] Virtual Network
+- [x] Network Interface
+- [x] Public IP Address
+- [x] Network Security Group
 
-The following example configuration collects metrics from Azure and send them to ServiceNow Cloud Observability Observability:
+### Storage
 
-```yaml
-receivers:
-  azuremonitor:
-    subscription_id: "${AZURE_SUBSCRIPTION_ID}"
-    tenant_id: "${AZURE_TENANT_ID}"
-    client_id: "${AZURE_CLIENT_ID}"
-    client_secret: "${AZURE_CLIENT_SECRET}"
-    resource_groups:
-      - "example-resources"
-    services:
-      - "microsoft.compute/disks"
-      - "Microsoft.Network/networkInterfaces"
-      - "Microsoft.Compute/virtualMachines"
-    collection_interval: 60s
+- [x] Storage Account
+- [x] SQL Database / SQL Server
 
-exporters:
-  logging:
-    loglevel: debug
-  otlp/public:
-    endpoint: ingest.lightstep.com:443
-    headers:
-        "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+## Architecture
 
-processors:
-  batch:
+### Overview
 
-service:
-  pipelines:
-    metrics/azuremonitor:
-      receivers: [azuremonitor]
-      processors: [batch]
-      exporters: [logging, otlp/public]
+> **NOTE**
+> The previous architecture used Log Analytics Workspaces as an intermediary to send logs to EventHubs. The current architecture isn't just simpler, but it's preferable for consistency of format and availability of data. Additionally, using Log Analytics Workspaces adds cost.
+
+- Azure resources that emit resource logs are configured with diagnostic settings, which cause logs to be sent to an EventHub.
+- An EventHub is an Azure managed messaging application with AMQP defaults. The Collector reads from the EventHub and sends the logs to the cloud observability backend.
+
+There are problems with sending the logs through Log Analytics Workspaces. Avoid it if possible.
+
+### Flow Diagram
 
 ```
+**Diagnostic Settings** :arrow_right: **EventHub** :arrow_right: **Otel Collector** :arrow_right: **Cloud Observability**
+```
 
+## Prerequisites
+
+- Terraform installed and accessible in your PATH
+- Docker to build, tag, push, or debug
+- Azure subscription
+- An authenticated Azure CLI session or configured service principal for Terraform to access your Azure account. This is required to load config files to storage and might be required to load code for functions in the future. You will need permissions to create and manage resources in the target subscription.
+- Environment variables for the Azure CLI session or service principal:
+  - `ARM_CLIENT_ID`
+  - `ARM_CLIENT_SECRET`
+  - `ARM_SUBSCRIPTION_ID`
+  - `ARM_TENANT_ID`
+- An environment variable named `LS_ACCESS_TOKEN` for sending logs to the cloud observability backend.
+
+## Directory Layout
+
+- **`terraform/modules/`**: This includes `logs`, `common` and will include `apps` as we migrate demos for metrics.
+
+- **`terraform/environments/`**: This contains subdirectories for environments. It aligns with a common approach to managing configs across multiple environments, but I think the structure is overkill for the project.
+
+## Using the Makefile
+
+The Makefile in the root of the Terraform directory provides commands to manage the complete lifecycle of the infrastructure for any specified environment. The available commands are:
+
+- **`all`**: Runs `init`, `validate`, `plan`, `apply`, and `upload-collector-config`.
+- If you just want the environment to run logs to Cloud Observability then you're done after `all` completes, but because `terraform apply` doesn't trigger a local file (collector config) to upload you'll need to use the make rule `upload-collector-config` to put a fresh config to the storage account. If you're developing the terraform IasC then you'll want to use this command the most, because it valitates, fmts, and applies.
+- If you're developing Collector configuration then you'll need to upload the config then manually restart the collector. `restart-collector` would be a good make rule to add, but it isn't implemented.
+
+## TODO
+
+### Automation
+
+- [ ] Add a make rule to Restart the Collector (bounce to load new config)
+- [ ] Remove hard-coded values from Makefile (just in `upload-collector-config` for now)
+- [ ] Add a make rule to compare attributes (semconv check)
+
+## Work Recommended for the EventHub Receiver
+
+- Migrate to `github.com/Azure/azure-sdk-for-go/sdk/messaging/azeventhubs` from `github.com/Azure/azure-event-hubs-go/v3`.
+- The latter was deprecated and migration recommended in July, 2023 (see: <https://github.com/Azure/azure-event-hubs-go/pull/289>).
+  - Improves performance
+  - Provides better authentication
+  - Can simplify code, depending on usage
+
+## Trouble Shooting
+
+- **Problem: I changed the Collector config. Why didn't telemetry change?**
+1. Be sure to upload the config. There's a rule in the Makefile for this.
+2. You may need to restart your container, which is currently a manual process.
+
+- **Problem: I did `make` to run the default rule, but it errored.**
+1. Get the 5 digit unique code emitted and export it to your environment with `export PROJECT_ID=${five_digit_code}`.
+2. Run `make` again.
+
+- **Problem: Something else is stopping pipeline after running `make` or `apply` in another form.**
+1. Check the environment variables for your containers. Resetting them after apply is manual.
+2. Check the log stream. In Container Apps you'll find the log stream in the left-nav bar under "Monitoring".

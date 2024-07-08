@@ -1,0 +1,65 @@
+receivers:
+  azureeventhub/resource:
+    connection: ${AZURE_EVENTHUB_CONNECTION_RESOURCE_LOGS}
+  azureeventhub/activity:
+    connection: ${AZURE_EVENTHUB_CONNECTION_ACTIVITY_LOGS}
+
+processors:
+  batch:
+  transform:
+    error_mode: ignore
+    log_statements:
+      - context: log
+        statements:
+          - set(cache, ExtractPatterns(resource.attributes["azure.resource.id"], "/SUBSCRIPTIONS/(?P<subid>[\\w-]+)/RESOURCEGROUPS/(?P<resgroup>[\\w-]+)/PROVIDERS/(?P<kind>[\\w/\\-\\.]+)/(?P<name>.*)"))
+          - set(attributes["cloud.account.id"], cache["subid"])
+          - set(attributes["cloud.platform"], cache["kind"])
+          - set(attributes["cloud.resource.id"], resource.attributes["azure.resource.id"])
+          - set(attributes["cloud.region"], resource.attributes["azure.location"])
+  transform/resource:
+    error_mode: ignore
+    log_statements:
+      - context: log
+        statements:
+          - set(attributes["log.kind"], "resource")
+  transform/activity:
+    error_mode: ignore
+    log_statements:
+      - context: log
+        statements:
+          - set(attributes["log.kind"], "activity")
+exporters:
+  otlp/scc1:
+    endpoint: ${SCC_ENDPOINT}:4318
+    tls: { "insecure": true }
+  otlp/scc2:
+    endpoint: ${SCC_ENDPOINT}:4318
+    tls: { "insecure": true }
+  otlp/snco1:
+    endpoint: ingest.lightstep.com:443
+    headers:
+      "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+  otlp/snco2:
+    endpoint: ingest.lightstep.com:443
+    headers:
+      "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+
+  debug:
+    verbosity: detailed
+
+extensions:
+  health_check:
+
+service:
+  extensions: [health_check]
+  telemetry:
+    logs:
+  pipelines:
+    logs:
+      receivers: [azureeventhub/resource]
+      processors: [transform, transform/resource]
+      exporters: [otlp/snco1, debug]
+    # logs/2:
+    #   receivers: [azureeventhub/activity]
+    #   processors: [transform, transform/activity]
+    #   exporters: [otlp/snco2, debug]

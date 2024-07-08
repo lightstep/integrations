@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Function to generate README for each module
+generate_readme() {
+  local module_dir=$1
+  local readme_file="$module_dir/README.md"
+
+  # Run terraform-docs to generate the README
+  terraform-docs markdown table "$module_dir" > "$readme_file"
+
+  echo "Generated README for module: $module_dir"
+}
+
+# Function to recursively process modules
+process_modules() {
+  local base_dir=$1
+
+  # Iterate over subdirectories
+  for dir in "$base_dir"/*/; do
+    if [ -d "$dir" ]; then
+      # Check if the directory contains Terraform configuration files
+      if ls "$dir"/*.tf &> /dev/null; then
+        generate_readme "$dir"
+      fi
+
+      # Recursively process subdirectories
+      process_modules "$dir"
+    fi
+  done
+}
+
+# Set the base directory to start the recursive process
+base_directory="."
+
+# Start the recursive process
+process_modules "$base_directory"

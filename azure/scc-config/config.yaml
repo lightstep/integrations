@@ -1,0 +1,18 @@
+resource:
+
+trace:
+
+metrics:
+
+log:
+  - match: ".*"
+    include:
+      - azure.subscription.id
+      - azure.resource_group
+      - azure.resource_name
+      - azure.resource_kind
+    report_additional: false
+
+report_unmatched: true
+server_address: 0.0.0.0:4318
+disable_error: true
