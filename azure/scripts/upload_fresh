@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Uploads a file to an Azure file share if it's newer than the last upload.
+# This is useful for synchronizing configs and other files
+# The equivalent of a file change trigger for Terraform.
+
+# This exists because the azurerm provider doesn't offer triggers
+# for uploading to file shares after changes.
+
+# Environment variable defaults (can override)
+TF_STATE_FILE=${TF_STATE_FILE:-terraform.tfstate}
+
+# flag parsing
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -l|--local-file) SRC="$2"; shift ;;
+        -s|--share-name) SHARE_NAME="$2"; shift ;;
+        -d|--share-dir)  SHARE_DIR="$2"; shift ;;
+        -f|--share-file) SHARE_FILE="$2"; shift ;;
+        --tf-state-file) TF_STATE_FILE="$2"; shift ;;
+        *) echo "Unknown parameter: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+#Validate parameters are set (we know TF_STATE_FILE will take a default)
+if [ -z "$LOCAL_FILE" || -z $SHARE_NAME || -z $SHARE_DIR || -z $SHARE_FILE ]; then
+    echo "Usage: ./filesync -l <LOCAL_FILE> -s <AZ_SHARE_NAME> -d <AZURE_FILE_DIR> -f <AZURE_FILE>"
+    exit 1
+fi
+
+# Extract terraform state file values
+# HACK: it works, but parsing tfstate aint great
+RESOURCE_GROUP=$(jq -r '.modules[0].resources[] | select(.type == "azurerm_resource_group") | .primary.attributes.name' $TF_STATE_FILE
+STORAGE_ACCOUNT=$(jq -r '.modules[0].resources[] | select(.type == "azurerm_storage_account") | .primary.attributes.name' $TF_STATE_FILE
+
+STORAGE_ACCOUNT_KEY=$(az storage account keys list --resource-group $RESOURCE_GROUP --account-name $STORAGE_ACCOUNT --query '[0].value' -o tsv)
+
+az storage sync files trigger-change \
+    --source-path $LOCAL_FILE \
+    --destination-path $SHARE_DIR/$SHARE_FILE \
+    --account-name $STORAGE_ACCOUNT \
+    --account-key $STORAGE_ACCOUNT_KEY \
+    --share-name $SHARE_NAME

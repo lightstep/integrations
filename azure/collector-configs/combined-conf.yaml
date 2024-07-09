@@ -1,0 +1,38 @@
+receivers:
+  azureeventhub:
+    connection: "${AZURE_EVENTHUB_CONNECTION}"
+  azuremonitor:
+    subscription_id: "${AZURE_SUBSCRIPTION_ID}"
+    tenant_id: "${AZURE_TENANT_ID}"
+    client_id: "${AZURE_CLIENT_ID}"
+    client_secret: "${AZURE_CLIENT_SECRET}"
+    resource_groups:
+      - ${AZURE_RESOURCE_GROUP}
+    # not specifying services will collect them all
+    collection_interval: 60s
+
+exporters:
+  otlp:
+    endpoint: ingest.lightstep.com:443
+    headers:
+        "lightstep-access-token": "${LS_ACCESS_TOKEN}"
+
+processors:
+  batch:
+
+extensions:
+  health_check:
+
+service:
+  extensions: [health_check]
+  telemetry:
+    logs:
+  pipelines:
+    logs:
+      receivers: [azureeventhub]
+      processors: [batch]
+      exporters: [otlp]
+    metrics:
+      receivers: [azuremonitor]
+      processors: [batch]
+      exporters: [otlp]
