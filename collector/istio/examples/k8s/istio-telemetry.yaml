@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio
+  namespace: istio-system
+data:
+  meshNetworks: |-
+    networks: {}
+  mesh: |-
+    accessLogFile: /dev/stdout
+    defaultConfig:
+      discoveryAddress: istiod.istio-system.svc:15012
+    defaultProviders:
+      accessLogging:
+        - opentelemetry
+    extensionProviders:
+      - name: "otel-tracing"
+        opentelemetry:
+          service: "otel-collector.istio-system.svc.cluster.local"
+          port: 4317
+      - name: "otel-logging"
+        envoyOtelAls:
+          service: "otel-collector.istio-system.svc.cluster.local"
+          port: 4317
+    enablePrometheusMerge: true
+    rootNamespace: istio-system
+    trustDomain: cluster.local
+---
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: mesh-default
+spec:
+  accessLogging:
+    - providers:
+        - name: otel-logging
+  tracing:
+    - providers:
+        - name: otel-tracing
